@@ -7,11 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public abstract class BaseDAO {
-    
+
     protected Connection getConnection() throws SQLException {
         return DBUtil.getConnection();
     }
-    
+
     protected void closeResultSet(ResultSet rs) {
         if (rs != null) {
             try {
@@ -22,7 +22,7 @@ public abstract class BaseDAO {
             }
         }
     }
-    
+
     protected void closePreparedStatement(PreparedStatement ps) {
         if (ps != null) {
             try {
@@ -33,24 +33,24 @@ public abstract class BaseDAO {
             }
         }
     }
-    
+
     protected void closeConnection(Connection conn) {
         if (conn != null) {
             DBUtil.closeConnection(conn);
         }
     }
-    
+
     protected void closeAllResources(ResultSet rs, PreparedStatement ps, Connection conn) {
         closeResultSet(rs);
         closePreparedStatement(ps);
         closeConnection(conn);
     }
-    
+
     protected void closeResources(PreparedStatement ps, Connection conn) {
         closePreparedStatement(ps);
         closeConnection(conn);
     }
-    
+
     protected int executeUpdate(String sql, Object... params) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -63,7 +63,7 @@ public abstract class BaseDAO {
             closeResources(ps, conn);
         }
     }
-    
+
     protected ResultSet executeQuery(String sql, Object... params) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -77,13 +77,13 @@ public abstract class BaseDAO {
             throw e;
         }
     }
-    
+
     protected void setParameters(PreparedStatement ps, Object... params) throws SQLException {
         for (int i = 0; i < params.length; i++) {
             ps.setObject(i + 1, params[i]);
         }
     }
-    
+
     protected void logError(String message, Exception e) {
         System.err.println(message);
         if (e != null) {
