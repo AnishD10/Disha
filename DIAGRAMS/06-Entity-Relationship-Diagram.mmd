@@ -1,0 +1,23 @@
+erDiagram
+    USER ||--o{ STUDENT_PROFILE : has
+    USER ||--o{ ASSESSMENT : takes
+    USER ||--o{ APTITUDE_PROFILE : completes
+    USER ||--o{ COUNSELOR_ASSIGNMENT : assigned_to
+    
+    ASSESSMENT ||--o{ QUESTION : contains
+    ASSESSMENT ||--o{ STUDENT_ANSWER : has
+    
+    QUESTION ||--o{ STUDENT_ANSWER : answered_in
+    
+    STUDENT_PROFILE ||--o{ APTITUDE_PROFILE : creates
+    STUDENT_PROFILE ||--o{ DECISION_PLAN : generates
+    
+    CAREER ||--o{ DECISION_PLAN : references
+    CAREER ||--o{ LABOUR_MARKET_DATA : has
+    
+    COLLEGE ||--o{ DEGREE : offers
+    DEGREE ||--o{ DECISION_PLAN : references
+    
+    COUNSELOR ||--o{ COUNSELOR_ASSIGNMENT : handles
+    
+    ADMIN ||--o{ USER : manages

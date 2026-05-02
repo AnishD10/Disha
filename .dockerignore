@@ -1,0 +1,17 @@
+.git
+.gitignore
+.idea/
+.conda/
+out/
+*.iml
+*.class
+.DS_Store
+*.log
+node_modules/
+.vscode/
+*.swp
+*.swo
+*~
+.env.local
+docker-compose.override.yml
+README.md

@@ -1,0 +1,86 @@
+classDiagram
+    class HttpServlet {
+        <<interface>>
+    }
+
+    class UserServlet {
+        -userService: UserService
+        +doGet(request: HttpServletRequest, response: HttpServletResponse): void
+        +doPost(request: HttpServletRequest, response: HttpServletResponse): void
+        +register(request: HttpServletRequest): void
+        +login(request: HttpServletRequest): void
+        +logout(request: HttpServletRequest): void
+        +updateProfile(request: HttpServletRequest): void
+    }
+
+    class AssessmentServlet {
+        -assessmentService: AssessmentService
+        +doGet(request: HttpServletRequest, response: HttpServletResponse): void
+        +doPost(request: HttpServletRequest, response: HttpServletResponse): void
+        +startAssessment(request: HttpServletRequest): void
+        +submitAnswers(request: HttpServletRequest): void
+        +getResults(request: HttpServletRequest): void
+    }
+
+    class CareerServlet {
+        -careerMatchingService: CareerMatchingService
+        +doGet(request: HttpServletRequest, response: HttpServletResponse): void
+        +doPost(request: HttpServletRequest, response: HttpServletResponse): void
+        +viewCareers(request: HttpServletRequest): void
+        +filterCareers(request: HttpServletRequest): void
+        +getDetails(careerId: int): void
+    }
+
+    class AdminServlet {
+        -adminService: AdminService
+        +doGet(request: HttpServletRequest, response: HttpServletResponse): void
+        +doPost(request: HttpServletRequest, response: HttpServletResponse): void
+        +manageUsers(request: HttpServletRequest): void
+        +manageCareers(request: HttpServletRequest): void
+        +viewAnalytics(request: HttpServletRequest): void
+    }
+
+    class CounselorServlet {
+        -counselorService: CounselorService
+        +doGet(request: HttpServletRequest, response: HttpServletResponse): void
+        +doPost(request: HttpServletRequest, response: HttpServletResponse): void
+        +viewStudents(request: HttpServletRequest): void
+        +assignStudent(request: HttpServletRequest): void
+        +createReport(request: HttpServletRequest): void
+    }
+
+    class DecisionServlet {
+        -decisionPlanningService: DecisionPlanningService
+        +doGet(request: HttpServletRequest, response: HttpServletResponse): void
+        +doPost(request: HttpServletRequest, response: HttpServletResponse): void
+        +generatePlan(request: HttpServletRequest): void
+        +savePlan(request: HttpServletRequest): void
+        +compareCareers(request: HttpServletRequest): void
+    }
+
+    class ParentServlet {
+        -userService: UserService
+        -reportService: ReportService
+        +doGet(request: HttpServletRequest, response: HttpServletResponse): void
+        +doPost(request: HttpServletRequest, response: HttpServletResponse): void
+        +viewChild(request: HttpServletRequest): void
+        +viewProgress(request: HttpServletRequest): void
+        +getAdvice(request: HttpServletRequest): void
+    }
+
+    HttpServlet <|-- UserServlet
+    HttpServlet <|-- AssessmentServlet
+    HttpServlet <|-- CareerServlet
+    HttpServlet <|-- AdminServlet
+    HttpServlet <|-- CounselorServlet
+    HttpServlet <|-- DecisionServlet
+    HttpServlet <|-- ParentServlet
+
+    UserServlet --> UserService
+    AssessmentServlet --> AssessmentService
+    CareerServlet --> CareerMatchingService
+    AdminServlet --> AdminService
+    CounselorServlet --> CounselorService
+    DecisionServlet --> DecisionPlanningService
+    ParentServlet --> UserService
+    ParentServlet --> ReportService

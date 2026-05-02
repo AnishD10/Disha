@@ -1,0 +1,124 @@
+classDiagram
+    class User {
+        <<enumeration>>
+        Role: STUDENT, ADMIN, COUNSELOR, PARENT
+        -fullName: String
+        -email: String
+        -role: Role
+        +User()
+        +User(fullName: String, email: String, role: Role)
+        +getFullName(): String
+        +setFullName(fullName: String): void
+        +getEmail(): String
+        +setEmail(email: String): void
+        +getRole(): Role
+        +setRole(role: Role): void
+    }
+
+    class StudentProfile {
+        -profileId: int
+        -userId: int
+        -academicScore: double
+        -stream: String
+        -interests: String[]
+        +getProfileId(): int
+        +getUserId(): int
+        +getAcademicScore(): double
+        +setAcademicScore(score: double): void
+    }
+
+    class Assessment {
+        -assessmentId: int
+        -title: String
+        -description: String
+        -type: String
+        -totalQuestions: int
+        +getAssessmentId(): int
+        +getTitle(): String
+        +getTotalQuestions(): int
+    }
+
+    class Question {
+        -questionId: int
+        -assessmentId: int
+        -questionText: String
+        -options: String[]
+        -correctAnswer: String
+        +getQuestionId(): int
+        +getQuestionText(): String
+        +getOptions(): String[]
+    }
+
+    class AptitudeProfile {
+        -profileId: int
+        -studentId: int
+        -assessmentId: int
+        -scores: double[]
+        -result: String
+        +getProfileId(): int
+        +getScores(): double[]
+        +getResult(): String
+    }
+
+    class DecisionPlan {
+        -collegeName: String
+        -degreeName: String
+        -faculty: String
+        -durationYears: int
+        -affiliation: String
+        -scholarshipAvailable: boolean
+        -annualFeeNPR: double
+        -minimumPercentage: double
+        -location: String
+        -careerPath: String
+        -contactInfo: String
+        +getCollegeName(): String
+        +getDegreeName(): String
+        +getDurationYears(): int
+    }
+
+    class Career {
+        -careerId: int
+        -careerName: String
+        -description: String
+        -demand: String
+        -salaryRange: String
+        -requiredSkills: String[]
+        +getCareerName(): String
+        +getDemand(): String
+        +getRequiredSkills(): String[]
+    }
+
+    class College {
+        -collegeId: int
+        -collegeName: String
+        -location: String
+        -ranking: int
+        -website: String
+        -contactInfo: String
+        +getCollegeName(): String
+        +getLocation(): String
+        +getRanking(): int
+    }
+
+    class Degree {
+        -degreeId: int
+        -degreeName: String
+        -collegeId: int
+        -faculty: String
+        -durationYears: int
+        -fees: double
+        +getDegreeName(): String
+        +getFaculty(): String
+        +getDurationYears(): int
+    }
+
+    User "1" --> "*" StudentProfile: has
+    User "1" --> "*" AptitudeProfile: completes
+    Assessment "1" --> "*" Question: contains
+    Assessment "1" --> "*" AptitudeProfile: generates
+    StudentProfile "1" --> "*" AptitudeProfile: creates
+    DecisionPlan "1" --> "1" Career: references
+    DecisionPlan "1" --> "1" Degree: references
+    Degree "1" --> "1" College: enrolled in
+    Career "1" --> "*" DecisionPlan: appears in
