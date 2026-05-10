@@ -1,15 +1,15 @@
-package dao;
+package com.disha.dao;
 
-import utils.DBUtil;
+import com.disha.util.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class BaseDAO {
+public abstract class BaseDAO extends DBUtil {
 
     protected Connection getConnection() throws SQLException {
-        return DBUtil.getConnection();
+        return super.getConnection();
     }
 
     protected void closeResultSet(ResultSet rs) {
@@ -36,7 +36,12 @@ public abstract class BaseDAO {
 
     protected void closeConnection(Connection conn) {
         if (conn != null) {
-            DBUtil.closeConnection(conn);
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing Connection!");
+                e.printStackTrace();
+            }
         }
     }
 

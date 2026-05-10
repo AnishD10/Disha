@@ -3,7 +3,7 @@
     /* If already logged in, redirect to appropriate dashboard */
     Object user = session.getAttribute("loggedInUser");
     if (user != null) {
-        response.sendRedirect(request.getContextPath() + "/JSP/student/dashboard.jsp");
+        response.sendRedirect(request.getContextPath() + "/pages/student/dashboard.jsp");
         return;
     }
 
@@ -140,7 +140,7 @@
 
             <div class="auth-footer">
                 Don't have an account?
-                <a href="<%= request.getContextPath() %>/JSP/auth/register.jsp">Create one free</a>
+                <a href="<%= request.getContextPath() %>/pages/auth/register.jsp">Create one free</a>
             </div>
 
         </div>

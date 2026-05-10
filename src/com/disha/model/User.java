@@ -1,31 +1,50 @@
 package com.disha.model;
 
+/**
+ * User model representing all system users.
+ * Supports roles: STUDENT, PARENT, COUNSELOR, ADMIN
+ */
 public class User {
 
     public enum Role {
-        STUDENT,
-        ADMIN,
-        COUNSELOR,
-        PARENT
+        STUDENT, PARENT, COUNSELOR, ADMIN
     }
 
+    private int userId;
     private String fullName;
     private String email;
+    private String passwordHash;
     private Role role;
+    private String phone;
+    private String address;
+    private java.sql.Timestamp createdAt;
+    private boolean isActive;
+
+    // ── Constructors ──────────────────────────────────────────────────────────
 
     public User() {
-        this.fullName = "Guest User";
-        this.role = Role.STUDENT;
     }
 
-    public User(String fullName, String email, Role role) {
+    public User(String fullName, String email, String passwordHash, Role role) {
         this.fullName = fullName;
         this.email = email;
-        this.role = role == null ? Role.STUDENT : role;
+        this.passwordHash = passwordHash;
+        this.role = role;
+        this.isActive = true;
+    }
+
+    // ── Getters & Setters ─────────────────────────────────────────────────────
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getFullName() {
-        return fullName == null || fullName.isBlank() ? "Guest User" : fullName;
+        return fullName;
     }
 
     public void setFullName(String fullName) {
@@ -40,11 +59,58 @@ public class User {
         this.email = email;
     }
 
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String hash) {
+        this.passwordHash = hash;
+    }
+
     public Role getRole() {
-        return role == null ? Role.STUDENT : role;
+        return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public java.sql.Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(java.sql.Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        this.isActive = active;
+    }
+
+    @Override
+    public String toString() {
+        return "User{id=" + userId + ", name='" + fullName + "', email='" + email + "', role=" + role + "}";
+    }
 }
+
+// End of User.java

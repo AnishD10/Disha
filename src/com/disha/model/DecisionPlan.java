@@ -1,18 +1,39 @@
 package com.disha.model;
 
+/**
+ * Represents a college/degree option returned by the Decision Planning engine.
+ * Each record is a matched programme filtered against the student's
+ * constraints.
+ */
 public class DecisionPlan {
 
+    private int planId;
     private String collegeName;
     private String degreeName;
-    private String faculty;
-    private int durationYears;
-    private String affiliation;
-    private boolean scholarshipAvailable;
+    private String faculty; // Science, Management, Humanities, etc.
+    private String location; // District / Province
     private double annualFeeNPR;
-    private double minimumPercentage;
-    private String location;
-    private String careerPath;
+    private double minimumPercentage; // minimum academic score required
+    private String careerPath; // comma-separated career tags
+    private String affiliation; // TU, PU, KU, etc.
+    private int durationYears;
+    private boolean scholarshipAvailable;
     private String contactInfo;
+
+    // ── Constructors ──────────────────────────────────────────────────────────
+
+    public DecisionPlan() {
+    }
+
+    // ── Getters & Setters ─────────────────────────────────────────────────────
+
+    public int getPlanId() {
+        return planId;
+    }
+
+    public void setPlanId(int planId) {
+        this.planId = planId;
+    }
 
     public String getCollegeName() {
         return collegeName;
@@ -38,28 +59,12 @@ public class DecisionPlan {
         this.faculty = faculty;
     }
 
-    public int getDurationYears() {
-        return durationYears;
+    public String getLocation() {
+        return location;
     }
 
-    public void setDurationYears(int durationYears) {
-        this.durationYears = durationYears;
-    }
-
-    public String getAffiliation() {
-        return affiliation;
-    }
-
-    public void setAffiliation(String affiliation) {
-        this.affiliation = affiliation;
-    }
-
-    public boolean isScholarshipAvailable() {
-        return scholarshipAvailable;
-    }
-
-    public void setScholarshipAvailable(boolean scholarshipAvailable) {
-        this.scholarshipAvailable = scholarshipAvailable;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public double getAnnualFeeNPR() {
@@ -78,20 +83,36 @@ public class DecisionPlan {
         this.minimumPercentage = minimumPercentage;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public String getCareerPath() {
         return careerPath;
     }
 
     public void setCareerPath(String careerPath) {
         this.careerPath = careerPath;
+    }
+
+    public String getAffiliation() {
+        return affiliation;
+    }
+
+    public void setAffiliation(String affiliation) {
+        this.affiliation = affiliation;
+    }
+
+    public int getDurationYears() {
+        return durationYears;
+    }
+
+    public void setDurationYears(int durationYears) {
+        this.durationYears = durationYears;
+    }
+
+    public boolean isScholarshipAvailable() {
+        return scholarshipAvailable;
+    }
+
+    public void setScholarshipAvailable(boolean scholarshipAvailable) {
+        this.scholarshipAvailable = scholarshipAvailable;
     }
 
     public String getContactInfo() {
@@ -101,4 +122,11 @@ public class DecisionPlan {
     public void setContactInfo(String contactInfo) {
         this.contactInfo = contactInfo;
     }
+
+    @Override
+    public String toString() {
+        return "DecisionPlan{college='" + collegeName + "', degree='" + degreeName
+                + "', fee=" + annualFeeNPR + ", location='" + location + "'}";
+    }
+
 }
