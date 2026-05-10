@@ -24,7 +24,8 @@ public class DecisionPlan {
 
     public DecisionPlan() {
     }
-
+    //sample
+// added
     // ── Getters & Setters ─────────────────────────────────────────────────────
 
     public int getPlanId() {
