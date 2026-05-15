@@ -67,10 +67,14 @@
             /* Hide date chip on small screens */
             header.topnav > div:last-child { display: none !important; }
             /* Hide greeting on very small */
-            .topnav-greeting { display: none; }
-            div[style*="font-size: 14px; font-weight: 600; color: var(--text-secondary)"] {
-                display: none !important;
-            }
+            .topnav-greeting { display: none !important; }
+        }
+
+        .chart-container {
+            position: relative;
+            height: 320px;
+            width: 100%;
+            overflow: hidden;
         }
 
         /* ── Phone (≤ 480px) ── */
@@ -150,10 +154,10 @@
     <div class="main-wrapper" style="flex: 1; display: flex; flex-direction: column; overflow-x: hidden;">
         
         <!-- Topnav -->
-        <header class="topnav" style="height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10;">
+        <header class="topnav" style="height: 72px; display: flex; align-items: center; justify-content: flex-start; padding: 0 40px; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10;">
             <div style="display: flex; align-items: center; gap: 8px;">
-                <button class="mobile-menu-btn" id="mobileMenuBtn" style="border: 1px solid var(--border); border-radius: 4px; background: var(--surface);">☰</button>
-                <div style="font-size: 14px; font-weight: 600; color: var(--text-secondary);">Good afternoon, Counselor Dev! 👋</div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" title="Toggle Menu">☰</button>
+                <div class="topnav-greeting" style="font-size: 14px; font-weight: 600; color: var(--text-secondary);">Good afternoon, Counselor Dev! 👋</div>
             </div>
             <div style="display: flex; align-items: center; gap: 16px;">
                 <div style="border: 1px solid var(--border); border-radius: var(--radius-md); padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--text-secondary); background: var(--surface); display: flex; align-items: center; gap: 8px;">
@@ -511,10 +515,10 @@
                 plugins: {
                     legend: { 
                         position: window.innerWidth < 768 ? 'bottom' : 'right', 
-                        labels: { boxWidth: 10, usePointStyle: true, padding: 10, font: { size: 10 } } 
+                        labels: { boxWidth: 8, usePointStyle: true, padding: 8, font: { size: 9 } } 
                     }
                 },
-                cutout: '70%'
+                cutout: window.innerWidth < 480 ? '60%' : '70%'
             }
         });
 

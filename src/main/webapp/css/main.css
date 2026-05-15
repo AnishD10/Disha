@@ -1422,6 +1422,17 @@ img {
         overflow-x: hidden !important;
     }
 
+    .topnav {
+        justify-content: flex-start !important;
+        padding: 0 16px !important;
+        gap: 12px !important;
+    }
+
+    .glass-panel {
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+
     body.sidebar-open {
         overflow: hidden !important;
     }
