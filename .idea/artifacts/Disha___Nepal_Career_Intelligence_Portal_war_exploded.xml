@@ -4,11 +4,11 @@
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="Disha - Nepal Career Intelligence Portal" />
+          <element id="module-output" name="Advance Programming" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="Disha - Nepal Career Intelligence Portal/web/Web" />
-      <element id="dir-copy" path="$PROJECT_DIR$/WebContent" />
+      <element id="javaee-facet-resources" facet="Advance Programming/web/Web" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src/main/webapp" />
     </root>
   </artifact>
 </component>
