@@ -77,24 +77,53 @@
             overflow: hidden;
         }
 
-        /* ── Phone (≤ 480px) ── */
-        @media (max-width: 480px) {
-            .dash-summary-grid {
-                grid-template-columns: 1fr;
-            }
+        /* ── Mobile (≤ 768px) ── */
+        @media (max-width: 768px) {
             .sc-value { font-size: 20px; }
             h1[style] { font-size: 22px !important; }
             .chart-container { height: 260px !important; }
-        }
-
-        body.sidebar-open {
-            overflow: hidden;
+            .glass-panel { padding: 16px !important; }
+            
+            /* FORCE SIDEBAR HIDE */
+            .sidebar {
+                transform: translateX(-100%) !important;
+                left: 0 !important;
+                top: 0 !important;
+                position: fixed !important;
+                z-index: 1000 !important;
+                display: flex !important;
+            }
+            
+            .main-wrapper {
+                margin-left: 0 !important;
+                width: 100% !important;
+                max-width: 100vw !important;
+            }
+            
+            body.sidebar-open .sidebar {
+                transform: translateX(0) !important;
+            }
+            
+            .topnav {
+                justify-content: space-between !important;
+                padding: 0 12px !important;
+            }
+            
+            .mobile-menu-btn {
+                display: flex !important;
+                order: -1;
+            }
         }
 
         .chart-container {
             position: relative;
             height: 320px;
             width: 100%;
+            overflow: hidden;
+        }
+
+        body.sidebar-open {
+            overflow: hidden;
         }
     </style>
 </head>
@@ -154,14 +183,14 @@
     <div class="main-wrapper" style="flex: 1; display: flex; flex-direction: column; overflow-x: hidden;">
         
         <!-- Topnav -->
-        <header class="topnav" style="height: 72px; display: flex; align-items: center; justify-content: flex-start; padding: 0 40px; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10;">
+        <header class="topnav" style="height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10;">
             <div style="display: flex; align-items: center; gap: 8px;">
-                <button class="mobile-menu-btn" id="mobileMenuBtn" title="Toggle Menu">☰</button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" style="border: 1px solid var(--border); border-radius: 8px; background: var(--surface); width: 42px; height: 42px; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer;">☰</button>
                 <div class="topnav-greeting" style="font-size: 14px; font-weight: 600; color: var(--text-secondary);">Good afternoon, Counselor Dev! 👋</div>
             </div>
             <div style="display: flex; align-items: center; gap: 16px;">
-                <div style="border: 1px solid var(--border); border-radius: var(--radius-md); padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--text-secondary); background: var(--surface); display: flex; align-items: center; gap: 8px;">
-                    📅 May 14, 2025 <span style="font-size: 10px;">▼</span>
+                <div class="date-chip" style="border: 1px solid var(--border); border-radius: var(--radius-md); padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--text-secondary); background: var(--surface); display: flex; align-items: center; gap: 8px;">
+                    📅 May 14, 2025
                 </div>
             </div>
         </header>
