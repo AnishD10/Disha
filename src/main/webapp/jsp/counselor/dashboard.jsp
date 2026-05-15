@@ -79,10 +79,12 @@
 
         /* ── Mobile (≤ 768px) ── */
         @media (max-width: 768px) {
-            .sc-value { font-size: 20px; }
-            h1[style] { font-size: 22px !important; }
-            .chart-container { height: 260px !important; }
-            .glass-panel { padding: 16px !important; }
+            .sc-value { font-size: 18px; }
+            h1[style] { font-size: 20px !important; }
+            .chart-container { height: 180px !important; }
+            .glass-panel { padding: 10px !important; }
+            .dash-summary-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+            .close-sidebar-btn { display: flex !important; }
             
             /* FORCE SIDEBAR HIDE */
             .sidebar {
@@ -128,14 +130,16 @@
     </style>
 </head>
 <body>
-<div style="background: #ef4444; color: white; padding: 10px; text-align: center; font-weight: bold; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">🚀 V7 RESPONSIVE UPDATE LOADED - REFRESH IF YOU DON'T SEE THIS</div>
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <div class="layout" style="display: flex; min-height: 100vh;">
 
     <!-- -- Sidebar -- -->
-    <nav class="sidebar animate-fade-in" style="flex-shrink: 0; z-index: 60; box-shadow: 1px 0 0 var(--border);">
-        <div class="sidebar-header" style="padding: 24px 20px; border-bottom: 1px solid var(--border);">
+    <nav class="sidebar animate-fade-in" style="flex-shrink: 0; z-index: 1000; box-shadow: 1px 0 0 var(--border);">
+        <div class="sidebar-header" style="padding: 24px 20px; border-bottom: 1px solid var(--border); position: relative;">
+            <!-- Close Button for Mobile -->
+            <button class="close-sidebar-btn" onclick="document.body.classList.remove('sidebar-open')" style="display: none; position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 50%; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; color: var(--text-primary); z-index: 1001;">&times;</button>
+            
             <a href="#" class="sidebar-brand" style="display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 20px;">
                 <img src="${pageContext.request.contextPath}/images/logo.svg" alt="DISHA" style="width: 34px; height: 34px;">
                 <span style="font-size: 16px; font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: 2px; color: var(--primary);">DISHA</span>
@@ -185,14 +189,10 @@
         
         <!-- Topnav -->
         <header class="topnav" style="height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <button class="mobile-menu-btn" id="mobileMenuBtn" style="border: 1px solid var(--border); border-radius: 8px; background: var(--surface); width: 42px; height: 42px; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer;">☰</button>
-                <div class="topnav-greeting" style="font-size: 14px; font-weight: 600; color: var(--text-secondary);">Good afternoon, Counselor Dev! 👋</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 16px;">
-                <div class="date-chip" style="border: 1px solid var(--border); border-radius: var(--radius-md); padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--text-secondary); background: var(--surface); display: flex; align-items: center; gap: 8px;">
-                    📅 May 14, 2025
-                </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" style="border: 1px solid var(--border); border-radius: 8px; background: var(--surface); width: 42px; height: 42px; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; margin-right: 12px;">☰</button>
+            <div class="topnav-greeting" style="flex: 1; font-size: 14px; font-weight: 600; color: var(--text-secondary);">Good afternoon, Counselor Dev! 👋</div>
+            <div class="date-chip" style="border: 1px solid var(--border); border-radius: var(--radius-md); padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--text-secondary); background: var(--surface); display: flex; align-items: center; gap: 8px;">
+                📅 May 14, 2025
             </div>
         </header>
 
@@ -233,7 +233,7 @@
                         <div class="sc-trend neutral">67.2% completion rate</div>
                     </div>
                 </div>
-                <div class="summary-card sc-green animate-fade-in delay-2">
+                <div class="summary-card sc-green animate-fade-in delay-2" style="display: none;">
                     <div class="sc-icon">🎯</div>
                     <div class="sc-content">
                         <div class="sc-label">Career Matches Generated</div>
@@ -544,11 +544,11 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: { 
-                        position: window.innerWidth < 768 ? 'bottom' : 'right', 
-                        labels: { boxWidth: 8, usePointStyle: true, padding: 8, font: { size: 9 } } 
+                        position: 'bottom', 
+                        labels: { boxWidth: 6, usePointStyle: true, padding: 6, font: { size: 8 } } 
                     }
                 },
-                cutout: window.innerWidth < 480 ? '60%' : '70%'
+                cutout: '65%'
             }
         });
 
