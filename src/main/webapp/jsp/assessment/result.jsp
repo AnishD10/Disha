@@ -9,7 +9,7 @@
     <title>Your Results - DISHA Career Portal</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css?v=5">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css?v=7">
     <style>
         :root {
             --primary: #2563EB;

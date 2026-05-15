@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Counselor Dashboard - DISHA</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css?v=6">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css?v=7">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
