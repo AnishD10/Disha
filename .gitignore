@@ -35,3 +35,9 @@ Disha - Nepal Career Intelligence Portal.iml
 # Ignore all markdown files except README.md
 *.md
 !README.md
+
+### Maven Build Output ###
+target/
+*.class
+*.war
+*.jar
