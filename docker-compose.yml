@@ -12,14 +12,13 @@ services:
       - "${MYSQL_HOST_PORT:-3307}:3306"
     volumes:
       # Initialize database with schema
-      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
-      - ./database/init.sql:/docker-entrypoint-initdb.d/02-init.sql
+      - ./sql/Disha_assessment.sql:/docker-entrypoint-initdb.d/01-schema.sql
       # Persist database data
       - disha-mysql-data:/var/lib/mysql
     networks:
       - disha-network
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot_password"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot_password" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -32,14 +31,12 @@ services:
       dockerfile: Dockerfile
     container_name: disha-app
     ports:
-      - "8080:8080"
+      - "8081:8080"
     environment:
       # Database configuration
-      DB_HOST: mysql-db
-      DB_PORT: 3306
-      DB_NAME: disha_db
-      DB_USER: disha_user
-      DB_PASSWORD: disha_pass
+      DISHA_DB_URL: "jdbc:mysql://mysql-db:3306/disha_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8"
+      DISHA_DB_USERNAME: disha_user
+      DISHA_DB_PASSWORD: disha_pass
       JAVA_OPTS: "-Xmx512m -Xms256m"
     depends_on:
       mysql-db:
@@ -47,9 +44,11 @@ services:
     networks:
       - disha-network
     volumes:
-      # For development: live code changes
-      - ./src:/opt/tomcat/webapps/ROOT/WEB-INF/classes
-      - ./WebContent:/opt/tomcat/webapps/ROOT
+      # Map subdirectories for live-reloading without overwriting WEB-INF/lib
+      - ./src/main/webapp/jsp:/usr/local/tomcat/webapps/ROOT/jsp
+      - ./src/main/webapp/css:/usr/local/tomcat/webapps/ROOT/css
+      - ./src/main/webapp/js:/usr/local/tomcat/webapps/ROOT/js
+      - ./src/main/webapp/images:/usr/local/tomcat/webapps/ROOT/images
     restart: unless-stopped
 
 networks:

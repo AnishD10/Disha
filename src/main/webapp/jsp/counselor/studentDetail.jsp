@@ -11,7 +11,7 @@
     <style>
         body {
             background: var(--bg);
-            background-image: radial-gradient(ellipse 70% 50% at 85% 5%, rgba(37,99,235,0.05) 0%, transparent 55%);
+            background-image: radial-gradient(ellipse 70% 50% at 85% 5%, rgba(37, 99, 235, 0.05) 0%, transparent 55%);
         }
 
         .page-wrap {
@@ -20,7 +20,7 @@
             padding: 36px 24px 80px;
         }
 
-        /* ── Back button ── */
+        /* -- Back button -- */
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -45,7 +45,7 @@
             transform: translateX(-2px);
         }
 
-        /* ── Profile Card ── */
+        /* -- Profile Card -- */
         .profile-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -64,7 +64,9 @@
         .profile-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             height: 4px;
             background: var(--primary-gradient);
         }
@@ -85,7 +87,10 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        .profile-info { flex: 1; min-width: 200px; }
+        .profile-info {
+            flex: 1;
+            min-width: 200px;
+        }
 
         .profile-info h1 {
             font-size: 22px;
@@ -127,7 +132,7 @@
             color: #15803D;
         }
 
-        /* ── Note Card ── */
+        /* -- Note Card -- */
         .note-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -220,7 +225,9 @@
             line-height: 1.6;
         }
 
-        .custom-textarea::placeholder { color: var(--text-muted); }
+        .custom-textarea::placeholder {
+            color: var(--text-muted);
+        }
 
         .custom-textarea:focus {
             border-color: var(--primary);
@@ -248,7 +255,7 @@
             margin-bottom: 8px;
         }
 
-        /* ── History Section ── */
+        /* -- History Section -- */
         .section-title {
             font-size: 16px;
             font-weight: 700;
@@ -268,10 +275,22 @@
             background: var(--border);
         }
 
-        .score-num { font-weight: 700; font-size: 14px; }
-        .apt { color: var(--primary-dark); }
-        .per { color: var(--info); }
-        .int { color: #16A34A; }
+        .score-num {
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .apt {
+            color: var(--primary-dark);
+        }
+
+        .per {
+            color: var(--info);
+        }
+
+        .int {
+            color: #16A34A;
+        }
 
         .view-link {
             display: inline-flex;
@@ -294,7 +313,9 @@
         }
 
         @media (max-width: 680px) {
-            .note-form-row { grid-template-columns: 1fr; }
+            .note-form-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -340,9 +361,11 @@
                 </div>
                 <div>
                     <label class="note-form-label">Counselor Note</label>
-                    <textarea name="counselorNote" class="custom-textarea" placeholder="Add a private note about this student...">${student.counselorNote}</textarea>
+                    <textarea name="counselorNote" class="custom-textarea"
+                              placeholder="Add a private note about this student...">${student.counselorNote}</textarea>
                 </div>
-                <button type="submit" class="btn-accent" style="padding: 11px 22px; white-space: nowrap; align-self: end;">
+                <button type="submit" class="btn-accent"
+                        style="padding: 11px 22px; white-space: nowrap; align-self: end;">
                     Save Note
                 </button>
             </div>
@@ -351,7 +374,7 @@
         <c:if test="${not empty student.counselorNote}">
             <div class="existing-note">
                 <span class="existing-note-label">Current Note:</span>
-                ${student.counselorNote}
+                    ${student.counselorNote}
             </div>
         </c:if>
     </div>
@@ -362,45 +385,49 @@
     <div class="glass-panel table-responsive animate-fade-in delay-3">
         <table class="modern-table" style="margin: 0;">
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Date</th>
-                    <th>Cluster</th>
-                    <th>Aptitude</th>
-                    <th>Personality</th>
-                    <th>Interest</th>
-                    <th>Report</th>
-                </tr>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Cluster</th>
+                <th>Aptitude</th>
+                <th>Personality</th>
+                <th>Interest</th>
+                <th>Report</th>
+            </tr>
             </thead>
             <tbody>
-                <c:if test="${empty attempts}">
-                    <tr>
-                        <td colspan="7" style="text-align: center; padding: 60px; color: var(--text-muted);">
-                            <div style="font-size: 36px; margin-bottom: 12px;">📭</div>
-                            <div style="font-weight: 600; margin-bottom: 4px;">No assessments yet</div>
-                            <div style="font-size: 13px;">This student has not completed any assessments yet.</div>
-                        </td>
-                    </tr>
-                </c:if>
-                <c:forEach var="attempt" items="${attempts}" varStatus="status">
-                    <tr>
-                        <td>
-                            <span style="font-size: 12px; font-weight: 700; color: var(--text-muted);">${status.count}</span>
-                        </td>
-                        <td style="color:var(--text-secondary); font-size:13px;">${attempt.attemptDate}</td>
-                        <td>
-                            <span class="badge ${fn:toLowerCase(attempt.personalityCluster)}">${attempt.personalityCluster}</span>
-                        </td>
-                        <td><span class="score-num apt">${attempt.aptitudeScore}</span><span style="color:var(--text-muted);font-size:12px;">/10</span></td>
-                        <td><span class="score-num per">${attempt.personalityScore}</span><span style="color:var(--text-muted);font-size:12px;">/50</span></td>
-                        <td><span class="score-num int">${attempt.interestScore}</span><span style="color:var(--text-muted);font-size:12px;">/50</span></td>
-                        <td>
-                            <a href="${pageContext.request.contextPath}/assessment/result?attemptId=${attempt.attemptId}" class="view-link">
-                                View →
-                            </a>
-                        </td>
-                    </tr>
-                </c:forEach>
+            <c:if test="${empty attempts}">
+                <tr>
+                    <td colspan="7" style="text-align: center; padding: 60px; color: var(--text-muted);">
+                        <div style="font-size: 36px; margin-bottom: 12px;">📭</div>
+                        <div style="font-weight: 600; margin-bottom: 4px;">No assessments yet</div>
+                        <div style="font-size: 13px;">This student has not completed any assessments yet.</div>
+                    </td>
+                </tr>
+            </c:if>
+            <c:forEach var="attempt" items="${attempts}" varStatus="status">
+                <tr>
+                    <td>
+                        <span style="font-size: 12px; font-weight: 700; color: var(--text-muted);">${status.count}</span>
+                    </td>
+                    <td style="color:var(--text-secondary); font-size:13px;">${attempt.attemptDate}</td>
+                    <td>
+                        <span class="badge ${fn:toLowerCase(attempt.personalityCluster)}">${attempt.personalityCluster}</span>
+                    </td>
+                    <td><span class="score-num apt">${attempt.aptitudeScore}</span><span
+                            style="color:var(--text-muted);font-size:12px;">/10</span></td>
+                    <td><span class="score-num per">${attempt.personalityScore}</span><span
+                            style="color:var(--text-muted);font-size:12px;">/50</span></td>
+                    <td><span class="score-num int">${attempt.interestScore}</span><span
+                            style="color:var(--text-muted);font-size:12px;">/50</span></td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/assessment/result?attemptId=${attempt.attemptId}"
+                           class="view-link">
+                            View →
+                        </a>
+                    </td>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
     </div>

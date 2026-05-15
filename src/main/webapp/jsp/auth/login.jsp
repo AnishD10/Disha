@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In - DISHA Career Portal</title>
-    <meta name="description" content="Sign in to DISHA - Nepal's premier science-backed career assessment platform for students.">
+    <meta name="description"
+          content="Sign in to DISHA - Nepal's premier science-backed career assessment platform for students.">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css?v=5">
     <style>
         body {
@@ -15,13 +16,12 @@
             justify-content: center;
             min-height: 100vh;
             background: var(--bg);
-            background-image:
-                radial-gradient(ellipse 80% 60% at 20% 110%, rgba(37,99,235,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 50% at 85% -10%, rgba(56,189,248,0.07) 0%, transparent 55%);
+            background-image: radial-gradient(ellipse 80% 60% at 20% 110%, rgba(37, 99, 235, 0.08) 0%, transparent 60%),
+            radial-gradient(ellipse 60% 50% at 85% -10%, rgba(56, 189, 248, 0.07) 0%, transparent 55%);
             padding: 24px;
         }
 
-        /* ── Wrapper ── */
+        /* -- Wrapper -- */
         .login-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -30,11 +30,11 @@
             min-height: 580px;
             border-radius: var(--radius-2xl);
             overflow: hidden;
-            box-shadow: var(--shadow-xl), 0 0 0 1px rgba(255,255,255,0.6);
+            box-shadow: var(--shadow-xl), 0 0 0 1px rgba(255, 255, 255, 0.6);
             background: var(--surface);
         }
 
-        /* ── Left Brand Panel ── */
+        /* -- Left Brand Panel -- */
         .login-brand {
             position: relative;
             background: linear-gradient(145deg, #1E3A8A 0%, #1D4ED8 40%, #2563EB 70%, #3B82F6 100%);
@@ -55,7 +55,7 @@
             width: 340px;
             height: 340px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .login-brand::after {
@@ -66,16 +66,15 @@
             width: 260px;
             height: 260px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
         }
 
         /* Grid pattern overlay */
         .brand-grid {
             position: absolute;
             inset: 0;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
             background-size: 48px 48px;
         }
 
@@ -94,10 +93,11 @@
             flex-direction: column;
             gap: 12px;
         }
+
         /*Glass morphisim mini-card */
         .mini-card {
-            background: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             backdrop-filter: blur(8px);
             border-radius: var(--radius-md);
             padding: 12px 16px;
@@ -105,14 +105,14 @@
             align-items: center;
             gap: 10px;
             width: 176px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
         }
 
         .mini-card-icon {
             width: 32px;
             height: 32px;
             border-radius: 8px;
-            background: rgba(255,255,255,0.18);
+            background: rgba(255, 255, 255, 0.18);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -123,13 +123,13 @@
         .mini-card-text {
             font-size: 11px;
             font-weight: 600;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             line-height: 1.35;
         }
 
         .mini-card-sub {
             font-size: 10px;
-            color: rgba(255,255,255,0.55);
+            color: rgba(255, 255, 255, 0.55);
             margin-top: 1px;
         }
 
@@ -173,7 +173,7 @@
 
         .brand-sub {
             font-size: 14px;
-            color: rgba(255,255,255,0.65);
+            color: rgba(255, 255, 255, 0.65);
             line-height: 1.7;
             margin-bottom: 32px;
             max-width: 280px;
@@ -191,7 +191,7 @@
             align-items: center;
             gap: 10px;
             font-size: 13px;
-            color: rgba(255,255,255,0.78);
+            color: rgba(255, 255, 255, 0.78);
             font-weight: 500;
         }
 
@@ -199,7 +199,7 @@
             width: 28px;
             height: 28px;
             border-radius: 7px;
-            background: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.12);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -211,13 +211,13 @@
         .brand-nepali {
             margin-top: 28px;
             font-size: 13px;
-            color: rgba(255,255,255,0.45);
+            color: rgba(255, 255, 255, 0.45);
             letter-spacing: 0.5px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 20px;
         }
 
-        /* ── Right Form Panel ── */
+        /* -- Right Form Panel -- */
         .login-form-panel {
             padding: 64px 52px;
             display: flex;
@@ -274,6 +274,7 @@
         .input-wrapper .form-control {
             padding-left: 42px;
         }
+
         /* Focus-within colour transition */
         .input-wrapper .form-control:focus ~ .input-icon,
         .input-wrapper:focus-within .input-icon {
@@ -356,7 +357,9 @@
             color: var(--text-secondary);
         }
 
-        .cred-row:last-child { margin-bottom: 0; }
+        .cred-row:last-child {
+            margin-bottom: 0;
+        }
 
         .cred-tag {
             font-size: 10px;
@@ -382,9 +385,17 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .login-wrapper { grid-template-columns: 1fr; }
-            .login-brand { display: none; }
-            .login-form-panel { padding: 40px 28px; }
+            .login-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .login-brand {
+                display: none;
+            }
+
+            .login-form-panel {
+                padding: 40px 28px;
+            }
         }
     </style>
 </head>
@@ -430,7 +441,8 @@
                 Find Your<br><span class="highlight">Perfect Career</span><br>Path
             </h2>
             <p class="brand-sub">
-                Science-backed assessment tailored for students across Nepal. Discover your strengths and unlock your future.
+                Science-backed assessment tailored for students across Nepal. Discover your strengths and unlock your
+                future.
             </p>
             <div class="trust-list">
                 <div class="trust-item">
@@ -469,13 +481,13 @@
                 <div class="input-wrapper">
                     <span class="input-icon">✉️</span>
                     <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        class="form-control"
-                        required
-                        placeholder="name@example.com"
-                        autocomplete="email"
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-control"
+                            required
+                            placeholder="name@example.com"
+                            autocomplete="email"
                     >
                 </div>
             </div>
@@ -485,13 +497,13 @@
                 <div class="input-wrapper">
                     <span class="input-icon">🔑</span>
                     <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        class="form-control"
-                        required
-                        placeholder="Enter your password"
-                        autocomplete="current-password"
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-control"
+                            required
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
                     >
                 </div>
             </div>
@@ -503,22 +515,7 @@
 
         <p class="form-footer">Don't have an account? Contact your counselor.</p>
 
-        <!-- Dev Credentials -->
-        <div class="dev-creds">
-            <span class="dev-creds-label">Dev Mode</span>
-            <div class="cred-row">
-                <span class="cred-tag">Student</span>
-                <span class="cred-code">student@example.com</span>
-                <span>/</span>
-                <span class="cred-code">password123</span>
-            </div>
-            <div class="cred-row">
-                <span class="cred-tag">Counselor</span>
-                <span class="cred-code">counselor@example.com</span>
-                <span>/</span>
-                <span class="cred-code">password123</span>
-            </div>
-        </div>
+
     </div>
 
 </div>

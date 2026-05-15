@@ -15,13 +15,13 @@
             overflow-x: hidden;
         }
 
-        /* ── Layout ── */
+        /* -- Layout -- */
         .app-shell {
             display: flex;
             min-height: 100vh;
         }
 
-        /* ── Left Sidebar ── */
+        /* -- Left Sidebar -- */
         .sidebar {
             width: 260px;
             background: var(--surface);
@@ -188,14 +188,14 @@
             color: var(--primary-dark);
         }
 
-        /* ── Top Navbar ── */
+        /* -- Top Navbar -- */
         .top-bar {
             position: fixed;
             top: 0;
             left: 260px;
             right: 0;
             height: 64px;
-            background: rgba(255,255,255,0.92);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
@@ -240,7 +240,7 @@
             gap: 8px;
         }
 
-        /* ── Main Content ── */
+        /* -- Main Content -- */
         .main-content {
             flex: 1;
             margin-left: 260px;
@@ -248,7 +248,7 @@
             min-height: 100vh;
         }
 
-        /* ── Section Badge ── */
+        /* -- Section Badge -- */
         .section-badge {
             display: inline-flex;
             align-items: center;
@@ -275,7 +275,9 @@
             border: 1px solid var(--primary-100);
         }
 
-        .section-badge.aptitude::before { background: var(--primary); }
+        .section-badge.aptitude::before {
+            background: var(--primary);
+        }
 
         .section-badge.personality {
             background: #F0FDFA;
@@ -283,7 +285,9 @@
             border: 1px solid #CCFBF1;
         }
 
-        .section-badge.personality::before { background: #0D9488; }
+        .section-badge.personality::before {
+            background: #0D9488;
+        }
 
         .section-badge.interest {
             background: var(--success-bg);
@@ -291,9 +295,11 @@
             border: 1px solid var(--success-border);
         }
 
-        .section-badge.interest::before { background: var(--success); }
+        .section-badge.interest::before {
+            background: var(--success);
+        }
 
-        /* ── Question Card ── */
+        /* -- Question Card -- */
         .question-card {
             background: var(--surface);
             border: 1.5px solid var(--border);
@@ -342,7 +348,7 @@
             line-height: 1.65;
         }
 
-        /* ── MCQ Options ── */
+        /* -- MCQ Options -- */
         .options-list {
             display: flex;
             flex-direction: column;
@@ -379,7 +385,7 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
         }
 
-        /* ── Likert Scale ── */
+        /* -- Likert Scale -- */
         .likert-scale {
             display: flex;
             gap: 10px;
@@ -425,7 +431,7 @@
             font-weight: 700;
         }
 
-        /* ── Custom Radio ── */
+        /* -- Custom Radio -- */
         input[type="radio"] {
             appearance: none;
             -webkit-appearance: none;
@@ -458,14 +464,14 @@
             border-radius: 50%;
         }
 
-        /* ── Bottom Submit Bar ── */
+        /* -- Bottom Submit Bar -- */
         .submit-bar {
             position: fixed;
             bottom: 0;
             left: 260px;
             right: 0;
             height: 76px;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-top: 1px solid var(--border);
@@ -531,15 +537,39 @@
             box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
         }
 
-        /* ── Responsive ── */
+        /* -- Responsive -- */
         @media (max-width: 1024px) {
-            .sidebar { display: none; }
-            .main-content { margin-left: 0; padding: 80px 20px 110px; }
-            .top-bar { left: 0; padding: 0 20px; }
-            .submit-bar { left: 0; padding: 0 20px; }
-            .options-list, .q-header { max-width: 100%; }
-            .likert-scale { max-width: 100%; flex-wrap: wrap; }
-            .likert-label { min-width: 80px; }
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 80px 20px 110px;
+            }
+
+            .top-bar {
+                left: 0;
+                padding: 0 20px;
+            }
+
+            .submit-bar {
+                left: 0;
+                padding: 0 20px;
+            }
+
+            .options-list, .q-header {
+                max-width: 100%;
+            }
+
+            .likert-scale {
+                max-width: 100%;
+                flex-wrap: wrap;
+            }
+
+            .likert-label {
+                min-width: 80px;
+            }
         }
     </style>
 </head>
@@ -624,8 +654,10 @@
                         <div class="options-list">
                             <c:forEach var="opt" items="${q.options}">
                                 <label class="option-label" for="opt-${opt.optionId}">
-                                    <input type="radio" id="opt-${opt.optionId}" name="q_${q.questionId}" value="${opt.optionId}" class="answer-radio" data-qorder="${q.questionOrder}" required>
-                                    ${opt.optionText}
+                                    <input type="radio" id="opt-${opt.optionId}" name="q_${q.questionId}"
+                                           value="${opt.optionId}" class="answer-radio" data-qorder="${q.questionOrder}"
+                                           required>
+                                        ${opt.optionText}
                                 </label>
                             </c:forEach>
                         </div>
@@ -635,7 +667,9 @@
                         <div class="likert-scale">
                             <c:forEach var="opt" items="${q.options}">
                                 <label class="likert-label" for="opt-${opt.optionId}">
-                                    <input type="radio" id="opt-${opt.optionId}" name="q_${q.questionId}" value="${opt.optionId}" class="answer-radio" data-qorder="${q.questionOrder}" required>
+                                    <input type="radio" id="opt-${opt.optionId}" name="q_${q.questionId}"
+                                           value="${opt.optionId}" class="answer-radio" data-qorder="${q.questionOrder}"
+                                           required>
                                     <span class="likert-val">${opt.optionText}</span>
                                 </label>
                             </c:forEach>
@@ -667,7 +701,7 @@
         var groups = {};
         var radios = document.querySelectorAll('input.answer-radio:checked');
 
-        radios.forEach(function(radio) {
+        radios.forEach(function (radio) {
             groups[radio.name] = true;
             var order = parseInt(radio.getAttribute('data-qorder'));
             var trackerIdx = Math.ceil(order / 3);
@@ -694,7 +728,7 @@
         allRadios[i].addEventListener('change', updateProgress);
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const sidebar = document.querySelector('.sidebar');
         const overlay = document.getElementById('sidebarOverlay');
@@ -704,6 +738,7 @@
                 sidebar.classList.toggle('open');
                 overlay.classList.toggle('show');
             }
+
             mobileMenuBtn.addEventListener('click', toggleMenu);
             overlay.addEventListener('click', toggleMenu);
         }

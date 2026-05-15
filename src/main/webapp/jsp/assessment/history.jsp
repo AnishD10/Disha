@@ -11,7 +11,7 @@
     <style>
         body {
             background: var(--bg);
-            background-image: radial-gradient(ellipse 70% 50% at 85% 5%, rgba(37,99,235,0.05) 0%, transparent 55%);
+            background-image: radial-gradient(ellipse 70% 50% at 85% 5%, rgba(37, 99, 235, 0.05) 0%, transparent 55%);
         }
 
         .page-header {
@@ -30,13 +30,7 @@
             gap: 6px;
         }
 
-        .page-header-eyebrow::before {
-            content: '';
-            width: 16px;
-            height: 2px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
+
 
         .page-header h1 {
             font-size: 28px;
@@ -90,10 +84,22 @@
         }
 
         /* Score values */
-        .score-val { font-weight: 700; font-size: 14px; }
-        .score-val.apt { color: var(--primary-dark); }
-        .score-val.per { color: var(--info); }
-        .score-val.int { color: #16A34A; }
+        .score-val {
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .score-val.apt {
+            color: var(--primary-dark);
+        }
+
+        .score-val.per {
+            color: var(--info);
+        }
+
+        .score-val.int {
+            color: #16A34A;
+        }
 
         /* View link */
         .view-link {
@@ -144,8 +150,15 @@
             border: 1px solid var(--primary-100);
         }
 
-        .trend-card strong { color: var(--text-primary); font-weight: 700; }
-        .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .trend-card strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
     </style>
 </head>
 <body>
@@ -158,7 +171,7 @@
         <div class="brand-text">DISHA</div>
     </a>
     <nav>
-        <a href="${pageContext.request.contextPath}/counselor/dashboard" class="nav-item">
+        <a href="${pageContext.request.contextPath}/" class="nav-item">
             <span style="font-size:18px">⌂</span> Dashboard
         </a>
         <a href="${pageContext.request.contextPath}/assessment/start" class="nav-item">
@@ -167,13 +180,13 @@
         <a href="#" class="nav-item active">
             <span style="font-size:18px">🕒</span> History
         </a>
-        <a href="#" class="nav-item">
+        <a href="${pageContext.request.contextPath}/profile" class="nav-item">
             <span style="font-size:18px">👤</span> Profile
         </a>
-        <a href="#" class="nav-item">
+        <a href="${pageContext.request.contextPath}/resources" class="nav-item">
             <span style="font-size:18px">📚</span> Resources
         </a>
-        <a href="#" class="nav-item">
+        <a href="${pageContext.request.contextPath}/support" class="nav-item">
             <span style="font-size:18px">🎧</span> Counselor Support
         </a>
     </nav>
@@ -181,11 +194,12 @@
 
 <!-- Main Wrapper -->
 <div class="main-wrapper">
-    
+
     <!-- Topnav -->
     <header class="topnav">
         <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-        <a href="${pageContext.request.contextPath}/assessment/start" class="btn btn-primary" id="btnTakeNewTest" style="padding: 8px 16px;">
+        <a href="${pageContext.request.contextPath}/assessment/start" class="btn btn-primary" id="btnTakeNewTest"
+           style="padding: 8px 16px;">
             + New Assessment
         </a>
         <button class="icon-btn">🔔</button>
@@ -194,28 +208,30 @@
 
     <div class="content animate-fade-in delay-1">
 
-    <div class="page-header">
-        <div class="page-header-eyebrow">Profile</div>
-        <h1>Assessment History</h1>
-        <p>All past attempts for <strong>${studentName}</strong>, newest first.</p>
-    </div>
-
-    <c:if test="${empty attempts}">
-        <div class="glass-panel empty-state">
-            <div class="empty-state-icon">📊</div>
-            <h2>No assessments yet</h2>
-            <p>Take your first assessment to unlock your career profile, personality insights, and skill analysis.</p>
-            <a href="${pageContext.request.contextPath}/assessment/start" class="btn-accent" id="btnFirstAssessment">
-                Start Assessment →
-            </a>
+        <div class="page-header">
+            <div class="page-header-eyebrow">Profile</div>
+            <h1>Assessment History</h1>
+            <p>All past attempts for <strong>${studentName}</strong>, newest first.</p>
         </div>
-    </c:if>
 
-    <c:if test="${not empty attempts}">
-        <div class="glass-panel animate-fade-in delay-2">
-            <div class="table-responsive">
-                <table class="modern-table">
-                    <thead>
+        <c:if test="${empty attempts}">
+            <div class="glass-panel empty-state">
+                <div class="empty-state-icon">📊</div>
+                <h2>No assessments yet</h2>
+                <p>Take your first assessment to unlock your career profile, personality insights, and skill
+                    analysis.</p>
+                <a href="${pageContext.request.contextPath}/assessment/start" class="btn-accent"
+                   id="btnFirstAssessment">
+                    Start Assessment →
+                </a>
+            </div>
+        </c:if>
+
+        <c:if test="${not empty attempts}">
+            <div class="glass-panel animate-fade-in delay-2">
+                <div class="table-responsive">
+                    <table class="modern-table">
+                        <thead>
                         <tr>
                             <th>#</th>
                             <th>Date</th>
@@ -225,8 +241,8 @@
                             <th>Interest</th>
                             <th>Report</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <c:forEach var="attempt" items="${attempts}" varStatus="status">
                             <tr>
                                 <td>
@@ -249,25 +265,26 @@
                                     <span style="color:var(--text-muted); font-size:12px;"> / 50</span>
                                 </td>
                                 <td>
-                                    <a href="${pageContext.request.contextPath}/assessment/result?attemptId=${attempt.attemptId}" class="view-link">
+                                    <a href="${pageContext.request.contextPath}/assessment/result?attemptId=${attempt.attemptId}"
+                                       class="view-link">
                                         View →
                                     </a>
                                 </td>
                             </tr>
                         </c:forEach>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
-        <div class="trend-card animate-fade-in delay-3">
-            <div class="trend-icon">📈</div>
-            <div>
-                You have taken the assessment <strong>${fn:length(attempts)} time(s)</strong>.
-                Compare your results over time to track your skill development and growth.
+            <div class="trend-card animate-fade-in delay-3">
+                <div class="trend-icon">📈</div>
+                <div>
+                    You have taken the assessment <strong>${fn:length(attempts)} time(s)</strong>.
+                    Compare your results over time to track your skill development and growth.
+                </div>
             </div>
-        </div>
-    </c:if>
+        </c:if>
 
     </div>
 </div>
@@ -275,7 +292,7 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const sidebar = document.querySelector('.sidebar');
         const overlay = document.getElementById('sidebarOverlay');
@@ -285,6 +302,7 @@
                 sidebar.classList.toggle('open');
                 overlay.classList.toggle('show');
             }
+
             mobileMenuBtn.addEventListener('click', toggleMenu);
             overlay.addEventListener('click', toggleMenu);
         }
