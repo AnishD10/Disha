@@ -80,6 +80,17 @@
             }
             .sc-value { font-size: 20px; }
             h1[style] { font-size: 22px !important; }
+            .chart-container { height: 260px !important; }
+        }
+
+        body.sidebar-open {
+            overflow: hidden;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 320px;
+            width: 100%;
         }
     </style>
 </head>
@@ -441,13 +452,12 @@
         const sidebar = document.querySelector('.sidebar');
         const overlay = document.getElementById('sidebarOverlay');
 
-        if (mobileMenuBtn && sidebar && overlay) {
+        if (mobileMenuBtn) {
             function toggleMenu() {
-                sidebar.classList.toggle('open');
-                overlay.classList.toggle('show');
+                document.body.classList.toggle('sidebar-open');
             }
             mobileMenuBtn.addEventListener('click', toggleMenu);
-            overlay.addEventListener('click', toggleMenu);
+            if (overlay) overlay.addEventListener('click', toggleMenu);
         }
 
         // Add Student Modal Logic
@@ -499,9 +509,12 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { position: 'right', labels: { boxWidth: 12, usePointStyle: true, padding: 15 } }
+                    legend: { 
+                        position: window.innerWidth < 768 ? 'bottom' : 'right', 
+                        labels: { boxWidth: 10, usePointStyle: true, padding: 10, font: { size: 10 } } 
+                    }
                 },
-                cutout: '75%'
+                cutout: '70%'
             }
         });
 
