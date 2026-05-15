@@ -24,6 +24,11 @@ public class CounselorDashboardServlet extends HttpServlet {
     private CounselorDAO counselorDAO = new CounselorDAO();
 
     @Override
+    public void init() throws ServletException {
+        System.out.println("CounselorDashboardServlet Initialized - V7");
+    }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

@@ -128,6 +128,7 @@
     </style>
 </head>
 <body>
+<div style="background: #ef4444; color: white; padding: 10px; text-align: center; font-weight: bold; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">🚀 V7 RESPONSIVE UPDATE LOADED - REFRESH IF YOU DON'T SEE THIS</div>
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <div class="layout" style="display: flex; min-height: 100vh;">
