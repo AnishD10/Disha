@@ -883,6 +883,11 @@ img {
     align-items: start;
 }
 
+.main-column,
+.side-column {
+    min-width: 0;
+}
+
 @media (max-width: 1200px) {
     .dashboard-grid {
         grid-template-columns: 1fr;
@@ -911,6 +916,8 @@ img {
     box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    min-width: 0;
 }
 
 .chart-header {
@@ -931,6 +938,11 @@ img {
     flex: 1;
     min-height: 200px;
     width: 100%;
+    min-width: 0;
+}
+
+.chart-container canvas {
+    max-width: 100% !important;
 }
 
 /* -- Progress Widgets -- */

@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Counselor Dashboard - DISHA</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css?v=7">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css?v=8">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
@@ -74,19 +74,28 @@
             position: relative;
             height: 320px;
             width: 100%;
-            overflow: hidden;
         }
 
         /* ── Mobile (≤ 768px) ── */
         @media (max-width: 768px) {
             .sc-value { font-size: 18px; }
             h1[style] { font-size: 20px !important; }
-            .chart-container { height: 180px !important; }
             .glass-panel { padding: 10px !important; }
             .dash-summary-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
             .close-sidebar-btn { display: flex !important; }
-            
-            /* FORCE SIDEBAR HIDE */
+            .dashboard-grid { flex-direction: column !important; gap: 16px !important; }
+            .main-column, .side-column { width: 100% !important; }
+
+            /* Line chart — give it enough room */
+            .chart-container {
+                height: 220px !important;
+            }
+
+            /* Doughnut chart needs more height so the circle isn't clipped */
+            .chart-container.chart-doughnut {
+                height: 300px !important;
+            }
+
             .sidebar {
                 transform: translateX(-100%) !important;
                 left: 0 !important;
@@ -115,13 +124,6 @@
                 display: flex !important;
                 order: -1;
             }
-        }
-
-        .chart-container {
-            position: relative;
-            height: 320px;
-            width: 100%;
-            overflow: hidden;
         }
 
         body.sidebar-open {
@@ -403,7 +405,7 @@
                         <div class="chart-header">
                             <div class="chart-title">Career Interest Distribution</div>
                         </div>
-                        <div class="chart-container" style="height: 220px;">
+                        <div class="chart-container chart-doughnut" style="height: 220px;">
                             <canvas id="interestChart"></canvas>
                         </div>
                     </div>
@@ -545,7 +547,7 @@
                 plugins: {
                     legend: { 
                         position: 'bottom', 
-                        labels: { boxWidth: 6, usePointStyle: true, padding: 6, font: { size: 8 } } 
+                        labels: { boxWidth: 8, usePointStyle: true, padding: 10, font: { size: 11 } } 
                     }
                 },
                 cutout: '65%'
