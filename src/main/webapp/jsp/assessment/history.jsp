@@ -167,7 +167,9 @@
 <!-- Sidebar -->
 <aside class="sidebar">
     <a href="${pageContext.request.contextPath}/" class="brand">
-        <div class="brand-icon">D</div>
+        <div class="brand-icon">
+            <img src="${pageContext.request.contextPath}/images/logo.svg?v=1.1" alt="DISHA Logo">
+        </div>
         <div class="brand-text">DISHA</div>
     </a>
     <nav>

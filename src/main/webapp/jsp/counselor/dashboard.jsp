@@ -142,9 +142,11 @@
             <!-- Close Button for Mobile -->
             <button class="close-sidebar-btn" onclick="document.body.classList.remove('sidebar-open')" style="display: none; position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 50%; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; color: var(--text-primary); z-index: 1001;">&times;</button>
             
-            <a href="#" class="sidebar-brand" style="display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 20px;">
-                <img src="${pageContext.request.contextPath}/images/logo.svg" alt="DISHA" style="width: 34px; height: 34px;">
-                <span style="font-size: 16px; font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: 2px; color: var(--primary);">DISHA</span>
+            <a href="${pageContext.request.contextPath}/counselor/dashboard" class="brand" style="margin-bottom: 20px;">
+                <div class="brand-icon">
+                    <img src="${pageContext.request.contextPath}/images/logo.svg?v=1.1" alt="DISHA Logo">
+                </div>
+                <div class="brand-text">DISHA</div>
             </a>
             
             <!-- Profile Block -->

@@ -63,21 +63,25 @@
         }
 
         .brand-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--primary);
-            color: white;
-            border-radius: 8px;
+            width: 38px;
+            height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .brand-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .brand-text {
             font-size: 18px;
             font-weight: 700;
             color: var(--text-dark);
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .nav-item {
@@ -801,9 +805,21 @@
                 margin-left: 0;
                 padding: 24px 16px;
             }
+
+            /* Stack careers vertically on mobile */
+            .careers-container {
+                display: block;
+                margin-bottom: 24px;
+            }
             .careers-grid {
                 grid-template-columns: 1fr;
+                gap: 16px;
+                width: 100%;
             }
+            .carousel-btn, .carousel-dots {
+                display: none;
+            }
+
             .next-steps-grid {
                 grid-template-columns: 1fr;
             }
@@ -844,7 +860,9 @@
 <!-- Sidebar -->
 <aside class="sidebar">
     <a href="${pageContext.request.contextPath}/" class="brand">
-        <div class="brand-icon">D</div>
+        <div class="brand-icon">
+            <img src="${pageContext.request.contextPath}/images/logo.svg?v=1.1" alt="DISHA Logo">
+        </div>
         <div class="brand-text">DISHA</div>
     </a>
     <nav>

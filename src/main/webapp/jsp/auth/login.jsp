@@ -434,7 +434,7 @@
 
         <div class="brand-content">
             <div class="brand-logo-wrap">
-                <img src="${pageContext.request.contextPath}/images/logo.svg" alt="DISHA Logo">
+                <img src="${pageContext.request.contextPath}/images/logo.svg?v=1.1" alt="DISHA Logo">
                 <div class="brand-logo-name">DISHA</div>
             </div>
             <h2 class="brand-heading">

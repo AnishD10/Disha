@@ -581,7 +581,7 @@
     <aside class="sidebar">
         <div class="sidebar-top">
             <a href="#" class="sidebar-logo">
-                <img src="${pageContext.request.contextPath}/images/logo.svg" alt="DISHA">
+                <img src="${pageContext.request.contextPath}/images/logo.svg?v=1.1" alt="DISHA">
                 <div>
                     <div class="sidebar-brand-name">DISHA</div>
                     <div class="sidebar-brand-tagline">Career Portal</div>
