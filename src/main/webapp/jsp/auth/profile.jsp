@@ -41,6 +41,15 @@
             min-height: 100vh;
         }
 
+        .content {
+            padding: 32px 40px;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            flex: 1;
+            box-sizing: border-box;
+        }
+
         .topnav {
             height: 72px;
             background: var(--surface);
@@ -87,6 +96,10 @@
                 margin-left: 0 !important;
                 width: 100% !important;
                 max-width: 100vw !important;
+            }
+
+            .content {
+                padding: 24px 20px !important;
             }
 
             .topnav {
@@ -651,6 +664,9 @@
         }
 
         @media (max-width: 768px) {
+            .content {
+                padding: 20px 16px !important;
+            }
             .profile-summary-section {
                 flex-direction: column;
                 align-items: flex-start;
