@@ -257,6 +257,10 @@
             color: var(--text-primary);
         }
 
+        .profile-details-card {
+            padding: 32px;
+        }
+
         /* Two column layout */
         .profile-lower-grid {
             display: grid;
@@ -665,11 +669,37 @@
 
         @media (max-width: 768px) {
             .content {
-                padding: 20px 16px !important;
+                padding: 16px 12px !important;
+            }
+            .profile-details-card {
+                padding: 20px !important;
+            }
+            .column-card {
+                padding: 20px !important;
+                gap: 16px !important;
+            }
+            .note-card {
+                padding: 16px !important;
+                gap: 12px !important;
+            }
+            .stat-tile {
+                padding: 16px 12px !important;
+            }
+            .status-panel {
+                gap: 12px !important;
+                margin-bottom: 20px !important;
+            }
+            .overview-item {
+                padding: 12px !important;
             }
             .profile-summary-section {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 20px !important;
+            }
+            .profile-summary-left {
+                gap: 16px !important;
+                width: 100% !important;
             }
             .profile-details-grid {
                 grid-template-columns: 1fr;
@@ -787,7 +817,7 @@
         </div>
 
         <!-- Profile Details Card -->
-        <div class="card animate-fade-in delay-2" style="padding: 32px; margin-bottom: 24px;">
+        <div class="card profile-details-card animate-fade-in delay-2" style="margin-bottom: 24px;">
             <div class="profile-summary-section">
                 <div class="profile-summary-left">
                     <div class="summary-avatar-circle">
