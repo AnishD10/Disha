@@ -34,23 +34,6 @@
         body {
             background-color: var(--bg);
             color: var(--text-dark);
-            display: flex;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: var(--sidebar-w);
-            background: var(--surface);
-            border-right: 1px solid var(--border);
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            padding: 24px 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            overflow-y: auto;
         }
 
         .brand {
@@ -144,16 +127,31 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
         }
 
-        /* Main Layout */
+        /* ---- APP SHELL LAYOUT ---- */
+        .sidebar {
+            width: 240px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 60;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         .main-wrapper {
-            margin-left: var(--sidebar-w);
+            margin-left: 240px;
             flex: 1;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* Topnav */
         .topnav {
             height: 72px;
             background: var(--surface);
@@ -166,6 +164,61 @@
             position: sticky;
             top: 0;
             z-index: 10;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--bg-alt);
+        }
+
+        /* ---- RESPONSIVE SHELL OVERRIDES (<= 1024px) ---- */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 280px;
+                transform: translateX(-100%);
+                z-index: 1000;
+                box-shadow: var(--shadow-xl);
+            }
+
+            .main-wrapper {
+                margin-left: 0 !important;
+                width: 100% !important;
+                max-width: 100vw !important;
+            }
+
+            .topnav {
+                justify-content: space-between !important;
+                padding: 0 20px !important;
+            }
+
+            .mobile-menu-btn {
+                display: flex !important;
+                order: -1; /* Place at the far left */
+            }
+
+            body.sidebar-open .sidebar {
+                transform: translateX(0) !important;
+            }
+
+            body.sidebar-open .sidebar-overlay {
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
         }
 
         .btn {
@@ -731,24 +784,10 @@
             gap: 4px;
         }
 
-        /* Responsive Layout */
+        /* Responsive Layout Overrides */
         @media (max-width: 1024px) {
             .sidebar-counselor {
                 display: none;
-            }
-
-            .main-wrapper {
-                margin-left: 0;
-                width: 100%;
-            }
-
-            .topnav {
-                padding: 0 20px;
-                justify-content: flex-start;
-            }
-
-            .topnav > :first-child:not(.mobile-menu-btn) {
-                margin-left: auto;
             }
 
             .careers-grid {
@@ -765,19 +804,6 @@
 
             .content {
                 padding: 20px;
-            }
-
-            .mobile-menu-btn {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: transparent;
-                border: none;
-                font-size: 24px;
-                padding: 8px;
-                margin-right: 12px;
-                cursor: pointer;
-                color: var(--text-dark);
             }
         }
 
@@ -798,9 +824,7 @@
             body {
                 flex-direction: column;
             }
-            .sidebar {
-                display: none; /* Collapsed by default on mobile */
-            }
+
             .main-content {
                 margin-left: 0;
                 padding: 24px 16px;
@@ -1173,17 +1197,14 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const sidebar = document.querySelector('.sidebar');
         const overlay = document.getElementById('sidebarOverlay');
 
-        if (mobileMenuBtn && sidebar && overlay) {
+        if (mobileMenuBtn) {
             function toggleMenu() {
-                sidebar.classList.toggle('open');
-                overlay.classList.toggle('show');
+                document.body.classList.toggle('sidebar-open');
             }
-
             mobileMenuBtn.addEventListener('click', toggleMenu);
-            overlay.addEventListener('click', toggleMenu);
+            if (overlay) overlay.addEventListener('click', toggleMenu);
         }
     });
 </script>

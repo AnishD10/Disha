@@ -15,14 +15,28 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-// StartAssessmentServlet handles the page where the student begins the test.
-// GET shows the intro/start page. POST creates a new attempt and loads the questions.
+/**
+ * StartAssessmentServlet handles student requests to begin a new career portal assessment.
+ * Serves the initial landing/instructions page via GET, and handles attempt initialization 
+ * and question loading via POST.
+ * 
+ * @author DISHA Team
+ */
 @WebServlet("/assessment/start")
 public class StartAssessmentServlet extends HttpServlet {
 
     private QuestionDAO questionDAO = new QuestionDAO();
     private AssessmentDAO assessmentDAO = new AssessmentDAO();
 
+    /**
+     * Handles HTTP GET requests to display the assessment introduction and instructions.
+     * Validates active session and forwards the student to the assessment start page view.
+     * 
+     * @param request  The HttpServletRequest object
+     * @param response The HttpServletResponse object
+     * @throws ServletException If a servlet-specific error occurs
+     * @throws IOException      If an input/output exception occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,7 +49,17 @@ public class StartAssessmentServlet extends HttpServlet {
         request.getRequestDispatcher("/jsp/assessment/start.jsp").forward(request, response);
     }
 
-    // Creates a fresh attempt in the database and loads all 30 questions.
+    /**
+     * Handles HTTP POST requests to initialize a fresh assessment attempt.
+     * Generates a new attempt ID in the database for the active student, retrieves 
+     * the complete list of 30 structured assessment questions, and forwards them 
+     * to the interactive questionnaire workspace JSP view.
+     * 
+     * @param request  The HttpServletRequest object
+     * @param response The HttpServletResponse object
+     * @throws ServletException If database mapping or forwarding fails
+     * @throws IOException      If transmission input/output fails
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -15,13 +15,33 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-// StudentDetailServlet loads one student's full profile for the counselor to review.
+/**
+ * StudentDetailServlet handles requests for retrieving and presenting a specific student's
+ * complete profile details, including their assessment logs and demographic data,
+ * for review by counselors or administrators.
+ * 
+ * Access is restricted to authorized roles (COUNSELOR, ADMIN).
+ * 
+ * @author DISHA Team
+ */
 @WebServlet("/counselor/student")
 public class StudentDetailServlet extends HttpServlet {
 
     private CounselorDAO counselorDAO = new CounselorDAO();
     private AssessmentDAO assessmentDAO = new AssessmentDAO();
 
+    /**
+     * Handles HTTP GET requests to fetch and display student details.
+     * Validates session authenticity and checks that the logged-in user possesses 
+     * counselor or administrator privileges. Retrieves the student demographic profile 
+     * and their past completed assessment attempt history from the database, and forwards 
+     * the request to the student detail review JSP view.
+     * 
+     * @param request  The HttpServletRequest object containing request parameters (e.g., studentId)
+     * @param response The HttpServletResponse object for redirecting or sending a response
+     * @throws ServletException If a servlet-specific error occurs during forwarding
+     * @throws IOException      If an input/output exception occurs during request handling
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
