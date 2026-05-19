@@ -22,7 +22,7 @@ import java.util.List;
  * 
  * Access is restricted to authorized roles (COUNSELOR, ADMIN).
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 @WebServlet("/counselor/student")
 public class StudentDetailServlet extends HttpServlet {

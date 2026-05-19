@@ -7,7 +7,7 @@ import java.util.List;
  * Each question belongs to a specific section (Aptitude, Personality, Interest)
  * and contains a list of selectable answer options.
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 public class Question {
 

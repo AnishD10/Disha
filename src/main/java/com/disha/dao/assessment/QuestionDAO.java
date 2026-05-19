@@ -16,7 +16,7 @@ import java.util.List;
  * and their respective options. This includes loading question banks for 
  * various sections (MCQ, Likert) and validating answers.
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 public class QuestionDAO {
 

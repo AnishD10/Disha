@@ -10,7 +10,7 @@ import java.util.List;
  * RecommendationService manages the algorithm for selecting the most suitable
  * Nepal-based careers for a student based on their assessment results.
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 public class RecommendationService {
 
