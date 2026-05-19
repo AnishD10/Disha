@@ -12,7 +12,7 @@ import java.sql.SQLException;
  * UserDAO handles authentication and profile management for all users
  * (Students and Counselors) in the DISHA portal.
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 public class UserDAO {
 

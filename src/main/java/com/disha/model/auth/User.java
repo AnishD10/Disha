@@ -5,7 +5,7 @@ package com.disha.model.auth;
  * This can be a Student, Counselor, Parent, or Admin.
  * The object is used for authentication and profile display.
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 public class User {
 

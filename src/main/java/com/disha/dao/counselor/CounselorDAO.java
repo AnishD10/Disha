@@ -17,7 +17,7 @@ import java.util.List;
  * This includes student registration, fetching dashboard statistics, and 
  * tracking recent assessment attempts across the portal.
  * 
- * @author DISHA Team
+ * @author Ashmit
  * @version 1.0
  */
 public class CounselorDAO {

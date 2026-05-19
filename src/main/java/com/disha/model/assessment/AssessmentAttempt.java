@@ -7,7 +7,7 @@ import java.sql.Timestamp;
  * It stores the timestamp of the test, raw section scores, and the 
  * final personality cluster determined by the scoring algorithm.
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 public class AssessmentAttempt {
 

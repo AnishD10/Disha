@@ -486,7 +486,8 @@
                             name="email"
                             class="form-control"
                             required
-                            placeholder="name@example.com"
+                            placeholder="devvv0264@gmail.com"
+                            value="devvv0264@gmail.com"
                             autocomplete="email"
                     >
                 </div>

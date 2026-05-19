@@ -15,7 +15,7 @@ import java.util.List;
  * for each assessment attempt. This includes "Logical Thinking", 
  * "Communication", and "Work Ethic".
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 public class ResultDAO {
 

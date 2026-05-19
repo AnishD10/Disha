@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * ProfileServlet serves the student profile dashboard and handles student profile updates.
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 @WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {

@@ -4,7 +4,7 @@ package com.disha.model.assessment;
  * Represents a specific skill evaluation result (e.g., Logical Thinking) 
  * derived from the student's assessment scores.
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 public class AttemptSkill {
 

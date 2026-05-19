@@ -15,7 +15,7 @@ import java.util.List;
  * This includes finding matches based on assessment results and managing
  * career recommendations for students.
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 public class CareerDAO {
 

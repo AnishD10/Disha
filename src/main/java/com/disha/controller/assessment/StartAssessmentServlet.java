@@ -20,7 +20,7 @@ import java.util.List;
  * Serves the initial landing/instructions page via GET, and handles attempt initialization 
  * and question loading via POST.
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 @WebServlet("/assessment/start")
 public class StartAssessmentServlet extends HttpServlet {

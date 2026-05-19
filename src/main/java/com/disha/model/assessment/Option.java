@@ -4,7 +4,7 @@ package com.disha.model.assessment;
  * Represents a single answer choice for an assessment question.
  * Contains the display text and the scoring weight (MCQ or Likert).
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 public class Option {
 

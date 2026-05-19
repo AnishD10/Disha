@@ -19,7 +19,7 @@ import java.util.List;
  * This includes initializing new attempts, saving individual answers, and
  * finalizing scores and personality clusters after submission.
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 public class AssessmentDAO {
 

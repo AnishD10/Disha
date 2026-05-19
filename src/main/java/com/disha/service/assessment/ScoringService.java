@@ -12,7 +12,7 @@ import java.util.List;
  * their aptitude, personality, and interest scores. It also determines the
  * student's personality cluster and skill classification.
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 public class ScoringService {
 

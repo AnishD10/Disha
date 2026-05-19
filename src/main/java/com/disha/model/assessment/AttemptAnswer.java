@@ -5,7 +5,7 @@ package com.disha.model.assessment;
  * Links an assessment attempt to a specific question and the option 
  * selected by the student.
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 public class AttemptAnswer {
 

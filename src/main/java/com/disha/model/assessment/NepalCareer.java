@@ -5,7 +5,7 @@ package com.disha.model.assessment;
  * Careers are stored in the database and matched to students based on their
  * personality clusters (e.g., Analytical, Social) and minimum aptitude requirements.
  * 
- * @author DISHA Team
+ * @author Ashmit
  */
 public class NepalCareer {
 
