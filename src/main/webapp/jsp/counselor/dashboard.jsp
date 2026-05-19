@@ -15,6 +15,18 @@
             background-image: radial-gradient(ellipse 70% 50% at 90% 0%, rgba(37, 99, 235, 0.05) 0%, transparent 55%);
         }
 
+        .hover-link {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .hover-link:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
         /* Summary cards grid */
         .dash-summary-grid {
             display: grid;
@@ -163,8 +175,8 @@
         </div>
 
         <div class="sidebar-nav" style="padding: 12px; flex: 1; overflow-y: auto; display: flex; flex-direction: column;">
-            <a href="#" class="nav-item active"><span>📊</span> Overview</a>
-            <a href="#" class="nav-item"><span>👥</span> My Students</a>
+            <a href="#" id="nav-overview" class="nav-item active"><span>📊</span> Overview</a>
+            <a href="#" id="nav-students" class="nav-item"><span>👥</span> My Students</a>
             <a href="#" class="nav-item"><span>📝</span> Assessments</a>
             <a href="#" class="nav-item"><span>🎯</span> Career Insights</a>
             <a href="#" class="nav-item"><span>📚</span> Resources</a>
@@ -204,8 +216,8 @@
         <main style="padding: 32px 40px; flex: 1;">
             
             <div style="margin-bottom: 32px;">
-                <h1 style="font-size: 28px; font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.02em; margin-bottom: 4px;">Counselor Dashboard</h1>
-                <p style="color: var(--text-muted); font-size: 14px;">Empower students to discover the right career path.</p>
+                <h1 id="dashboard-title" style="font-size: 28px; font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.02em; margin-bottom: 4px;">Counselor Dashboard</h1>
+                <p id="dashboard-subtitle" style="color: var(--text-muted); font-size: 14px;">Empower students to discover the right career path.</p>
             </div>
 
             <c:if test="${addSuccess}">
@@ -219,8 +231,9 @@
                 </div>
             </c:if>
 
-            <!-- Summary Cards -->
-            <div class="dash-summary-grid">
+            <div id="overview-section">
+                <!-- Summary Cards -->
+                <div class="dash-summary-grid">
                 <div class="summary-card sc-purple animate-fade-in">
                     <div class="sc-icon">👥</div>
                     <div class="sc-content">
@@ -273,7 +286,7 @@
                     <div class="glass-panel" style="margin-bottom: 24px; overflow: hidden;">
                         <div style="padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
                             <h2 style="font-size: 16px; margin: 0;">Recent Student Activity</h2>
-                            <a href="#" style="font-size: 13px; color: var(--primary); font-weight: 600;">View All Students →</a>
+                            <a href="#" id="viewAllStudentsLink" style="font-size: 13px; color: var(--primary); font-weight: 600;">View All Students →</a>
                         </div>
                         <div class="table-responsive">
                             <table class="modern-table" style="margin: 0; min-width: 100%;">
@@ -293,7 +306,7 @@
                                             <td style="display: flex; align-items: center; gap: 12px;">
                                                 <div class="avatar" style="width: 32px; height: 32px; font-size: 12px; background: #E0E7FF; color: #4338CA; box-shadow: none;">${fn:substring(student.fullName, 0, 1)}</div>
                                                 <div>
-                                                    <div style="font-weight: 600; color: var(--text-primary); font-size: 13px;">${student.fullName}</div>
+                                                    <a href="${pageContext.request.contextPath}/counselor/student?studentId=${student.userId}" class="hover-link" style="font-size: 13px;">${student.fullName}</a>
                                                     <div style="font-size: 11px; color: var(--text-muted);">${student.email}</div>
                                                 </div>
                                             </td>
@@ -444,6 +457,95 @@
                     </div>
                 </div>
             </div>
+            </div> <!-- End of overview-section -->
+
+            <!-- My Students Section -->
+            <div id="students-section" style="display: none;" class="animate-fade-in">
+                <!-- Search and Filters -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 16px; flex-wrap: wrap;">
+                    <div style="position: relative; flex: 1; max-width: 360px;">
+                        <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 14px;">🔍</span>
+                        <input type="text" id="studentSearchInput" placeholder="Search students by name or email..." style="width: 100%; padding: 12px 14px 12px 40px; border: 1px solid var(--border); border-radius: var(--radius-md); font-size: 14px; background: var(--surface); color: var(--text-primary); box-sizing: border-box; outline: none; transition: var(--transition); box-shadow: var(--shadow-xs);">
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" id="filterAllBtn" class="btn-primary" style="padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer;">All Students</button>
+                        <button type="button" id="filterFlaggedBtn" class="btn-outline" style="padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer;">🚩 Flagged Only</button>
+                    </div>
+                </div>
+
+                <!-- Students Table -->
+                <div class="glass-panel" style="overflow: hidden; box-shadow: var(--shadow-md);">
+                    <div class="table-responsive">
+                        <table class="modern-table" style="margin: 0; min-width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Email</th>
+                                    <th>Latest Assessment</th>
+                                    <th>Interest Area</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentsTableBody">
+                                <c:forEach var="student" items="${students}">
+                                    <c:set var="latest" value="${latestAttempts[student.userId]}" />
+                                    <tr class="student-row" data-name="${fn:toLowerCase(student.fullName)}" data-email="${fn:toLowerCase(student.email)}" data-flagged="${student.flagged}">
+                                        <td style="display: flex; align-items: center; gap: 12px; border-bottom: none;">
+                                            <div class="avatar" style="width: 36px; height: 36px; font-size: 14px; background: #E0E7FF; color: #4338CA; font-weight: bold; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: none;">
+                                                ${fn:toUpperCase(fn:substring(student.fullName, 0, 1))}
+                                            </div>
+                                            <div style="font-weight: 600; color: var(--text-primary); font-size: 14px;">${student.fullName}</div>
+                                        </td>
+                                        <td style="font-size: 13px; color: var(--text-secondary);">${student.email}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${not empty latest}">
+                                                    <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Career Assessment</div>
+                                                    <div style="font-size: 11px; color: #16A34A; font-weight: 700; margin-top: 2px;">Score: ${latest.aptitudeScore} / 10</div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div style="font-size: 13px; font-weight: 500; color: var(--text-muted);">No Assessment</div>
+                                                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Not Started</div>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td style="font-size: 13px; color: var(--text-secondary);">
+                                            <c:choose>
+                                                <c:when test="${not empty latest and not empty latest.personalityCluster}">
+                                                    <span class="badge ${fn:toLowerCase(latest.personalityCluster)}">${latest.personalityCluster}</span>
+                                                </c:when>
+                                                <c:otherwise><span style="color: var(--text-muted); font-style: italic;">N/A</span></c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${student.flagged}">
+                                                    <span class="badge badge-orange" style="background: #FEF2F2; color: #EF4444; border: 1.5px solid #FCA5A5;">Flagged</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span class="badge badge-green" style="background: #F0FDF4; color: #22C55E; border: 1.5px solid #BBF7D0;">Active</span>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td>
+                                            <a href="${pageContext.request.contextPath}/counselor/student?studentId=${student.userId}" class="btn-outline" style="padding: 6px 14px; font-size: 12px; font-weight: 600; text-decoration: none; border-radius: var(--radius-md); display: inline-flex; align-items: center; gap: 4px; transition: var(--transition);">
+                                                View Profile →
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                <tr id="noStudentsRow" style="display: none;">
+                                    <td colspan="6" style="text-align: center; padding: 48px; color: var(--text-muted);">
+                                        <div style="font-size: 28px; margin-bottom: 8px;">🔍</div>
+                                        <div style="font-weight: 600;">No students found matching your criteria.</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
         </main>
     </div>
@@ -587,6 +689,94 @@
             }
         });
 
+        // --- Counselor Dashboard Tab Switching & Filtering Logic ---
+        const navOverview = document.getElementById('nav-overview');
+        const navStudents = document.getElementById('nav-students');
+        const overviewSection = document.getElementById('overview-section');
+        const studentsSection = document.getElementById('students-section');
+        const dashboardTitle = document.getElementById('dashboard-title');
+        const dashboardSubtitle = document.getElementById('dashboard-subtitle');
+        const viewAllStudentsLink = document.getElementById('viewAllStudentsLink');
+
+        function activateOverviewTab(e) {
+            if (e) e.preventDefault();
+            if (navOverview) navOverview.classList.add('active');
+            if (navStudents) navStudents.classList.remove('active');
+            if (overviewSection) overviewSection.style.display = 'block';
+            if (studentsSection) studentsSection.style.display = 'none';
+            if (dashboardTitle) dashboardTitle.textContent = 'Counselor Dashboard';
+            if (dashboardSubtitle) dashboardSubtitle.textContent = 'Empower students to discover the right career path.';
+            document.body.classList.remove('sidebar-open');
+        }
+
+        function activateStudentsTab(e) {
+            if (e) e.preventDefault();
+            if (navOverview) navOverview.classList.remove('active');
+            if (navStudents) navStudents.classList.add('active');
+            if (overviewSection) overviewSection.style.display = 'none';
+            if (studentsSection) studentsSection.style.display = 'block';
+            if (dashboardTitle) dashboardTitle.textContent = 'My Students';
+            if (dashboardSubtitle) dashboardSubtitle.textContent = 'Manage, monitor, and view detailed progress of all registered students.';
+            document.body.classList.remove('sidebar-open');
+        }
+
+        if (navOverview) navOverview.addEventListener('click', activateOverviewTab);
+        if (navStudents) navStudents.addEventListener('click', activateStudentsTab);
+        if (viewAllStudentsLink) viewAllStudentsLink.addEventListener('click', activateStudentsTab);
+
+        // Student searching and status filtering logic
+        const studentSearchInput = document.getElementById('studentSearchInput');
+        const filterAllBtn = document.getElementById('filterAllBtn');
+        const filterFlaggedBtn = document.getElementById('filterFlaggedBtn');
+        const studentRows = document.querySelectorAll('.student-row');
+        const noStudentsRow = document.getElementById('noStudentsRow');
+        let activeStatusFilter = 'all'; // 'all' or 'flagged'
+
+        function filterStudents() {
+            if (!studentSearchInput) return;
+            const query = studentSearchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            studentRows.forEach(row => {
+                const name = row.getAttribute('data-name') || '';
+                const email = row.getAttribute('data-email') || '';
+                const isFlagged = row.getAttribute('data-flagged') === 'true';
+
+                const matchesQuery = name.includes(query) || email.includes(query);
+                const matchesStatus = (activeStatusFilter === 'all') || (activeStatusFilter === 'flagged' && isFlagged);
+
+                if (matchesQuery && matchesStatus) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            if (noStudentsRow) {
+                noStudentsRow.style.display = (visibleCount === 0) ? '' : 'none';
+            }
+        }
+
+        if (studentSearchInput) {
+            studentSearchInput.addEventListener('input', filterStudents);
+        }
+
+        if (filterAllBtn && filterFlaggedBtn) {
+            filterAllBtn.addEventListener('click', () => {
+                activeStatusFilter = 'all';
+                filterAllBtn.className = 'btn-primary';
+                filterFlaggedBtn.className = 'btn-outline';
+                filterStudents();
+            });
+
+            filterFlaggedBtn.addEventListener('click', () => {
+                activeStatusFilter = 'flagged';
+                filterAllBtn.className = 'btn-outline';
+                filterFlaggedBtn.className = 'btn-primary';
+                filterStudents();
+            });
+        }
 
     });
 </script>
