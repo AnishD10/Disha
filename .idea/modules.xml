@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Disha - Nepal Career Intelligence Portal.iml" filepath="$PROJECT_DIR$/Disha - Nepal Career Intelligence Portal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/disha-portal.iml" filepath="$PROJECT_DIR$/disha-portal.iml" />
     </modules>
   </component>
 </project>
