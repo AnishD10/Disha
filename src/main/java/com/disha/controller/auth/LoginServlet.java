@@ -41,9 +41,9 @@ public class LoginServlet extends HttpServlet {
 
             String role = user.getRole();
             if ("COUNSELOR".equals(role) || "ADMIN".equals(role)) {
-                response.sendRedirect(request.getContextPath() + "/counselor/dashboard");
+                response.sendRedirect(request.getContextPath() + "/counselor/dashboard?loginSuccess=true");
             } else {
-                response.sendRedirect(request.getContextPath() + "/assessment/start");
+                response.sendRedirect(request.getContextPath() + "/assessment/start?loginSuccess=true");
             }
         } else {
             request.setAttribute("errorMessage", "Invalid email or password.");
