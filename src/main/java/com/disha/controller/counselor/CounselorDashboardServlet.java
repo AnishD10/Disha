@@ -16,18 +16,39 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// CounselorDashboardServlet loads all students and their latest attempt data.
-// Only users with role COUNSELOR or ADMIN can access this.
+/**
+ * CounselorDashboardServlet aggregates and loads all registered student details,
+ * summary metrics, and latest assessment attempt data for the counselor workspace.
+ * 
+ * Access is restricted to users with COUNSELOR or ADMIN roles.
+ * 
+ * @author Ashmit
+ */
 @WebServlet("/counselor/dashboard")
 public class CounselorDashboardServlet extends HttpServlet {
 
     private CounselorDAO counselorDAO = new CounselorDAO();
 
+    /**
+     * Initializes the CounselorDashboardServlet and outputs verification log.
+     * 
+     * @throws ServletException If a servlet-specific error occurs
+     */
     @Override
     public void init() throws ServletException {
         System.out.println("CounselorDashboardServlet Initialized - V7");
     }
 
+    /**
+     * Handles HTTP GET requests to retrieve and render the dashboard overview
+     * and student directory. Binds student lists, latest attempts, averages,
+     * and alert flags to the request context.
+     * 
+     * @param request  The HttpServletRequest containing request attributes
+     * @param response The HttpServletResponse to return
+     * @throws ServletException If a servlet error occurs
+     * @throws IOException      If an input/output exception occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
