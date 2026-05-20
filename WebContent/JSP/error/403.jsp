@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +11,7 @@
     <div style="font-size:4rem;">🚫</div>
     <h1 style="font-size:2rem; color:#F4A22D;">403 — Access Denied</h1>
     <p style="color:#8B949E; max-width:400px;">You don't have permission to view this page. This area is restricted to a specific role.</p>
-    <a href="<%= request.getContextPath() %>/JSP/auth/login.jsp" class="btn btn-primary" style="width:auto; display:inline-flex; margin-top:8px;">
+    <a href="<%= request.getContextPath() %>/jsp/auth/login.jsp" class="btn btn-primary" style="width:auto; display:inline-flex; margin-top:8px;">
         ← Back to Login
     </a>
 </div>

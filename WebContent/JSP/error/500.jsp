@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +16,7 @@
 <%= exception.getMessage() %>
     </pre>
     <% } %>
-    <a href="<%= request.getContextPath() %>/JSP/auth/login.jsp" class="btn btn-secondary" style="width:auto; display:inline-flex; margin-top:8px;">
+    <a href="<%= request.getContextPath() %>/jsp/auth/login.jsp" class="btn btn-secondary" style="width:auto; display:inline-flex; margin-top:8px;">
         ← Back to Login
     </a>
 </div>

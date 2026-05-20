@@ -56,7 +56,7 @@
 </head>
 <body>
 <nav class="navbar">
-    <a href="<%= contextPath %>/jsp/student/dashboard.jsp" class="nav-brand">DISHA</a>
+    <a href="<%= contextPath %>/career" class="nav-brand">DISHA</a>
     <div class="nav-user">
         <a href="<%= contextPath %>/career?action=search" class="btn btn-sm btn-secondary">Search</a>
         <a href="<%= contextPath %>/career?action=saved" class="btn btn-sm btn-secondary">Saved</a>
