@@ -42,27 +42,27 @@ case $choice in
     1)
         echo ""
         echo "🚀 Building and starting containers..."
-        docker-compose up --build
+        docker compose up --build
         ;;
     2)
         echo ""
         echo "🚀 Starting containers..."
-        docker-compose up -d
+        docker compose up -d
         echo ""
         echo "✅ Containers started!"
         echo "🌐 Access application at: http://localhost:8080"
         echo ""
-        echo "View logs with: docker-compose logs -f"
+        echo "View logs with: docker compose logs -f"
         ;;
     3)
         echo ""
         echo "⏹️  Stopping containers..."
-        docker-compose stop
+        docker compose stop
         echo "✅ Containers stopped"
         ;;
     4)
         echo ""
-        docker-compose logs -f
+        docker compose logs -f
         ;;
     5)
         echo ""
@@ -70,7 +70,7 @@ case $choice in
         read -p "Are you sure? (yes/no): " confirm
         if [ "$confirm" = "yes" ]; then
             echo "🗑️  Removing containers and volumes..."
-            docker-compose down -v
+            docker compose down -v
             echo "✅ Everything cleaned up"
         else
             echo "Cancelled"

@@ -47,9 +47,10 @@ services:
     networks:
       - disha-network
     volumes:
-      # For development: live code changes
-      - ./src:/opt/tomcat/webapps/ROOT/WEB-INF/classes
-      - ./WebContent:/opt/tomcat/webapps/ROOT
+      # Live reload specific frontend folders only without obscuring WEB-INF
+      - ./WebContent/JSP:/opt/tomcat/webapps/ROOT/JSP
+      - ./WebContent/CSS:/opt/tomcat/webapps/ROOT/CSS
+      - ./WebContent/index.jsp:/opt/tomcat/webapps/ROOT/index.jsp
     restart: unless-stopped
 
 networks:

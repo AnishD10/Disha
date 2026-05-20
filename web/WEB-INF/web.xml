@@ -3,4 +3,68 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <!-- ── Auth Servlet ── -->
+    <servlet>
+        <servlet-name>AuthServlet</servlet-name>
+        <servlet-class>com.disha.controller.AuthServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AuthServlet</servlet-name>
+        <url-pattern>/auth/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuthServlet</servlet-name>
+        <url-pattern>/auth/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuthServlet</servlet-name>
+        <url-pattern>/auth/logout</url-pattern>
+    </servlet-mapping>
+
+    <!-- ── Admin Dashboard Servlet ── -->
+    <servlet>
+        <servlet-name>DashboardServlet</servlet-name>
+        <servlet-class>com.disha.controller.DashboardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DashboardServlet</servlet-name>
+        <url-pattern>/admin/dashboard</url-pattern>
+    </servlet-mapping>
+
+    <!-- ── User Management Servlet ── -->
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>com.disha.controller.UserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/admin/users</url-pattern>
+    </servlet-mapping>
+
+    <!-- ── Career Management Servlet ── -->
+    <servlet>
+        <servlet-name>CareerServlet</servlet-name>
+        <servlet-class>com.disha.controller.CareerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CareerServlet</servlet-name>
+        <url-pattern>/admin/careers</url-pattern>
+    </servlet-mapping>
+
+    <!-- ── College Management Servlet ── -->
+    <servlet>
+        <servlet-name>CollegeServlet</servlet-name>
+        <servlet-class>com.disha.controller.CollegeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CollegeServlet</servlet-name>
+        <url-pattern>/admin/colleges</url-pattern>
+    </servlet-mapping>
+
+    <!-- ── Session Configuration ── -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+
 </web-app>

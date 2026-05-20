@@ -1,4 +1,4 @@
-USE disha_career_portal;
+USE disha_db;
 
 CREATE TABLE users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
