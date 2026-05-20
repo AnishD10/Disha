@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
 <%@ page import="com.disha.model.DecisionPlan, com.disha.model.User, java.util.List" %>
 <%
     /* Session guard — SessionFilter handles redirect, but double-check here */
     User currentUser = (User) session.getAttribute("loggedInUser");
     if (currentUser == null) {
-        response.sendRedirect(request.getContextPath() + "/pages/auth/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/JSP/auth/login.jsp");
         return;
     }
 
@@ -33,7 +31,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decision Planning — DISHA Nepal</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/disha-main.css">
     <style>
         .fee-highlight { color: var(--color-primary); }
 
@@ -71,11 +69,11 @@
 
 <!-- ── Navbar ─────────────────────────────────────────────────────── -->
 <nav class="navbar">
-    <a href="<%= request.getContextPath() %>/pages/student/dashboard.jsp" class="nav-brand">DISHA</a>
+    <a href="<%= request.getContextPath() %>/JSP/student/dashboard.jsp" class="nav-brand">DISHA</a>
     <div class="nav-user">
         <span>Welcome, <%= currentUser.getFullName() %></span>
         <span class="role-chip"><%= currentUser.getRole().name() %></span>
-        <a href="<%= request.getContextPath() %>/auth/logout" class="btn btn-sm btn-secondary">Log Out</a>
+        <a href="<%= request.getContextPath() %>/JSP/auth/login.jsp" class="btn btn-sm btn-secondary">Log Out</a>
     </div>
 </nav>
 
@@ -100,7 +98,7 @@
         <aside class="filter-panel">
             <h3>🔍 Filter Options</h3>
 
-            <form method="POST" action="<%= request.getContextPath() %>/decision/plan">
+            <form method="POST" action="<%= request.getContextPath() %>/JSP/decision/decision-plan.jsp">
 
                 <!-- Budget -->
                 <div class="filter-section">
@@ -173,7 +171,7 @@
                 </button>
 
                 <% if (hasSearched) { %>
-                <a href="<%= request.getContextPath() %>/decision/plan"
+                <a href="<%= request.getContextPath() %>/JSP/decision/decision-plan.jsp"
                    class="btn btn-secondary" style="width:100%; margin-top: 10px; text-align:center;">
                     Clear Filters
                 </a>
