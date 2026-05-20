@@ -3,6 +3,8 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .kotlin
+target/
+.smarttomcat/
 
 ### Eclipse ###
 .apt_generated
@@ -34,4 +36,4 @@ Disha - Nepal Career Intelligence Portal.iml
 ### Documentation ###
 # Ignore all markdown files except README.md
 *.md
-!README.md
+!README.md
