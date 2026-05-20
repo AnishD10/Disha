@@ -36,7 +36,6 @@ public class SessionFilter implements Filter {
             "/pages/auth/register.jsp",
             "/auth/login",
             "/auth/register",
-            "/index.jsp",
             "/",
             "/favicon.ico"
     ));

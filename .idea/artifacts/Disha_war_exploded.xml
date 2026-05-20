@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Disha:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Disha_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Disha" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="servlet-api" />
+          <element id="library" level="project" name="mysql-connector-j-9.7.0" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="Disha/web/Web" />
+      <element id="dir-copy" path="$PROJECT_DIR$/WebContent" />
+    </root>
+  </artifact>
+</component>
