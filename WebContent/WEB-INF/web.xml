@@ -1,31 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-         version="3.1">
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
 
-    <display-name>DISHA Career Intelligence Portal</display-name>
+    <display-name>Disha Admin Dashboard and Career Discovery Module</display-name>
+
+    <servlet>
+        <servlet-name>DashboardServlet</servlet-name>
+        <servlet-class>com.disha.controller.DashboardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DashboardServlet</servlet-name>
+        <url-pattern>/admin/dashboard</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>com.disha.controller.UserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/admin/users</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CareerServlet</servlet-name>
+        <servlet-class>com.disha.controller.CareerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CareerServlet</servlet-name>
+        <url-pattern>/admin/careers</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CollegeServlet</servlet-name>
+        <servlet-class>com.disha.controller.CollegeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CollegeServlet</servlet-name>
+        <url-pattern>/admin/colleges</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReportServlet</servlet-name>
+        <servlet-class>com.disha.controller.ReportServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReportServlet</servlet-name>
+        <url-pattern>/admin/reports</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LabourMarketServlet</servlet-name>
+        <servlet-class>com.disha.controller.LabourMarketServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LabourMarketServlet</servlet-name>
+        <url-pattern>/admin/labour-market</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CareerDiscoveryServlet</servlet-name>
+        <servlet-class>com.disha.career.servlet.CareerDiscoveryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CareerDiscoveryServlet</servlet-name>
+        <url-pattern>/career</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
-    <session-config>
-        <session-timeout>30</session-timeout>
-    </session-config>
-
     <error-page>
         <error-code>403</error-code>
-        <location>/jsp/error/403.jsp</location>
+        <location>/JSP/error/403.jsp</location>
     </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/jsp/error/404.jsp</location>
+        <location>/JSP/error/404.jsp</location>
     </error-page>
     <error-page>
         <error-code>500</error-code>
-        <location>/jsp/error/500.jsp</location>
+        <location>/JSP/error/500.jsp</location>
     </error-page>
 
-    <!-- Feature branches should add servlet mappings here during integration. -->
 </web-app>
