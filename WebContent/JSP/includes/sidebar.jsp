@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="<%= request.getContextPath() %>/JSP/decision/decision-plan.jsp" class="nav-link <%= uri.contains("/decision/") ? "active":""%>">
+                <a href="<%= request.getContextPath() %>/decision/plan" class="nav-link <%= uri.contains("/decision/") ? "active":""%>">
                     <span style="font-size: 1.2rem;">DP</span> <span>Decision Planning</span>
                 </a>
             </li>
@@ -44,14 +44,14 @@
 
         <% } else if ("PARENT".equalsIgnoreCase(userRole)) { %>
             <li class="nav-item">
-                <a href="<%= request.getContextPath() %>/JSP/parent/dashboard.jsp" class="nav-link <%= uri.endsWith("dashboard.jsp") ? "active":""%>">
+                <a href="<%= request.getContextPath() %>/parent/dashboard" class="nav-link <%= uri.contains("/parent/") ? "active":""%>">
                     <span style="font-size: 1.2rem;">DB</span> <span>Dashboard</span>
                 </a>
             </li>
 
         <% } else if ("COUNSELOR".equalsIgnoreCase(userRole)) { %>
             <li class="nav-item">
-                <a href="<%= request.getContextPath() %>/JSP/counselor/dashboard.jsp" class="nav-link <%= uri.endsWith("dashboard.jsp") ? "active":""%>">
+                <a href="<%= request.getContextPath() %>/counselor/dashboard" class="nav-link <%= uri.contains("/counselor/") ? "active":""%>">
                     <span style="font-size: 1.2rem;">DB</span> <span>Dashboard</span>
                 </a>
             </li>
@@ -88,6 +88,11 @@
                 </a>
             </li>
         <% } %>
+        <li class="nav-item">
+            <a href="<%= request.getContextPath() %>/profile" class="nav-link <%= uri.contains("/profile") ? "active":""%>">
+                <span style="font-size: 1.2rem;">PR</span> <span>Profile</span>
+            </a>
+        </li>
     </ul>
 
     <div class="sidebar-footer">

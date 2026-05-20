@@ -50,7 +50,9 @@ public class SessionFilter implements Filter {
     private static final String[][] ROLE_RESTRICTIONS = {
             {"/admin/",          RoleConstants.ADMIN},
             {"/JSP/admin/",      RoleConstants.ADMIN},
+            {"/counselor/",      RoleConstants.COUNSELOR},
             {"/JSP/counselor/",  RoleConstants.COUNSELOR},
+            {"/parent/",         RoleConstants.PARENT},
             {"/JSP/parent/",     RoleConstants.PARENT},
             {"/JSP/student/",    RoleConstants.STUDENT},
             {"/JSP/decision/",   RoleConstants.STUDENT},

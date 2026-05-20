@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.disha.model.User, com.disha.model.Career, java.util.List" %>
 <%
     User cu = (User) session.getAttribute("loggedInUser");
@@ -11,7 +11,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Careers â€” DISHA Admin</title>
+    <title>Manage Careers - DISHA Admin</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
 </head>
 <body>
@@ -38,7 +38,7 @@
                         <label>Search Careers</label>
                         <input type="text" name="search" placeholder="Search by career name..." value="<%= searchQuery != null ? searchQuery : "" %>">
                     </div>
-                    <button type="submit" class="btn btn-primary" style="height: fit-content;">ðŸ” Search</button>
+                    <button type="submit" class="btn btn-primary" style="height: fit-content;"> Search</button>
                 </form>
             </div>
 

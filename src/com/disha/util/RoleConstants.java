@@ -22,8 +22,8 @@ public final class RoleConstants {
     public static String getDashboardPath(String role) {
         switch (role) {
             case STUDENT:   return "/JSP/student/dashboard.jsp";
-            case PARENT:    return "/JSP/parent/dashboard.jsp";
-            case COUNSELOR: return "/JSP/counselor/dashboard.jsp";
+            case PARENT:    return "/parent/dashboard";
+            case COUNSELOR: return "/counselor/dashboard";
             case ADMIN:     return "/admin/dashboard";
             default:        return "/JSP/auth/login.jsp";
         }

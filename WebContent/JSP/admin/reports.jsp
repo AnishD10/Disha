@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.disha.model.User" %>
 <%
     User cu = (User) session.getAttribute("loggedInUser");
@@ -21,10 +21,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reports â€” DISHA Admin</title>
+    <title>Reports - DISHA Admin</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
-    <style>
-        .chart-container { margin-bottom: 2rem; }
+    <style> .chart-container { margin-bottom: 2rem; }
         .bar-chart { display: flex; flex-direction: column; gap: 1rem; }
         .bar-row { display: flex; align-items: center; gap: 1rem; }
         .bar-label { min-width: 120px; font-weight: 600; font-size: 0.9rem; color: var(--color-text-muted); }
@@ -38,8 +37,7 @@
         .stat-mini { text-align: center; padding: 1.5rem; }
         .stat-mini-value { font-size: 2.5rem; font-weight: 800; color: var(--color-primary); }
         .stat-mini-label { color: var(--color-text-muted); font-size: 0.9rem; margin-top: 0.25rem; }
-        .report-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-    </style>
+        .report-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }</style>
 </head>
 <body>
 <div class="dashboard-layout">
@@ -47,7 +45,7 @@
     <div class="main-content">
         <jsp:include page="../includes/dashboard-header.jsp" />
         <div class="dashboard-body">
-            <h1 class="page-title" style="color: var(--color-primary);">ðŸ“Š Platform Reports</h1>
+            <h1 class="page-title" style="color: var(--color-primary);"> Platform Reports</h1>
             <p style="color: var(--color-text-muted); margin-bottom: 2rem;">Comprehensive overview of the Disha Nepal Career Intelligence Platform statistics and analytics.</p>
 
             <!-- Summary Cards -->
@@ -69,7 +67,7 @@
             <div class="report-grid">
                 <!-- User Distribution Chart -->
                 <div class="card chart-container">
-                    <h3 style="margin-bottom: 1.5rem;">ðŸ‘¥ User Distribution by Role</h3>
+                    <h3 style="margin-bottom: 1.5rem;"> User Distribution by Role</h3>
                     <div class="bar-chart">
                         <div class="bar-row">
                             <span class="bar-label">Students</span>
@@ -92,7 +90,7 @@
 
                 <!-- Platform Overview -->
                 <div class="card chart-container">
-                    <h3 style="margin-bottom: 1.5rem;">ðŸ“ˆ Platform Overview</h3>
+                    <h3 style="margin-bottom: 1.5rem;"> Platform Overview</h3>
                     <div class="bar-chart">
                         <div class="bar-row">
                             <span class="bar-label">Users</span>
@@ -112,7 +110,7 @@
 
             <!-- Summary Table -->
             <div class="card">
-                <h3 style="margin-bottom: 1rem;">ðŸ“‹ Summary Report</h3>
+                <h3 style="margin-bottom: 1rem;"> Summary Report</h3>
                 <div class="table-container" style="border: none; box-shadow: none;">
                     <table class="table">
                         <thead>

@@ -9,10 +9,10 @@
                 response.sendRedirect(request.getContextPath() + "/admin/dashboard");
                 break;
             case PARENT:
-                response.sendRedirect(request.getContextPath() + "/JSP/parent/dashboard.jsp");
+                response.sendRedirect(request.getContextPath() + "/parent/dashboard");
                 break;
             case COUNSELOR:
-                response.sendRedirect(request.getContextPath() + "/JSP/counselor/dashboard.jsp");
+                response.sendRedirect(request.getContextPath() + "/counselor/dashboard");
                 break;
             default:
                 response.sendRedirect(request.getContextPath() + "/JSP/student/dashboard.jsp");
@@ -33,7 +33,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account â€” DISHA Nepal</title>
+    <title>Create Account - DISHA Nepal</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
     <style>
         .auth-panel { padding: 36px 48px; }
@@ -139,20 +139,20 @@
 
 <div class="auth-wrapper">
 
-    <!-- â”€â”€ Left Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <!-- Left Hero -->
     <div class="auth-hero">
         <div class="logo">DISHA</div>
         <p class="tagline">Nepal Career Intelligence Portal</p>
 
         <ul class="feature-list">
-            <li><span class="icon">ðŸŽ“</span>Find the right degree for your goals and budget</li>
-            <li><span class="icon">ðŸ—ºï¸</span>Explore careers with real Nepal market salary data</li>
-            <li><span class="icon">ðŸ“‹</span>Take aptitude assessments to discover your strengths</li>
-            <li><span class="icon">ðŸ””</span>Parents and counselors get their own dashboards</li>
+            <li>Find the right degree for your goals and budget</li>
+            <li>Explore careers with real Nepal market salary data</li>
+            <li>Take aptitude assessments to discover your strengths</li>
+            <li>Parents and counselors get their own dashboards</li>
         </ul>
     </div>
 
-    <!-- â”€â”€ Right Register Panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <!-- Right Register Panel -->
     <div class="auth-panel">
         <div class="auth-card" style="max-width: 460px;">
 
@@ -161,21 +161,18 @@
 
             <!-- Server-side error -->
             <% if (request.getAttribute("errorMessage") != null) { %>
-            <div class="alert alert-error">
-                <span>âš </span> <%= request.getAttribute("errorMessage") %>
-            </div>
+            <div class="alert alert-error"><%= request.getAttribute("errorMessage") %></div>
             <% } %>
 
             <form method="POST" action="<%= request.getContextPath() %>/auth/register" novalidate id="registerForm">
 
                 <!-- Role Selection -->
-                <p class="section-title">I am aâ€¦</p>
+                <p class="section-title">I am a</p>
                 <div class="role-selector">
                     <div class="role-option">
                         <input type="radio" id="roleStudent" name="role" value="STUDENT"
                             <%= "STUDENT".equals(formRole) || formRole.isEmpty() ? "checked" : "" %>>
                         <label for="roleStudent">
-                            <span class="role-icon">ðŸŽ“</span>
                             Student
                         </label>
                     </div>
@@ -183,7 +180,6 @@
                         <input type="radio" id="roleParent" name="role" value="PARENT"
                             <%= "PARENT".equals(formRole) ? "checked" : "" %>>
                         <label for="roleParent">
-                            <span class="role-icon">ðŸ‘¨â€ðŸ‘©â€ðŸ‘§</span>
                             Parent
                         </label>
                     </div>
@@ -191,7 +187,6 @@
                         <input type="radio" id="roleCounselor" name="role" value="COUNSELOR"
                             <%= "COUNSELOR".equals(formRole) ? "checked" : "" %>>
                         <label for="roleCounselor">
-                            <span class="role-icon">ðŸ§‘â€ðŸ’¼</span>
                             Counselor
                         </label>
                     </div>
@@ -199,7 +194,6 @@
                         <input type="radio" id="roleAdmin" name="role" value="ADMIN"
                             <%= "ADMIN".equals(formRole) ? "checked" : "" %>>
                         <label for="roleAdmin">
-                            <span class="role-icon">âš™ï¸</span>
                             Admin
                         </label>
                     </div>
@@ -250,7 +244,7 @@
                                placeholder="Minimum 8 characters"
                                autocomplete="new-password" required
                                oninput="checkStrength(this.value)">
-                        <button type="button" class="toggle-password" onclick="togglePassword('password', this)">ðŸ‘</button>
+                        <button type="button" class="toggle-password" onclick="togglePassword('password', this)">Show</button>
                     </div>
                     <div class="strength-bar">
                         <div class="strength-bar-fill" id="strengthFill"></div>
@@ -264,12 +258,12 @@
                         <input type="password" id="confirmPassword" name="confirmPassword"
                                placeholder="Repeat your password"
                                autocomplete="new-password" required>
-                        <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword', this)">ðŸ‘</button>
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword', this)">Show</button>
                     </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary" onclick="return validateForm()">
-                    Create Account â†’
+                    Create Account
                 </button>
 
             </form>
@@ -288,7 +282,7 @@
     function togglePassword(inputId, btn) {
         const input = document.getElementById(inputId);
         input.type  = (input.type === 'password') ? 'text' : 'password';
-        btn.textContent = (input.type === 'text') ? 'ðŸ™ˆ' : 'ðŸ‘';
+        btn.textContent = (input.type === 'text') ? 'Hide' : 'Show';
     }
 
     function checkStrength(password) {

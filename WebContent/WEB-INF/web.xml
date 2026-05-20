@@ -69,6 +69,15 @@
         <url-pattern>/career</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>com.disha.controller.ProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>30</session-timeout>
         <cookie-config>

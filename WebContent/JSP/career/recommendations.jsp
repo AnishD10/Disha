@@ -9,111 +9,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Career Recommendations - DISHA</title>
-    <link rel="stylesheet" href="<%= contextPath %>/CSS/disha-main.css">
-    <style>
-        .career-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 18px;
-            margin-top: 24px;
-        }
-
-        .career-card {
-            border: 1px solid #30363D;
-            border-radius: 8px;
-            padding: 18px;
-            background: #161B22;
-        }
-
-        .career-score {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #F4A22D;
-            margin: 8px 0;
-        }
-
-        .career-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 12px 0;
-        }
-
-        .badge {
-            border: 1px solid #30363D;
-            border-radius: 999px;
-            padding: 4px 10px;
-            font-size: 0.75rem;
-            color: #C9D1D9;
-        }
-
-        .career-card p {
-            color: #8B949E;
-            line-height: 1.5;
-        }
-    </style>
+    <link rel="stylesheet" href="<%= contextPath %>/css/disha-main.css">
 </head>
 <body>
-<nav class="navbar">
-    <a href="<%= contextPath %>/career" class="nav-brand">DISHA</a>
-    <div class="nav-user">
-        <a href="<%= contextPath %>/career?action=search" class="btn btn-sm btn-secondary">Search</a>
-        <a href="<%= contextPath %>/career?action=saved" class="btn btn-sm btn-secondary">Saved</a>
-        <span class="role-chip">STUDENT</span>
-    </div>
-</nav>
-
-<div class="page-wrapper">
-    <div class="page-header">
-        <h1>Career Recommendations</h1>
-        <p>Your top career matches based on aptitude compatibility.</p>
-    </div>
-
-    <% if (recommendedCareers == null || recommendedCareers.isEmpty()) { %>
-        <div class="career-card">
-            <h3>No recommendations found</h3>
-            <p>Please complete or retake your career aptitude assessment.</p>
-            <form method="post" action="<%= contextPath %>/career">
-                <input type="hidden" name="action" value="retake">
-                <button type="submit" class="btn btn-primary">Retake Assessment</button>
-            </form>
-        </div>
-    <% } else { %>
-        <div class="career-grid">
-            <% for (CareerMatch match : recommendedCareers) { %>
-                <article class="career-card">
-                    <h2><%= match.getCareer().getCareerName() %></h2>
-                    <div class="career-score"><%= match.getCompatibilityPercentage() %>%</div>
-                    <strong><%= match.getMatchStrength() %></strong>
-
-                    <div class="career-badges">
-                        <span class="badge"><%= match.getDemandBadge() %></span>
-                        <span class="badge"><%= match.getAutomationRiskBadge() %></span>
-                        <span class="badge"><%= match.getRemoteOpportunityBadge() %></span>
-                        <span class="badge"><%= match.getGrowthTrendBadge() %></span>
-                    </div>
-
-                    <p><%= match.getExplanation() %></p>
-                    <p><%= match.getCareer().getOverview() %></p>
-
-                    <p>
-                        Entry: NPR <%= match.getCareer().getSalaryEntry() %><br>
-                        Mid: NPR <%= match.getCareer().getSalaryMid() %><br>
-                        Senior: NPR <%= match.getCareer().getSalarySenior() %>
-                    </p>
-
+<div class="dashboard-layout">
+    <jsp:include page="../includes/sidebar.jsp" />
+    <div class="main-content">
+        <jsp:include page="../includes/dashboard-header.jsp" />
+        <main class="dashboard-body">
+            <section class="feature-hero">
+                <div>
+                    <span class="feature-eyebrow">Career Discovery</span>
+                    <h1>Career Recommendations</h1>
+                    <p class="feature-subtitle">Your strongest matches ranked by aptitude fit, market demand, and career profile.</p>
+                </div>
+                <div class="feature-actions">
                     <form method="post" action="<%= contextPath %>/career">
-                        <input type="hidden" name="action" value="bookmark">
-                        <input type="hidden" name="careerId" value="<%= match.getCareer().getCareerId() %>">
-                        <button type="submit" class="btn btn-primary">Save Career</button>
-                        <a href="<%= contextPath %>/career?action=details&careerId=<%= match.getCareer().getCareerId() %>" class="btn btn-secondary">Details</a>
+                        <input type="hidden" name="action" value="retake">
+                        <button type="submit" class="btn btn-secondary">Retake Scores</button>
                     </form>
-                </article>
+                    <a href="<%= contextPath %>/career?action=saved" class="btn btn-primary">Saved Careers</a>
+                </div>
+            </section>
+
+            <nav class="feature-tabs">
+                <span class="feature-tab active">Recommendations</span>
+                <a href="<%= contextPath %>/career?action=search" class="feature-tab">Search</a>
+                <a href="<%= contextPath %>/career?action=saved" class="feature-tab">Saved</a>
+            </nav>
+
+            <% if (recommendedCareers == null || recommendedCareers.isEmpty()) { %>
+                <section class="empty-state">
+                    <h2>No recommendations found</h2>
+                    <p class="muted-copy" style="margin:0 auto 1rem; max-width:560px;">Complete the career score form to generate a ranked set of career matches.</p>
+                    <form method="post" action="<%= contextPath %>/career" class="inline-actions" style="justify-content:center;">
+                        <input type="hidden" name="action" value="retake">
+                        <button type="submit" class="btn btn-primary">Enter Scores</button>
+                        <a href="<%= contextPath %>/assessment/start" class="btn btn-secondary">Take Aptitude Test</a>
+                    </form>
+                </section>
+            <% } else { %>
+                <div class="career-grid">
+                    <% for (CareerMatch match : recommendedCareers) { %>
+                        <article class="career-card">
+                            <div class="career-card-header">
+                                <div>
+                                    <h2><%= match.getCareer().getCareerName() %></h2>
+                                    <p class="muted-copy"><%= match.getExplanation() %></p>
+                                </div>
+                                <div class="match-score"><%= match.getCompatibilityPercentage() %>%<span>Match</span></div>
+                            </div>
+
+                            <div class="pill-row">
+                                <span class="pill"><%= match.getMatchStrength() %></span>
+                                <span class="pill"><%= match.getDemandBadge() %></span>
+                                <span class="pill"><%= match.getAutomationRiskBadge() %></span>
+                                <span class="pill"><%= match.getRemoteOpportunityBadge() %></span>
+                                <span class="pill"><%= match.getGrowthTrendBadge() %></span>
+                            </div>
+
+                            <p class="muted-copy"><%= match.getCareer().getOverview() %></p>
+
+                            <div class="metric-strip">
+                                <div class="metric-box">
+                                    <span class="metric-label">Entry</span>
+                                    <span class="metric-value">NPR <%= match.getCareer().getSalaryEntry() %></span>
+                                </div>
+                                <div class="metric-box">
+                                    <span class="metric-label">Mid</span>
+                                    <span class="metric-value">NPR <%= match.getCareer().getSalaryMid() %></span>
+                                </div>
+                                <div class="metric-box">
+                                    <span class="metric-label">Senior</span>
+                                    <span class="metric-value">NPR <%= match.getCareer().getSalarySenior() %></span>
+                                </div>
+                            </div>
+
+                            <form method="post" action="<%= contextPath %>/career" class="inline-actions">
+                                <input type="hidden" name="action" value="bookmark">
+                                <input type="hidden" name="careerId" value="<%= match.getCareer().getCareerId() %>">
+                                <button type="submit" class="btn btn-primary">Save Career</button>
+                                <a href="<%= contextPath %>/career?action=details&careerId=<%= match.getCareer().getCareerId() %>" class="btn btn-secondary">View Details</a>
+                            </form>
+                        </article>
+                    <% } %>
+                </div>
             <% } %>
-        </div>
-    <% } %>
+        </main>
+    </div>
 </div>
 </body>
 </html>
-

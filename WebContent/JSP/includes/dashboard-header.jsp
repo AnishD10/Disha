@@ -38,6 +38,6 @@
     
     <div class="header-user">
         <span class="user-role-badge"><%= roleName %></span>
-        <div class="avatar"><%= initial %></div>
+        <a href="<%= request.getContextPath() %>/profile" class="avatar avatar-link" title="View profile"><%= initial %></a>
     </div>
 </header>

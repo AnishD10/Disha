@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.disha.model.User, com.disha.model.Career, com.disha.model.LabourMarketData, java.util.List" %>
 <%
     User currentUser = (User) session.getAttribute("loggedInUser");
@@ -21,15 +21,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Labour Market â€” DISHA Admin</title>
+    <title>Labour Market - DISHA Admin</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
-    <style>
-        .labour-form-grid {
+    <style> .labour-form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1rem;
-        }
-    </style>
+        }</style>
 </head>
 <body>
 <div class="dashboard-layout">

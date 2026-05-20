@@ -47,6 +47,7 @@ DB_PASSWORD=disha123
 ## Build And Run
 
 ```powershell
+.\verify-integration.ps1
 .\build-local.bat
 .\deploy-local.bat
 .\start-local-tomcat.bat
@@ -59,6 +60,12 @@ http://localhost:8081/Disha/
 ```
 
 Use the `APP_PORT` and `APP_NAME` values from `.env` if yours differ.
+
+Run the local auth/dashboard/assessment smoke test after deployment:
+
+```powershell
+.\smoke-test-local.ps1
+```
 
 ## Integration Rules
 

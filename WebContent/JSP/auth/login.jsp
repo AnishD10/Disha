@@ -9,10 +9,10 @@
                 response.sendRedirect(request.getContextPath() + "/admin/dashboard");
                 break;
             case PARENT:
-                response.sendRedirect(request.getContextPath() + "/JSP/parent/dashboard.jsp");
+                response.sendRedirect(request.getContextPath() + "/parent/dashboard");
                 break;
             case COUNSELOR:
-                response.sendRedirect(request.getContextPath() + "/JSP/counselor/dashboard.jsp");
+                response.sendRedirect(request.getContextPath() + "/counselor/dashboard");
                 break;
             default:
                 response.sendRedirect(request.getContextPath() + "/JSP/student/dashboard.jsp");
@@ -34,7 +34,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login â€” DISHA Nepal</title>
+    <title>Login - DISHA Nepal</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
     <style>
         .password-wrapper {
@@ -63,36 +63,31 @@
 
 <div class="auth-wrapper">
 
-    <!-- â”€â”€ Left Hero Panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <!-- Left Hero Panel -->
     <div class="auth-hero">
         <div class="logo">DISHA</div>
         <p class="tagline">Nepal Career Intelligence Portal</p>
 
         <ul class="feature-list">
             <li>
-                <span class="icon">ðŸŽ¯</span>
                 Psychometric assessments mapped to Nepal's job market
             </li>
             <li>
-                <span class="icon">ðŸ«</span>
-                Browse colleges filtered by budget, location & score
+                Browse colleges filtered by budget, location and score
             </li>
             <li>
-                <span class="icon">ðŸ“Š</span>
-                Real salary & demand data for Nepali career paths
+                Real salary and demand data for Nepali career paths
             </li>
             <li>
-                <span class="icon">ðŸ‘¨â€ðŸ‘©â€ðŸ‘§</span>
                 Family-facing dashboard for informed decisions
             </li>
             <li>
-                <span class="icon">ðŸ§­</span>
                 Counselor tools to guide students at scale
             </li>
         </ul>
     </div>
 
-    <!-- â”€â”€ Right Login Panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <!-- Right Login Panel -->
     <div class="auth-panel">
         <div class="auth-card">
 
@@ -102,14 +97,14 @@
             <!-- Flash message (from registration redirect) -->
             <% if (flashMsg != null) { %>
             <div class="alert alert-<%= flashType %>">
-                <span>âœ“</span> <%= flashMsg %>
+                <%= flashMsg %>
             </div>
             <% } %>
 
             <!-- Error message from servlet -->
             <% if (request.getAttribute("errorMessage") != null) { %>
             <div class="alert alert-error">
-                <span>âš </span> <%= request.getAttribute("errorMessage") %>
+                <%= request.getAttribute("errorMessage") %>
             </div>
             <% } %>
 
@@ -139,13 +134,13 @@
                                 autocomplete="current-password"
                                 required>
                         <button type="button" class="toggle-password" onclick="togglePassword('password', this)" title="Show/hide password">
-                            ðŸ‘
+                            Show
                         </button>
                     </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary">
-                    Sign In â†’
+                    Sign In
                 </button>
 
             </form>
@@ -167,10 +162,10 @@
         const input = document.getElementById(inputId);
         if (input.type === 'password') {
             input.type = 'text';
-            btn.textContent = 'ðŸ™ˆ';
+            btn.textContent = 'Hide';
         } else {
             input.type = 'password';
-            btn.textContent = 'ðŸ‘';
+            btn.textContent = 'Show';
         }
     }
 </script>

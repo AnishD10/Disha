@@ -59,8 +59,8 @@ public class AuthServlet extends HttpServlet {
             // Role-based redirect with a one-time dashboard toast flag.
             switch (user.getRole()) {
                 case ADMIN:     response.sendRedirect(request.getContextPath() + "/admin/dashboard?loginSuccess=true"); break;
-                case PARENT:    response.sendRedirect(request.getContextPath() + "/JSP/parent/dashboard.jsp?loginSuccess=true"); break;
-                case COUNSELOR: response.sendRedirect(request.getContextPath() + "/JSP/counselor/dashboard.jsp?loginSuccess=true"); break;
+                case PARENT:    response.sendRedirect(request.getContextPath() + "/parent/dashboard?loginSuccess=true"); break;
+                case COUNSELOR: response.sendRedirect(request.getContextPath() + "/counselor/dashboard?loginSuccess=true"); break;
                 default:        response.sendRedirect(request.getContextPath() + "/JSP/student/dashboard.jsp?loginSuccess=true"); break;
             }
         } else {

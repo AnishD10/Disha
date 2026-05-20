@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard â€” DISHA</title>
+    <title>Student Dashboard - DISHA</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
 </head>
 <body>
@@ -29,7 +29,7 @@
         <div class="dashboard-body">
             
             <div class="page-header" style="margin-bottom: 2rem;">
-                <h1 style="color: var(--color-primary); font-size: 2rem;">Welcome back, <%= currentUser.getFullName() %>! ðŸ‘‹</h1>
+                <h1 style="color: var(--color-primary); font-size: 2rem;">Welcome back, <%= currentUser.getFullName() %>!</h1>
                 <p style="color: var(--color-text-muted);">Let's continue shaping your future today.</p>
             </div>
             
@@ -70,7 +70,7 @@
                             
                             <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; border: 1px solid var(--color-border-soft); border-radius: var(--radius-md);">
                                 <div style="display: flex; gap: 1rem; align-items: center;">
-                                    <div style="font-size: 2rem;">ðŸ’»</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: var(--color-primary);">IT</div>
                                     <div>
                                         <h4 style="margin:0;">Software Engineer</h4>
                                         <span style="font-size:0.85rem; color:var(--color-text-muted);">High Demand in Nepal</span>
@@ -78,13 +78,13 @@
                                 </div>
                                 <div style="text-align: right;">
                                     <span class="badge badge-success">95% Match</span>
-                                    <div style="font-size:0.85rem; margin-top:5px; font-weight:600;">RS 80K - 150K / mo</div>
+                                    <div style="font-size:0.85rem; margin-top:5px; font-weight:600;">NPR 80K - 150K / month</div>
                                 </div>
                             </div>
                             
                             <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; border: 1px solid var(--color-border-soft); border-radius: var(--radius-md);">
                                 <div style="display: flex; gap: 1rem; align-items: center;">
-                                    <div style="font-size: 2rem;">ðŸ“Š</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: var(--color-primary);">DA</div>
                                     <div>
                                         <h4 style="margin:0;">Data Analyst</h4>
                                         <span style="font-size:0.85rem; color:var(--color-text-muted);">Growing Field</span>
@@ -92,7 +92,7 @@
                                 </div>
                                 <div style="text-align: right;">
                                     <span class="badge badge-success">88% Match</span>
-                                    <div style="font-size:0.85rem; margin-top:5px; font-weight:600;">RS 60K - 120K / mo</div>
+                                    <div style="font-size:0.85rem; margin-top:5px; font-weight:600;">NPR 60K - 120K / month</div>
                                 </div>
                             </div>
                             
@@ -109,7 +109,7 @@
                         <h3 style="margin-bottom: 1rem; color: var(--color-secondary);">Next Steps</h3>
                         <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
                             <li style="display: flex; gap: 1rem; align-items: flex-start;">
-                                <div>â³</div>
+                                <div style="font-weight: 700;">1</div>
                                 <div>
                                     <div style="font-weight: 600;">Complete Personality Test</div>
                                     <div style="font-size: 0.85rem; opacity: 0.9;">Required for better accuracy</div>
@@ -117,7 +117,7 @@
                                 </div>
                             </li>
                             <li style="display: flex; gap: 1rem; align-items: flex-start;">
-                                <div>ðŸ§­</div>
+                                <div style="font-weight: 700;">2</div>
                                 <div>
                                     <div style="font-weight: 600;">Try Decision Planning</div>
                                     <div style="font-size: 0.85rem; opacity: 0.9;">Explore degrees and budget filters</div>
