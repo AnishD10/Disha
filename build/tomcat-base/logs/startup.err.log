@@ -1,0 +1,130 @@
+May 20, 2026 11:12:59 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version name:   Apache Tomcat/9.0.117
+May 20, 2026 11:12:59 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server built:          Mar 30 2026 18:21:16 UTC
+May 20, 2026 11:12:59 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version number: 9.0.117.0
+May 20, 2026 11:12:59 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Name:               Windows 11
+May 20, 2026 11:12:59 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Version:            10.0
+May 20, 2026 11:12:59 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Architecture:          amd64
+May 20, 2026 11:12:59 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Java Home:             C:\Program Files\Java\jdk-25.0.2
+May 20, 2026 11:12:59 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Version:           25.0.2+10-LTS-69
+May 20, 2026 11:12:59 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Vendor:            Oracle Corporation
+May 20, 2026 11:12:59 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_BASE:         C:\Users\anish\OneDrive - London Metropolitan University\Desktop\Try1\Disha\build\tomcat-base
+May 20, 2026 11:12:59 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_HOME:         C:\apache-tomcat-9.0.117
+May 20, 2026 11:12:59 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.home=C:\apache-tomcat-9.0.117
+May 20, 2026 11:12:59 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.base=C:\Users\anish\OneDrive - London Metropolitan University\Desktop\Try1\Disha\build\tomcat-base
+May 20, 2026 11:12:59 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.io.tmpdir=C:\Users\anish\OneDrive - London Metropolitan University\Desktop\Try1\Disha\build\tomcat-base\temp
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/C:/apache-tomcat-9.0.117/lib/tomcat-jni.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+May 20, 2026 11:12:59 PM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: Loaded Apache Tomcat Native library [1.3.7] using APR version [1.7.6].
+May 20, 2026 11:12:59 PM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true].
+May 20, 2026 11:12:59 PM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+May 20, 2026 11:12:59 PM org.apache.catalina.core.AprLifecycleListener initializeSSL
+INFO: OpenSSL successfully initialized [OpenSSL 3.0.19 27 Jan 2026]
+May 20, 2026 11:12:59 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-nio-8081"]
+May 20, 2026 11:13:00 PM org.apache.catalina.startup.Catalina load
+INFO: Server initialization in [355] milliseconds
+May 20, 2026 11:13:00 PM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Catalina]
+May 20, 2026 11:13:00 PM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet engine: [Apache Tomcat/9.0.117]
+May 20, 2026 11:13:00 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory [C:\Users\anish\OneDrive - London Metropolitan University\Desktop\Try1\Disha\build\tomcat-base\webapps\Disha]
+May 20, 2026 11:13:00 PM org.apache.jasper.servlet.TldScanner scanJars
+INFO: At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+May 20, 2026 11:13:00 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory [C:\Users\anish\OneDrive - London Metropolitan University\Desktop\Try1\Disha\build\tomcat-base\webapps\Disha] has finished in [561] ms
+May 20, 2026 11:13:00 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-nio-8081"]
+May 20, 2026 11:13:00 PM org.apache.catalina.startup.Catalina start
+INFO: Server startup in [632] milliseconds
+Error deleting career
+java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`disha_career_portal`.`skill_roadmaps`, CONSTRAINT `skill_roadmaps_ibfk_1` FOREIGN KEY (`career_id`) REFERENCES `careers` (`career_id`))
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:109)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:988)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1166)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1101)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1448)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1084)
+	at dao.CareerDAO.deleteCareer(CareerDAO.java:71)
+	at com.disha.controller.CareerServlet.doGet(CareerServlet.java:39)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:197)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:491)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:643)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:939)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1854)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Error creating user
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'np05cp4a240274@iic.edu.np' for key 'users.email'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:109)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:988)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1166)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1101)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1448)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1084)
+	at dao.UserDAO.createUser(UserDAO.java:56)
+	at com.disha.controller.AuthServlet.handleRegister(AuthServlet.java:89)
+	at com.disha.controller.AuthServlet.doPost(AuthServlet.java:35)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:197)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:142)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:491)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:643)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:939)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1854)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1474)

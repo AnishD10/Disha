@@ -12,8 +12,8 @@ import javax.crypto.spec.PBEKeySpec;
  * Password hashing and verification utilities.
  *
  * New registrations use salted SHA-256 in "base64Salt:base64Hash" format.
- * Verification also accepts the shared DB's existing PBKDF2 format:
- * "iterations:base64Salt:base64Hash".
+ * Verification also accepts the shared DB's existing formats:
+ * "iterations:base64Salt:base64Hash" and legacy unsalted SHA-256 hex.
  */
 public class PasswordUtil {
 
@@ -42,6 +42,9 @@ public class PasswordUtil {
             }
             if (parts.length == 3) {
                 return verifyPbkdf2(plainPassword, parts);
+            }
+            if (storedHash.matches("(?i)^[0-9a-f]{64}$")) {
+                return verifyLegacySha256Hex(plainPassword, storedHash);
             }
             return false;
         } catch (IllegalArgumentException e) {
@@ -77,6 +80,11 @@ public class PasswordUtil {
         return MessageDigest.isEqual(expectedHash, actualHash);
     }
 
+    private static boolean verifyLegacySha256Hex(String plainPassword, String storedHash) {
+        byte[] actualHash = sha256(plainPassword.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        return MessageDigest.isEqual(hexToBytes(storedHash), actualHash);
+    }
+
     private static byte[] generateSalt() {
         byte[] salt = new byte[SALT_BYTES];
         new SecureRandom().nextBytes(salt);
@@ -92,6 +100,23 @@ public class PasswordUtil {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("SHA-256 not available.", e);
         }
+    }
+
+    private static byte[] sha256(byte[] value) {
+        try {
+            return MessageDigest.getInstance(SHA_ALGORITHM).digest(value);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("SHA-256 not available.", e);
+        }
+    }
+
+    private static byte[] hexToBytes(String hex) {
+        byte[] bytes = new byte[hex.length() / 2];
+        for (int i = 0; i < bytes.length; i++) {
+            int index = i * 2;
+            bytes[i] = (byte) Integer.parseInt(hex.substring(index, index + 2), 16);
+        }
+        return bytes;
     }
 
     private static byte[] pbkdf2(String password, byte[] salt, int iterations, int keyLengthBits) {

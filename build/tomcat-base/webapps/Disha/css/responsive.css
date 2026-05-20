@@ -1,0 +1,77 @@
+/* Responsive Adjustments */
+
+@media (max-width: 1024px) {
+    .dashboard-layout {
+        grid-template-columns: 80px 1fr;
+    }
+    
+    .sidebar-logo h2 {
+        display: none;
+    }
+    
+    .sidebar-logo {
+        padding: 0 0 1.5rem 0;
+        justify-content: center;
+    }
+    
+    .nav-link span {
+        display: none;
+    }
+    
+    .nav-link {
+        justify-content: center;
+        padding: 1rem 0;
+    }
+    
+    .header-search {
+        width: 250px;
+    }
+    
+    .grid-cards {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar {
+        display: none; /* Can be toggled with JS */
+    }
+    
+    .dashboard-header {
+        padding: 1rem;
+    }
+    
+    .header-search {
+        display: none; /* Hide on mobile */
+    }
+    
+    .dashboard-body {
+        padding: 1rem;
+    }
+    
+    .auth-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .auth-hero {
+        padding: 2.5rem;
+        text-align: center;
+    }
+    
+    .auth-panel {
+        padding: 2rem 1rem;
+    }
+    
+    .auth-card {
+        padding: 2rem;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
