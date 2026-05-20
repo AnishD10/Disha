@@ -6,97 +6,80 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 /**
- * PasswordUtil — Handles all password hashing and verification for DISHA.
+ * PasswordUtil — Salted SHA-256 password hashing for DISHA.
  *
- * Strategy: SHA-256 with a random 16-byte salt, stored as "salt:hash" (Base64).
- * This is sufficient for the academic context of this project.
- * In production, BCrypt / Argon2 would be preferred.
- *
- * Format stored in DB: BASE64(salt) + ":" + BASE64(SHA256(salt + password))
- *
- * Author: Joyal Karki — Authentication Lead
+ * Storage format in DB:  BASE64(salt) + ":" + BASE64(SHA256(salt + password))
+ * Example stored value:  "rW3kLp...==:Xh9mNq...=="
  */
 public class PasswordUtil {
 
-    private static final String ALGORITHM = "SHA-256";
-    private static final int SALT_BYTES = 16;
-    private static final String SEPARATOR = ":";
+    private static final String ALGORITHM  = "SHA-256";
+    private static final int    SALT_BYTES = 16;
+    private static final String SEPARATOR  = ":";
 
     // ── Public API ────────────────────────────────────────────────────────────
 
     /**
-     * Hash a plain-text password.
-     * 
-     * @param plainPassword the raw password entered by the user
-     * @return a storable hash string: "base64Salt:base64Hash"
+     * Hash a plain-text password with a fresh random salt.
+     * Call this once during registration — never during login.
+     *
+     * @param plainPassword raw password entered by user
+     * @return "base64Salt:base64Hash" ready to store in DB
      */
     public static String hash(String plainPassword) {
         if (plainPassword == null || plainPassword.isEmpty()) {
-            throw new IllegalArgumentException("Password must not be null or empty.");
+            throw new IllegalArgumentException("Password must not be empty.");
         }
-
-        byte[] salt = generateSalt();
+        byte[] salt   = generateSalt();
         byte[] hashed = sha256(salt, plainPassword);
-
         return Base64.getEncoder().encodeToString(salt)
                 + SEPARATOR
                 + Base64.getEncoder().encodeToString(hashed);
     }
 
     /**
-     * Verify a plain-text password against a stored hash.
-     * 
-     * @param plainPassword the password entered at login
-     * @param storedHash    the "salt:hash" value from the DB
-     * @return true if the password matches, false otherwise
+     * Verify a plain-text password against the stored hash.
+     * Constant-time comparison prevents timing attacks.
+     *
+     * @param plainPassword password entered at login
+     * @param storedHash    "salt:hash" string from the DB column
+     * @return true if password is correct, false otherwise
      */
     public static boolean verify(String plainPassword, String storedHash) {
-        if (plainPassword == null || storedHash == null)
-            return false;
-
+        if (plainPassword == null || storedHash == null) return false;
         String[] parts = storedHash.split(SEPARATOR, 2);
-        if (parts.length != 2)
-            return false;
-
+        if (parts.length != 2) return false;
         try {
-            byte[] salt = Base64.getDecoder().decode(parts[0]);
+            byte[] salt         = Base64.getDecoder().decode(parts[0]);
             byte[] expectedHash = Base64.getDecoder().decode(parts[1]);
-            byte[] actualHash = sha256(salt, plainPassword);
-
-            // Constant-time comparison to prevent timing attacks
+            byte[] actualHash   = sha256(salt, plainPassword);
             return MessageDigest.isEqual(expectedHash, actualHash);
         } catch (IllegalArgumentException e) {
-            // Malformed base64 in DB — should never happen in normal operation
             return false;
         }
     }
 
     /**
-     * Validate password strength before hashing.
-     * Rules: min 8 chars, at least one digit, at least one letter.
-     * 
-     * @param password the plain-text password to check
+     * Validate password strength rules.
+     * Rules: min 8 chars, at least 1 letter, at least 1 digit.
+     *
      * @return null if valid, or an error message string if invalid
      */
     public static String validateStrength(String password) {
-        if (password == null || password.length() < 8) {
+        if (password == null || password.length() < 8)
             return "Password must be at least 8 characters long.";
-        }
-        if (!password.matches(".*[A-Za-z].*")) {
+        if (!password.matches(".*[A-Za-z].*"))
             return "Password must contain at least one letter.";
-        }
-        if (!password.matches(".*[0-9].*")) {
-            return "Password must contain at least one digit.";
-        }
-        return null; // valid
+        if (!password.matches(".*[0-9].*"))
+            return "Password must contain at least one number.";
+        return null;
     }
 
-    // ── Internal Helpers ──────────────────────────────────────────────────────
+    // ── Internal helpers ──────────────────────────────────────────────────────
 
     private static byte[] generateSalt() {
-        SecureRandom rng = new SecureRandom();
         byte[] salt = new byte[SALT_BYTES];
-        rng.nextBytes(salt);
+        new SecureRandom().nextBytes(salt);
         return salt;
     }
 
@@ -107,8 +90,7 @@ public class PasswordUtil {
             md.update(password.getBytes(java.nio.charset.StandardCharsets.UTF_8));
             return md.digest();
         } catch (NoSuchAlgorithmException e) {
-            // SHA-256 is guaranteed present in all Java SE implementations
-            throw new RuntimeException("SHA-256 algorithm not available on this JVM.", e);
+            throw new RuntimeException("SHA-256 not available.", e);
         }
     }
 }

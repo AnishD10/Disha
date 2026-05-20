@@ -5,52 +5,39 @@ import com.disha.model.DecisionPlan;
 import com.disha.model.User;
 import com.disha.util.SessionUtil;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 /**
- * DecisionServlet — Handles the Decision Planning feature for DISHA.
+ * DecisionServlet — Decision Planning feature.
  *
- * URL Mappings:
- * GET /decision/plan → Load filter form with dropdown data
- * POST /decision/plan → Run the constraint filter and display results
+ * GET  /decision/plan  → load filter form with dropdown data
+ * POST /decision/plan  → run constraint filter and show results
  *
  * Access: STUDENT role only (enforced by SessionFilter).
- * The filter logic lives in DecisionDAO — this servlet handles HTTP I/O only.
- *
- * Author: Joyal Karki — Decision Planning Feature Owner
  */
-@WebServlet(urlPatterns = { "/decision/plan" })
+@WebServlet(urlPatterns = {"/decision/plan"})
 public class DecisionServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-
     private final DecisionDAO decisionDAO = new DecisionDAO();
 
-    // ── GET — Load filter form ────────────────────────────────────────────────
+    // ── GET — show filter form ────────────────────────────────────────────────
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
-        // Guard: only students should access this feature
-        if (!SessionUtil.hasRole(req, User.Role.STUDENT)) {
-            resp.sendError(HttpServletResponse.SC_FORBIDDEN,
-                    "Decision Planning is only available to students.");
-            return;
-        }
-
         loadDropdowns(req);
         req.getRequestDispatcher("/pages/decision/decision-plan.jsp").forward(req, resp);
     }
 
-    // ── POST — Run constraint filter ──────────────────────────────────────────
+    // ── POST — run filter and return results ──────────────────────────────────
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -58,17 +45,11 @@ public class DecisionServlet extends HttpServlet {
 
         req.setCharacterEncoding("UTF-8");
 
-        if (!SessionUtil.hasRole(req, User.Role.STUDENT)) {
-            resp.sendError(HttpServletResponse.SC_FORBIDDEN);
-            return;
-        }
-
-        // ── Parse filter parameters ───────────────────────────────────────────
-        double maxBudget = parseDouble(req.getParameter("maxBudget"), 0);
-        String location = trim(req.getParameter("location"));
-        double studentPercent = parseDouble(req.getParameter("studentPercent"), 0);
-        String careerKeyword = trim(req.getParameter("careerPath"));
-        String faculty = trim(req.getParameter("faculty"));
+        double maxBudget       = parseDouble(req.getParameter("maxBudget"), 0);
+        String location        = nullIfBlank(req.getParameter("location"));
+        double studentPercent  = parseDouble(req.getParameter("studentPercent"), 0);
+        String careerKeyword   = nullIfBlank(req.getParameter("careerPath"));
+        String faculty         = nullIfBlank(req.getParameter("faculty"));
         boolean scholarshipOnly = "on".equalsIgnoreCase(req.getParameter("scholarshipOnly"))
                 || "true".equalsIgnoreCase(req.getParameter("scholarshipOnly"));
 
@@ -80,7 +61,7 @@ public class DecisionServlet extends HttpServlet {
             return;
         }
         if (studentPercent < 0 || studentPercent > 100) {
-            req.setAttribute("errorMessage", "Academic percentage must be between 0 and 100.");
+            req.setAttribute("errorMessage", "Academic score must be between 0 and 100.");
             loadDropdowns(req);
             req.getRequestDispatcher("/pages/decision/decision-plan.jsp").forward(req, resp);
             return;
@@ -90,7 +71,7 @@ public class DecisionServlet extends HttpServlet {
             List<DecisionPlan> results = decisionDAO.filterProgrammes(
                     maxBudget, location, studentPercent, careerKeyword, faculty, scholarshipOnly);
 
-            // Log the search for counselor visibility
+            // Log search history (non-critical — failure does not block results)
             User currentUser = SessionUtil.getLoggedInUser(req);
             if (currentUser != null) {
                 try {
@@ -98,61 +79,49 @@ public class DecisionServlet extends HttpServlet {
                             currentUser.getUserId(), maxBudget, location,
                             studentPercent, careerKeyword, results.size());
                 } catch (SQLException logEx) {
-                    // Non-critical — search logging should not block results
-                    log("DecisionServlet: Could not save search history: " + logEx.getMessage());
+                    log("Search history log failed (non-critical): " + logEx.getMessage());
                 }
             }
 
-            // Pass results and applied filters back to JSP for display
-            req.setAttribute("results", results);
-            req.setAttribute("resultCount", results.size());
-            req.setAttribute("filterMaxBudget", maxBudget);
-            req.setAttribute("filterLocation", location);
-            req.setAttribute("filterPercent", studentPercent);
-            req.setAttribute("filterCareer", careerKeyword);
-            req.setAttribute("filterFaculty", faculty);
+            // Pass results and filter state back to JSP
+            req.setAttribute("results",           results);
+            req.setAttribute("resultCount",       results.size());
+            req.setAttribute("filterMaxBudget",   maxBudget);
+            req.setAttribute("filterLocation",    location);
+            req.setAttribute("filterPercent",     studentPercent);
+            req.setAttribute("filterCareer",      careerKeyword);
+            req.setAttribute("filterFaculty",     faculty);
             req.setAttribute("filterScholarship", scholarshipOnly);
 
             loadDropdowns(req);
             req.getRequestDispatcher("/pages/decision/decision-plan.jsp").forward(req, resp);
 
         } catch (SQLException e) {
-            log("DecisionServlet.doPost() — DB error: " + e.getMessage(), e);
-            req.setAttribute("errorMessage",
-                    "A database error occurred while searching. Please try again.");
+            log("DecisionServlet DB error: " + e.getMessage(), e);
+            req.setAttribute("errorMessage", "Database error. Please try again.");
             loadDropdowns(req);
             req.getRequestDispatcher("/pages/decision/decision-plan.jsp").forward(req, resp);
         }
     }
 
-    // ── Private Helpers ───────────────────────────────────────────────────────
+    // ── Helpers ───────────────────────────────────────────────────────────────
 
-    /**
-     * Load dropdown data (faculties, locations, career paths) for the filter form.
-     * Failures here are non-fatal — the user can still type into text fields.
-     */
     private void loadDropdowns(HttpServletRequest req) {
         try {
-            req.setAttribute("faculties", decisionDAO.getAllFaculties());
-            req.setAttribute("locations", decisionDAO.getAllLocations());
+            req.setAttribute("faculties",   decisionDAO.getAllFaculties());
+            req.setAttribute("locations",   decisionDAO.getAllLocations());
             req.setAttribute("careerPaths", decisionDAO.getAllCareerPaths());
         } catch (SQLException e) {
-            log("DecisionServlet.loadDropdowns() — DB error: " + e.getMessage());
-            // Dropdowns will be empty; user can type values manually
+            log("loadDropdowns failed: " + e.getMessage());
         }
     }
 
-    private double parseDouble(String s, double defaultVal) {
-        if (s == null || s.trim().isEmpty())
-            return defaultVal;
-        try {
-            return Double.parseDouble(s.trim());
-        } catch (NumberFormatException e) {
-            return defaultVal;
-        }
+    private double parseDouble(String s, double def) {
+        if (s == null || s.trim().isEmpty()) return def;
+        try { return Double.parseDouble(s.trim()); } catch (NumberFormatException e) { return def; }
     }
 
-    private String trim(String s) {
+    private String nullIfBlank(String s) {
         return (s == null || s.trim().isEmpty()) ? null : s.trim();
     }
 }

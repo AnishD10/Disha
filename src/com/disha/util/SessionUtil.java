@@ -1,72 +1,78 @@
 package com.disha.util;
 
 import com.disha.model.User;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
- * SessionUtil — Centralised session key constants and helper methods.
+ * SessionUtil — All session reads and writes go through this class.
  *
- * NEVER hardcode session attribute names as strings outside this class.
- * All session reads/writes must go through these helpers to ensure
- * consistency and make future changes easy to apply across the system.
- *
- * Author: Joyal Karki — Authentication Lead
+ * Key design decisions:
+ *  - On login: old session is INVALIDATED and a brand-new one is created
+ *    (prevents session fixation attacks).
+ *  - On logout: session.invalidate() destroys the entire session object
+ *    (prevents session reuse after logout).
+ *  - Flash messages: stored in session, consumed once, then removed.
+ *  - Timeout: 30 minutes of inactivity.
  */
 public class SessionUtil {
 
     // ── Session Attribute Keys ────────────────────────────────────────────────
-
-    /** The currently logged-in User object */
-    public static final String USER = "loggedInUser";
-
-    /** The role of the logged-in user (User.Role enum) */
-    public static final String ROLE = "userRole";
-
-    /** The user's full name — convenience shortcut for JSP display */
+    /** Full User object */
+    public static final String USER      = "loggedInUser";
+    /** User.Role enum value */
+    public static final String ROLE      = "userRole";
+    /** Full name string — for display in JSPs */
     public static final String USER_NAME = "userName";
-
-    /** The user's database ID — frequently needed in DAO queries */
-    public static final String USER_ID = "userId";
-
-    /** Flash message key — set before redirect, read once and cleared */
-    public static final String FLASH_MSG = "flashMessage";
-
-    /** Flash message type: "success", "error", "warning", "info" */
+    /** Integer user_id — for DAO queries */
+    public static final String USER_ID   = "userId";
+    /** One-time flash message text */
+    public static final String FLASH_MSG  = "flashMessage";
+    /** One-time flash message type: success | error | warning | info */
     public static final String FLASH_TYPE = "flashType";
 
-    // ── Session Timeout ───────────────────────────────────────────────────────
+    /** Session idle timeout — 30 minutes */
+    public static final int TIMEOUT_SECONDS = 30 * 60;
 
-    /** Session idle timeout in seconds (30 minutes) */
-    public static final int SESSION_TIMEOUT_SECONDS = 30 * 60;
-
-    // ── Helper Methods ────────────────────────────────────────────────────────
+    // ── Login — create fresh session ──────────────────────────────────────────
 
     /**
-     * Store the authenticated user in the session after successful login.
-     * 
-     * @param request the current HTTP request
-     * @param user    the User object returned by UserDAO
+     * Called immediately after successful password verification.
+     *
+     * Invalidates any existing session first (session fixation prevention),
+     * then creates a brand-new session and stores all user attributes.
+     *
+     * @param request current HTTP request
+     * @param user    the authenticated User object from UserDAO
      */
     public static void setLoggedInUser(HttpServletRequest request, User user) {
-        HttpSession session = request.getSession(true);
-        session.setMaxInactiveInterval(SESSION_TIMEOUT_SECONDS);
+        // Step 1: Invalidate existing session to prevent session fixation
+        HttpSession oldSession = request.getSession(false);
+        if (oldSession != null) {
+            oldSession.invalidate();
+        }
 
-        session.setAttribute(USER, user);
-        session.setAttribute(ROLE, user.getRole());
+        // Step 2: Create a fresh session with a new session ID
+        HttpSession session = request.getSession(true);
+        session.setMaxInactiveInterval(TIMEOUT_SECONDS);
+
+        // Step 3: Store all user attributes
+        session.setAttribute(USER,      user);
+        session.setAttribute(ROLE,      user.getRole());
         session.setAttribute(USER_NAME, user.getFullName());
-        session.setAttribute(USER_ID, user.getUserId());
+        session.setAttribute(USER_ID,   user.getUserId());
     }
 
+    // ── Read helpers ──────────────────────────────────────────────────────────
+
     /**
-     * Retrieve the logged-in user from the session.
-     * 
-     * @return the User object, or null if not logged in
+     * Get the logged-in User object from the session.
+     * Returns null if no session exists or user is not logged in.
      */
     public static User getLoggedInUser(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if (session == null)
-            return null;
+        if (session == null) return null;
         return (User) session.getAttribute(USER);
     }
 
@@ -78,7 +84,7 @@ public class SessionUtil {
     }
 
     /**
-     * Check whether the current session belongs to a user with the given role.
+     * Check whether the logged-in user has a specific role.
      */
     public static boolean hasRole(HttpServletRequest request, User.Role expectedRole) {
         User user = getLoggedInUser(request);
@@ -86,7 +92,20 @@ public class SessionUtil {
     }
 
     /**
-     * Invalidate the current session entirely (logout).
+     * Get the logged-in user's role as a string (e.g. "STUDENT").
+     * Returns empty string if not logged in.
+     */
+    public static String getRoleName(HttpServletRequest request) {
+        User user = getLoggedInUser(request);
+        return (user != null) ? user.getRole().name() : "";
+    }
+
+    // ── Logout ────────────────────────────────────────────────────────────────
+
+    /**
+     * Completely destroy the session on logout.
+     * session.invalidate() marks the session ID as invalid server-side,
+     * so a captured cookie cannot be reused after logout.
      */
     public static void invalidate(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
@@ -95,41 +114,43 @@ public class SessionUtil {
         }
     }
 
+    // ── Flash Messages ────────────────────────────────────────────────────────
+
     /**
-     * Store a one-time flash message to be displayed after the next redirect.
-     * 
+     * Store a one-time flash message to survive a redirect.
+     * The message is consumed and cleared on the next read.
+     *
      * @param type "success" | "error" | "warning" | "info"
      */
     public static void setFlash(HttpServletRequest request, String type, String message) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.setAttribute(FLASH_MSG, message);
-            session.setAttribute(FLASH_TYPE, type);
-        }
+        // Use existing session if present, otherwise create one
+        HttpSession session = request.getSession(true);
+        session.setAttribute(FLASH_MSG,  message);
+        session.setAttribute(FLASH_TYPE, type);
     }
 
     /**
-     * Retrieve and CLEAR the flash message (so it only shows once).
-     * 
-     * @return the message string, or null if none pending
+     * Read and immediately clear the flash message.
+     * Returns null if no flash message is pending.
      */
     public static String consumeFlashMessage(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if (session == null)
-            return null;
+        if (session == null) return null;
         String msg = (String) session.getAttribute(FLASH_MSG);
-        session.removeAttribute(FLASH_MSG);
-        session.removeAttribute(FLASH_TYPE);
+        if (msg != null) {
+            session.removeAttribute(FLASH_MSG);
+            session.removeAttribute(FLASH_TYPE);
+        }
         return msg;
     }
 
     /**
-     * Get the flash message type without clearing it.
+     * Read the flash message type without clearing it.
+     * Always call consumeFlashMessage() to clear after reading.
      */
     public static String getFlashType(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if (session == null)
-            return "info";
+        if (session == null) return "info";
         String type = (String) session.getAttribute(FLASH_TYPE);
         return (type != null) ? type : "info";
     }

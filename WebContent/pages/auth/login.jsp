@@ -1,19 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.disha.model.User" %>
+<%@ page import="com.disha.util.RoleConstants" %>
 <%
-    /* If already logged in, redirect to appropriate dashboard */
-    Object user = session.getAttribute("loggedInUser");
-    if (user != null) {
-        response.sendRedirect(request.getContextPath() + "/pages/student/dashboard.jsp");
+    // ── Session check: redirect already-logged-in users to their dashboard ────
+    User existingUser = (User) session.getAttribute("loggedInUser");
+    if (existingUser != null) {
+        response.sendRedirect(request.getContextPath()
+                + RoleConstants.getDashboardPath(existingUser.getRole().name()));
         return;
     }
 
-    /* Consume flash message from registration redirect */
+    // ── Read flash message (from register redirect or logout) ─────────────────
     String flashMsg  = (String) session.getAttribute("flashMessage");
     String flashType = (String) session.getAttribute("flashType");
     if (flashMsg != null) {
         session.removeAttribute("flashMessage");
         session.removeAttribute("flashType");
     }
+
+    // ── Read error and repopulated email from servlet forward ─────────────────
+    String errorMsg = (String) request.getAttribute("errorMessage");
+    String formEmail = request.getAttribute("formEmail") != null
+            ? (String) request.getAttribute("formEmail") : "";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,116 +29,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login — DISHA Nepal</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/disha-main.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
     <style>
-        .password-wrapper {
-            position: relative;
+        .password-wrapper { position: relative; }
+        .password-wrapper input { padding-right: 44px; }
+        .toggle-pw {
+            position: absolute; right: 12px; top: 50%;
+            transform: translateY(-50%);
+            background: none; border: none; cursor: pointer;
+            color: var(--color-text-muted); font-size: 1rem; padding: 0;
         }
-        .password-wrapper input {
-            padding-right: 44px;
-        }
-        .toggle-password {
-            position:   absolute;
-            right:      12px;
-            top:        50%;
-            transform:  translateY(-50%);
-            background: none;
-            border:     none;
-            cursor:     pointer;
-            color:      var(--color-text-muted);
-            font-size:  1rem;
-            padding:    0;
-            line-height: 1;
-        }
-        .toggle-password:hover { color: var(--color-primary); }
+        .toggle-pw:hover { color: var(--color-primary); }
+        .input-error { border-color: var(--color-error) !important; }
     </style>
 </head>
 <body>
 
 <div class="auth-wrapper">
 
-    <!-- ── Left Hero Panel ─────────────────────────────────────────── -->
+    <!-- ── Left Hero ─────────────────────────────────────────────────────── -->
     <div class="auth-hero">
         <div class="logo">DISHA</div>
         <p class="tagline">Nepal Career Intelligence Portal</p>
-
         <ul class="feature-list">
-            <li>
-                <span class="icon">🎯</span>
-                Psychometric assessments mapped to Nepal's job market
-            </li>
-            <li>
-                <span class="icon">🏫</span>
-                Browse colleges filtered by budget, location & score
-            </li>
-            <li>
-                <span class="icon">📊</span>
-                Real salary & demand data for Nepali career paths
-            </li>
-            <li>
-                <span class="icon">👨‍👩‍👧</span>
-                Family-facing dashboard for informed decisions
-            </li>
-            <li>
-                <span class="icon">🧭</span>
-                Counselor tools to guide students at scale
-            </li>
+            <li><span class="icon">🎯</span> Psychometric assessments mapped to Nepal's job market</li>
+            <li><span class="icon">🏫</span> Browse colleges filtered by budget, location &amp; score</li>
+            <li><span class="icon">📊</span> Real salary &amp; demand data for Nepali careers</li>
+            <li><span class="icon">👨‍👩‍👧</span> Parent-facing dashboard for family decisions</li>
+            <li><span class="icon">🧭</span> Counselor tools to guide students at scale</li>
         </ul>
     </div>
 
-    <!-- ── Right Login Panel ───────────────────────────────────────── -->
+    <!-- ── Right Login Panel ─────────────────────────────────────────────── -->
     <div class="auth-panel">
         <div class="auth-card">
 
             <h2>Welcome back</h2>
             <p class="subtitle">Log in to your DISHA account to continue.</p>
 
-            <!-- Flash message (from registration redirect) -->
-            <% if (flashMsg != null) { %>
-            <div class="alert alert-<%= flashType %>">
-                <span>✓</span> <%= flashMsg %>
+            <%-- Flash message (success from register, info from logout) --%>
+            <% if (flashMsg != null && !flashMsg.isEmpty()) { %>
+            <div class="alert alert-<%= flashType != null ? flashType : "info" %>">
+                <span><%= "success".equals(flashType) ? "✓" : "ℹ" %></span>
+                <%= flashMsg %>
             </div>
             <% } %>
 
-            <!-- Error message from servlet -->
-            <% if (request.getAttribute("errorMessage") != null) { %>
+            <%-- Error message from failed login attempt --%>
+            <% if (errorMsg != null && !errorMsg.isEmpty()) { %>
             <div class="alert alert-error">
-                <span>⚠</span> <%= request.getAttribute("errorMessage") %>
+                <span>⚠</span> <%= errorMsg %>
             </div>
             <% } %>
 
-            <!-- Login Form -->
-            <form method="POST" action="<%= request.getContextPath() %>/auth/login" novalidate>
+            <%-- Login form — POST to /auth/login servlet --%>
+            <form id="loginForm"
+                  method="POST"
+                  action="<%= request.getContextPath() %>/auth/login"
+                  novalidate>
 
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value="<%= request.getAttribute("formEmail") != null ? request.getAttribute("formEmail") : "" %>"
-                            placeholder="your@email.com"
-                            autocomplete="email"
-                            required>
+                    <input type="email"
+                           id="email"
+                           name="email"
+                           value="<%= formEmail %>"
+                           placeholder="your@email.com"
+                           autocomplete="email"
+                           class="<%= (errorMsg != null) ? "input-error" : "" %>"
+                           required>
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
                     <div class="password-wrapper">
-                        <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="Enter your password"
-                                autocomplete="current-password"
-                                required>
-                        <button type="button" class="toggle-password" onclick="togglePassword('password', this)" title="Show/hide password">
-                            👁
-                        </button>
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               placeholder="Enter your password"
+                               autocomplete="current-password"
+                               class="<%= (errorMsg != null) ? "input-error" : "" %>"
+                               required>
+                        <button type="button" class="toggle-pw"
+                                onclick="togglePw('password', this)"
+                                title="Show/hide password">👁</button>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" id="loginBtn">
                     Sign In →
                 </button>
 
@@ -140,17 +126,19 @@
 
             <div class="auth-footer">
                 Don't have an account?
-                <a href="<%= request.getContextPath() %>/pages/auth/register.jsp">Create one free</a>
+                <a href="<%= request.getContextPath() %>/pages/auth/register.jsp">
+                    Create one free
+                </a>
             </div>
 
         </div>
     </div>
-
 </div>
 
 <script>
-    function togglePassword(inputId, btn) {
-        const input = document.getElementById(inputId);
+    // Show/hide password toggle
+    function togglePw(inputId, btn) {
+        var input = document.getElementById(inputId);
         if (input.type === 'password') {
             input.type = 'text';
             btn.textContent = '🙈';
@@ -159,6 +147,28 @@
             btn.textContent = '👁';
         }
     }
+
+    // Client-side validation before submit
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        var email    = document.getElementById('email').value.trim();
+        var password = document.getElementById('password').value;
+        var emailReg = /^[\w.+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+
+        if (!email || !password) {
+            e.preventDefault();
+            alert('Please enter both email and password.');
+            return;
+        }
+        if (!emailReg.test(email)) {
+            e.preventDefault();
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+        // Show loading state
+        document.getElementById('loginBtn').textContent = 'Signing in…';
+        document.getElementById('loginBtn').disabled = true;
+    });
 </script>
 
 </body>
