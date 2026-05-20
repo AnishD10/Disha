@@ -5,8 +5,6 @@
     </div>
     <div style="display: flex; gap: 1.5rem; align-items: center;">
         <a href="<%= request.getContextPath() %>/" style="font-weight: 500; color: var(--color-text);">Home</a>
-        <a href="<%= request.getContextPath() %>/JSP/about.jsp" style="font-weight: 500; color: var(--color-text);">About</a>
-        <a href="<%= request.getContextPath() %>/JSP/contact.jsp" style="font-weight: 500; color: var(--color-text);">Contact</a>
         <a href="<%= request.getContextPath() %>/JSP/auth/login.jsp" class="btn btn-primary" style="padding: 0.5rem 1.25rem;">Login / Register</a>
     </div>
 </nav>

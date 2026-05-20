@@ -1,31 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.disha.model.User, dao.UserDAO, dao.CareerDAO, dao.CollegeDAO" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.disha.model.User" %>
 <%
     User cu = (User) session.getAttribute("loggedInUser");
     if (cu == null || !"ADMIN".equals(cu.getRole().name())) { response.sendRedirect(request.getContextPath() + "/JSP/auth/login.jsp"); return; }
-    
-    // Fetch statistics directly for reports page
-    UserDAO userDAO = new UserDAO();
-    CareerDAO careerDAO = new CareerDAO();
-    CollegeDAO collegeDAO = new CollegeDAO();
-    
-    int totalStudents = userDAO.countByRole("STUDENT");
-    int totalParents = userDAO.countByRole("PARENT");
-    int totalCounselors = userDAO.countByRole("COUNSELOR");
-    int totalAdmins = userDAO.countByRole("ADMIN");
-    int totalUsers = userDAO.countAll();
-    int totalCareers = careerDAO.countAll();
-    int totalColleges = collegeDAO.countAll();
-    
-    // Compute percentages for CSS bar charts
-    int maxVal = Math.max(1, Math.max(totalStudents, Math.max(totalParents, Math.max(totalCounselors, totalAdmins))));
+    if (request.getAttribute("totalUsers") == null) {
+        response.sendRedirect(request.getContextPath() + "/admin/reports");
+        return;
+    }
+
+    int totalStudents = (Integer) request.getAttribute("totalStudents");
+    int totalParents = (Integer) request.getAttribute("totalParents");
+    int totalCounselors = (Integer) request.getAttribute("totalCounselors");
+    int totalAdmins = (Integer) request.getAttribute("totalAdmins");
+    int totalUsers = (Integer) request.getAttribute("totalUsers");
+    int totalCareers = (Integer) request.getAttribute("totalCareers");
+    int totalColleges = (Integer) request.getAttribute("totalColleges");
+    int maxVal = (Integer) request.getAttribute("maxRoleCount");
 %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reports — DISHA Admin</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/disha-main.css">
+    <title>Reports â€” DISHA Admin</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
     <style>
         .chart-container { margin-bottom: 2rem; }
         .bar-chart { display: flex; flex-direction: column; gap: 1rem; }
@@ -50,7 +47,7 @@
     <div class="main-content">
         <jsp:include page="../includes/dashboard-header.jsp" />
         <div class="dashboard-body">
-            <h1 class="page-title" style="color: var(--color-primary);">📊 Platform Reports</h1>
+            <h1 class="page-title" style="color: var(--color-primary);">ðŸ“Š Platform Reports</h1>
             <p style="color: var(--color-text-muted); margin-bottom: 2rem;">Comprehensive overview of the Disha Nepal Career Intelligence Platform statistics and analytics.</p>
 
             <!-- Summary Cards -->
@@ -72,7 +69,7 @@
             <div class="report-grid">
                 <!-- User Distribution Chart -->
                 <div class="card chart-container">
-                    <h3 style="margin-bottom: 1.5rem;">👥 User Distribution by Role</h3>
+                    <h3 style="margin-bottom: 1.5rem;">ðŸ‘¥ User Distribution by Role</h3>
                     <div class="bar-chart">
                         <div class="bar-row">
                             <span class="bar-label">Students</span>
@@ -95,7 +92,7 @@
 
                 <!-- Platform Overview -->
                 <div class="card chart-container">
-                    <h3 style="margin-bottom: 1.5rem;">📈 Platform Overview</h3>
+                    <h3 style="margin-bottom: 1.5rem;">ðŸ“ˆ Platform Overview</h3>
                     <div class="bar-chart">
                         <div class="bar-row">
                             <span class="bar-label">Users</span>
@@ -115,7 +112,7 @@
 
             <!-- Summary Table -->
             <div class="card">
-                <h3 style="margin-bottom: 1rem;">📋 Summary Report</h3>
+                <h3 style="margin-bottom: 1rem;">ðŸ“‹ Summary Report</h3>
                 <div class="table-container" style="border: none; box-shadow: none;">
                     <table class="table">
                         <thead>

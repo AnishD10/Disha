@@ -26,6 +26,10 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (!requireAdmin(request, response)) {
+            return;
+        }
+
         String action = request.getParameter("action");
         if (action == null) action = "list";
 
@@ -65,6 +69,10 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (!requireAdmin(request, response)) {
+            return;
+        }
+
         String action = request.getParameter("action");
 
         if ("add".equals(action)) {
@@ -99,5 +107,18 @@ public class UserServlet extends HttpServlet {
             }
             response.sendRedirect(request.getContextPath() + "/admin/users?action=list&msg=updated");
         }
+    }
+
+    private boolean requireAdmin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User currentUser = (User) request.getSession().getAttribute("loggedInUser");
+        if (currentUser == null) {
+            response.sendRedirect(request.getContextPath() + "/JSP/auth/login.jsp");
+            return false;
+        }
+        if (!User.Role.ADMIN.equals(currentUser.getRole())) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+            return false;
+        }
+        return true;
     }
 }

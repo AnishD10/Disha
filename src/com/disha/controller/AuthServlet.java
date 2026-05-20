@@ -58,9 +58,9 @@ public class AuthServlet extends HttpServlet {
 
             // Role-based redirect
             switch (user.getRole()) {
-                case ADMIN:     response.sendRedirect(request.getContextPath() + "/JSP/admin/dashboard.jsp"); break;
+                case ADMIN:     response.sendRedirect(request.getContextPath() + "/admin/dashboard"); break;
                 case PARENT:    response.sendRedirect(request.getContextPath() + "/JSP/parent/dashboard.jsp"); break;
-                case COUNSELOR: response.sendRedirect(request.getContextPath() + "/JSP/consultant/dashboard.jsp"); break;
+                case COUNSELOR: response.sendRedirect(request.getContextPath() + "/JSP/counselor/dashboard.jsp"); break;
                 default:        response.sendRedirect(request.getContextPath() + "/JSP/student/dashboard.jsp"); break;
             }
         } else {

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.disha.model.User, java.util.List" %>
 <%
     User currentUser = (User) session.getAttribute("loggedInUser");
@@ -12,8 +12,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Users — DISHA Admin</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/disha-main.css">
+    <title>Manage Users â€” DISHA Admin</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
 </head>
 <body>
 <div class="dashboard-layout">
@@ -48,7 +48,7 @@
                             <option value="ADMIN" <%= "ADMIN".equals(roleFilter) ? "selected" : "" %>>Admin</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="height: fit-content;">🔍 Search</button>
+                    <button type="submit" class="btn btn-primary" style="height: fit-content;">ðŸ” Search</button>
                 </form>
             </div>
 

@@ -2,6 +2,7 @@ package com.disha.controller;
 
 import dao.CareerDAO;
 import com.disha.model.Career;
+import com.disha.model.User;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -16,6 +17,10 @@ public class CareerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (!requireAdmin(request, response)) {
+            return;
+        }
+
         String action = request.getParameter("action");
         if (action == null) action = "list";
 
@@ -31,8 +36,8 @@ public class CareerServlet extends HttpServlet {
                 break;
             case "delete":
                 int deleteId = Integer.parseInt(request.getParameter("id"));
-                careerDAO.deleteCareer(deleteId);
-                response.sendRedirect(request.getContextPath() + "/admin/careers?action=list&msg=deleted");
+                boolean deleted = careerDAO.deleteCareer(deleteId);
+                response.sendRedirect(request.getContextPath() + "/admin/careers?action=list&msg=" + (deleted ? "deleted" : "delete_blocked"));
                 break;
             default:
                 String search = request.getParameter("search");
@@ -51,16 +56,27 @@ public class CareerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (!requireAdmin(request, response)) {
+            return;
+        }
+
         String action = request.getParameter("action");
 
         Career career = new Career();
         career.setCareerName(request.getParameter("careerName"));
-        career.setCareerDescription(request.getParameter("careerDescription"));
-        career.setRequiredAptitudeCluster(request.getParameter("requiredAptitudeCluster"));
-        career.setMarketDemand(request.getParameter("marketDemand"));
-        try { career.setAverageSalary(new BigDecimal(request.getParameter("averageSalary"))); } catch (Exception e) { career.setAverageSalary(BigDecimal.ZERO); }
-        try { career.setRiskIndex(Integer.parseInt(request.getParameter("riskIndex"))); } catch (Exception e) { career.setRiskIndex(0); }
-        try { career.setJobMarketGrowthRate(new BigDecimal(request.getParameter("jobMarketGrowthRate"))); } catch (Exception e) { career.setJobMarketGrowthRate(BigDecimal.ZERO); }
+        career.setOverview(request.getParameter("overview"));
+        career.setResponsibilities(request.getParameter("responsibilities"));
+        career.setIndustry(request.getParameter("industry"));
+        career.setFutureScope(request.getParameter("futureScope"));
+        career.setDemandLevel(request.getParameter("demandLevel"));
+        career.setAutomationRisk(request.getParameter("automationRisk"));
+        career.setRemoteOpportunity(request.getParameter("remoteOpportunity"));
+        career.setDescription(request.getParameter("description"));
+        career.setSuggestedCertifications(request.getParameter("suggestedCertifications"));
+        career.setSalaryEntry(parseDecimal(request.getParameter("salaryEntry")));
+        career.setSalaryMid(parseDecimal(request.getParameter("salaryMid")));
+        career.setSalarySenior(parseDecimal(request.getParameter("salarySenior")));
+        career.setGrowthRate(parseDecimal(request.getParameter("growthRate")));
 
         if ("add".equals(action)) {
             careerDAO.createCareer(career);
@@ -70,5 +86,22 @@ public class CareerServlet extends HttpServlet {
             careerDAO.updateCareer(career);
             response.sendRedirect(request.getContextPath() + "/admin/careers?action=list&msg=updated");
         }
+    }
+
+    private BigDecimal parseDecimal(String value) {
+        try { return new BigDecimal(value); } catch (Exception e) { return BigDecimal.ZERO; }
+    }
+
+    private boolean requireAdmin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User currentUser = (User) request.getSession().getAttribute("loggedInUser");
+        if (currentUser == null) {
+            response.sendRedirect(request.getContextPath() + "/JSP/auth/login.jsp");
+            return false;
+        }
+        if (!User.Role.ADMIN.equals(currentUser.getRole())) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+            return false;
+        }
+        return true;
     }
 }

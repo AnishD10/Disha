@@ -1,9 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.disha.model.User" %>
 <%
     /* If already logged in, redirect */
-    Object user = session.getAttribute("loggedInUser");
+    User user = (User) session.getAttribute("loggedInUser");
     if (user != null) {
-        response.sendRedirect(request.getContextPath() + "/JSP/student/dashboard.jsp");
+        switch (user.getRole()) {
+            case ADMIN:
+                response.sendRedirect(request.getContextPath() + "/admin/dashboard");
+                break;
+            case PARENT:
+                response.sendRedirect(request.getContextPath() + "/JSP/parent/dashboard.jsp");
+                break;
+            case COUNSELOR:
+                response.sendRedirect(request.getContextPath() + "/JSP/counselor/dashboard.jsp");
+                break;
+            default:
+                response.sendRedirect(request.getContextPath() + "/JSP/student/dashboard.jsp");
+                break;
+        }
         return;
     }
 
@@ -19,8 +33,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account — DISHA Nepal</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/disha-main.css">
+    <title>Create Account â€” DISHA Nepal</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
     <style>
         .auth-panel { padding: 36px 48px; }
 
@@ -125,20 +139,20 @@
 
 <div class="auth-wrapper">
 
-    <!-- ── Left Hero ───────────────────────────────────────────────── -->
+    <!-- â”€â”€ Left Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <div class="auth-hero">
         <div class="logo">DISHA</div>
         <p class="tagline">Nepal Career Intelligence Portal</p>
 
         <ul class="feature-list">
-            <li><span class="icon">🎓</span>Find the right degree for your goals and budget</li>
-            <li><span class="icon">🗺️</span>Explore careers with real Nepal market salary data</li>
-            <li><span class="icon">📋</span>Take aptitude assessments to discover your strengths</li>
-            <li><span class="icon">🔔</span>Parents and counselors get their own dashboards</li>
+            <li><span class="icon">ðŸŽ“</span>Find the right degree for your goals and budget</li>
+            <li><span class="icon">ðŸ—ºï¸</span>Explore careers with real Nepal market salary data</li>
+            <li><span class="icon">ðŸ“‹</span>Take aptitude assessments to discover your strengths</li>
+            <li><span class="icon">ðŸ””</span>Parents and counselors get their own dashboards</li>
         </ul>
     </div>
 
-    <!-- ── Right Register Panel ─────────────────────────────────────── -->
+    <!-- â”€â”€ Right Register Panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <div class="auth-panel">
         <div class="auth-card" style="max-width: 460px;">
 
@@ -148,20 +162,20 @@
             <!-- Server-side error -->
             <% if (request.getAttribute("errorMessage") != null) { %>
             <div class="alert alert-error">
-                <span>⚠</span> <%= request.getAttribute("errorMessage") %>
+                <span>âš </span> <%= request.getAttribute("errorMessage") %>
             </div>
             <% } %>
 
             <form method="POST" action="<%= request.getContextPath() %>/auth/register" novalidate id="registerForm">
 
                 <!-- Role Selection -->
-                <p class="section-title">I am a…</p>
+                <p class="section-title">I am aâ€¦</p>
                 <div class="role-selector">
                     <div class="role-option">
                         <input type="radio" id="roleStudent" name="role" value="STUDENT"
                             <%= "STUDENT".equals(formRole) || formRole.isEmpty() ? "checked" : "" %>>
                         <label for="roleStudent">
-                            <span class="role-icon">🎓</span>
+                            <span class="role-icon">ðŸŽ“</span>
                             Student
                         </label>
                     </div>
@@ -169,7 +183,7 @@
                         <input type="radio" id="roleParent" name="role" value="PARENT"
                             <%= "PARENT".equals(formRole) ? "checked" : "" %>>
                         <label for="roleParent">
-                            <span class="role-icon">👨‍👩‍👧</span>
+                            <span class="role-icon">ðŸ‘¨â€ðŸ‘©â€ðŸ‘§</span>
                             Parent
                         </label>
                     </div>
@@ -177,7 +191,7 @@
                         <input type="radio" id="roleCounselor" name="role" value="COUNSELOR"
                             <%= "COUNSELOR".equals(formRole) ? "checked" : "" %>>
                         <label for="roleCounselor">
-                            <span class="role-icon">🧑‍💼</span>
+                            <span class="role-icon">ðŸ§‘â€ðŸ’¼</span>
                             Counselor
                         </label>
                     </div>
@@ -185,7 +199,7 @@
                         <input type="radio" id="roleAdmin" name="role" value="ADMIN"
                             <%= "ADMIN".equals(formRole) ? "checked" : "" %>>
                         <label for="roleAdmin">
-                            <span class="role-icon">⚙️</span>
+                            <span class="role-icon">âš™ï¸</span>
                             Admin
                         </label>
                     </div>
@@ -236,7 +250,7 @@
                                placeholder="Minimum 8 characters"
                                autocomplete="new-password" required
                                oninput="checkStrength(this.value)">
-                        <button type="button" class="toggle-password" onclick="togglePassword('password', this)">👁</button>
+                        <button type="button" class="toggle-password" onclick="togglePassword('password', this)">ðŸ‘</button>
                     </div>
                     <div class="strength-bar">
                         <div class="strength-bar-fill" id="strengthFill"></div>
@@ -250,12 +264,12 @@
                         <input type="password" id="confirmPassword" name="confirmPassword"
                                placeholder="Repeat your password"
                                autocomplete="new-password" required>
-                        <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword', this)">👁</button>
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword', this)">ðŸ‘</button>
                     </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary" onclick="return validateForm()">
-                    Create Account →
+                    Create Account â†’
                 </button>
 
             </form>
@@ -274,7 +288,7 @@
     function togglePassword(inputId, btn) {
         const input = document.getElementById(inputId);
         input.type  = (input.type === 'password') ? 'text' : 'password';
-        btn.textContent = (input.type === 'text') ? '🙈' : '👁';
+        btn.textContent = (input.type === 'text') ? 'ðŸ™ˆ' : 'ðŸ‘';
     }
 
     function checkStrength(password) {

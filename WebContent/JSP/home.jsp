@@ -1,18 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Disha – Nepal Career Intelligence Portal. Discover the right career path using aptitude assessments, real Nepali labor market data, and expert counselor guidance.">
-    <title>DISHA — Nepal Career Intelligence Portal</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/home.css">
+    <meta name="description" content="Disha â€“ Nepal Career Intelligence Portal. Discover the right career path using aptitude assessments, real Nepali labor market data, and expert counselor guidance.">
+    <title>DISHA â€” Nepal Career Intelligence Portal</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/home.css">
 </head>
 <body class="landing-page">
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      1. NAVIGATION BAR
-     ═══════════════════════════════════════════════════════ -->
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <nav class="landing-nav" id="mainNav">
     <div class="nav-container">
         <a href="#" class="nav-logo">
@@ -39,25 +39,25 @@
     </div>
 </nav>
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      2. HERO SECTION
-     ═══════════════════════════════════════════════════════ -->
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="hero" id="home">
     <div class="hero-container">
         <div class="hero-content">
-            <div class="hero-badge">🇳🇵 Built for Nepali Students</div>
+            <div class="hero-badge">ðŸ‡³ðŸ‡µ Built for Nepali Students</div>
             <h1 class="hero-title">
                 Find the Right <span class="highlight">Career Path</span> with Real Nepal Market Data
             </h1>
             <p class="hero-desc">
-                Disha is Nepal's first AI-powered career intelligence platform that matches your aptitude, interests, and budget with real labor market opportunities — helping you make smarter career decisions.
+                Disha is Nepal's first AI-powered career intelligence platform that matches your aptitude, interests, and budget with real labor market opportunities â€” helping you make smarter career decisions.
             </p>
             <div class="hero-buttons">
                 <a href="<%= request.getContextPath() %>/JSP/auth/register.jsp" class="btn-hero-primary">
-                    Get Started Free →
+                    Get Started Free â†’
                 </a>
                 <a href="<%= request.getContextPath() %>/JSP/auth/login.jsp" class="btn-hero-secondary">
-                    📝 Take Career Test
+                    ðŸ“ Take Career Test
                 </a>
             </div>
             <div class="hero-stats">
@@ -79,26 +79,26 @@
         <div class="hero-visual">
             <div class="hero-illustration">
                 <div class="hero-illustration-content">
-                    <div class="ill-icon">🎯</div>
+                    <div class="ill-icon">ðŸŽ¯</div>
                     <p>Career Intelligence</p>
                 </div>
             </div>
-            <div class="float-card" style="top: 15%; right: -10%;">📊 Aptitude Score: 87%</div>
-            <div class="float-card" style="bottom: 25%; left: -5%;">💼 Best Match: Engineer</div>
-            <div class="float-card" style="bottom: 8%; right: 10%;">🏫 5 Colleges Found</div>
+            <div class="float-card" style="top: 15%; right: -10%;">ðŸ“Š Aptitude Score: 87%</div>
+            <div class="float-card" style="bottom: 25%; left: -5%;">ðŸ’¼ Best Match: Engineer</div>
+            <div class="float-card" style="bottom: 8%; right: 10%;">ðŸ« 5 Colleges Found</div>
         </div>
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      3. ABOUT DISHA SECTION
-     ═══════════════════════════════════════════════════════ -->
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="section section-light" id="about">
     <div class="section-container">
         <div class="about-grid">
             <div class="about-visual">
                 <div class="about-visual-inner">
-                    <div class="av-icon">🇳🇵</div>
+                    <div class="av-icon">ðŸ‡³ðŸ‡µ</div>
                     <p>Made in Nepal, for Nepal</p>
                 </div>
             </div>
@@ -113,19 +113,19 @@
                 </p>
                 <div class="about-highlights">
                     <div class="about-highlight">
-                        <span class="about-highlight-icon">🎯</span>
+                        <span class="about-highlight-icon">ðŸŽ¯</span>
                         <span class="about-highlight-text">Data-Driven Career Matching</span>
                     </div>
                     <div class="about-highlight">
-                        <span class="about-highlight-icon">📊</span>
+                        <span class="about-highlight-icon">ðŸ“Š</span>
                         <span class="about-highlight-text">Real Nepal Salary Data</span>
                     </div>
                     <div class="about-highlight">
-                        <span class="about-highlight-icon">🏫</span>
+                        <span class="about-highlight-icon">ðŸ«</span>
                         <span class="about-highlight-text">College Recommendations</span>
                     </div>
                     <div class="about-highlight">
-                        <span class="about-highlight-icon">🧑‍💼</span>
+                        <span class="about-highlight-icon">ðŸ§‘â€ðŸ’¼</span>
                         <span class="about-highlight-text">Expert Counselor Access</span>
                     </div>
                 </div>
@@ -134,50 +134,50 @@
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      4. FEATURES SECTION
-     ═══════════════════════════════════════════════════════ -->
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="section" id="features">
     <div class="section-container">
         <div class="section-header">
             <span class="section-tag">Features</span>
             <h2 class="section-title">Everything You Need for Smarter Career Decisions</h2>
-            <p class="section-subtitle">From aptitude testing to real salary insights — Disha gives you the complete career intelligence toolkit.</p>
+            <p class="section-subtitle">From aptitude testing to real salary insights â€” Disha gives you the complete career intelligence toolkit.</p>
         </div>
 
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">📝</div>
+                <div class="feature-icon">ðŸ“</div>
                 <h4>Aptitude Assessment</h4>
                 <p>Take scientifically designed aptitude tests to discover your cognitive strengths and ideal career clusters.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🎯</div>
+                <div class="feature-icon">ðŸŽ¯</div>
                 <h4>Career Recommendations</h4>
                 <p>Get personalized career matches based on your aptitude profile, interests, and Nepal's market demand.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">💰</div>
+                <div class="feature-icon">ðŸ’°</div>
                 <h4>Salary Insights</h4>
                 <p>Access up-to-date salary ranges for various careers in Nepal's job market to plan your financial future.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🗺️</div>
+                <div class="feature-icon">ðŸ—ºï¸</div>
                 <h4>Skill Roadmaps</h4>
                 <p>Follow step-by-step skill development paths to prepare for your chosen career with confidence.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🏫</div>
+                <div class="feature-icon">ðŸ«</div>
                 <h4>Budget vs Degree Planning</h4>
                 <p>Compare college fees, degree options, and scholarship possibilities that fit your budget.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📄</div>
+                <div class="feature-icon">ðŸ“„</div>
                 <h4>Parent Reports</h4>
                 <p>Parents get detailed progress reports and career recommendations for their children's future planning.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📈</div>
+                <div class="feature-icon">ðŸ“ˆ</div>
                 <h4>Consultant Analytics</h4>
                 <p>Career counselors get powerful tools to track student progress, risk alerts, and performance dashboards.</p>
             </div>
@@ -185,9 +185,9 @@
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      5. USER ROLES SECTION
-     ═══════════════════════════════════════════════════════ -->
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="section section-light" id="roles">
     <div class="section-container">
         <div class="section-header">
@@ -198,7 +198,7 @@
 
         <div class="roles-grid">
             <div class="role-card">
-                <div class="role-icon student">🎓</div>
+                <div class="role-icon student">ðŸŽ“</div>
                 <h4>Students</h4>
                 <p>Discover careers that match your unique strengths and the Nepal job market.</p>
                 <ul>
@@ -209,7 +209,7 @@
                 </ul>
             </div>
             <div class="role-card">
-                <div class="role-icon parent">👨‍👩‍👧</div>
+                <div class="role-icon parent">ðŸ‘¨â€ðŸ‘©â€ðŸ‘§</div>
                 <h4>Parents</h4>
                 <p>Stay informed about your child's career readiness and opportunities ahead.</p>
                 <ul>
@@ -220,7 +220,7 @@
                 </ul>
             </div>
             <div class="role-card">
-                <div class="role-icon counselor">🧑‍💼</div>
+                <div class="role-icon counselor">ðŸ§‘â€ðŸ’¼</div>
                 <h4>Counselors</h4>
                 <p>Advanced tools for career counselors to guide students effectively at scale.</p>
                 <ul>
@@ -231,7 +231,7 @@
                 </ul>
             </div>
             <div class="role-card">
-                <div class="role-icon admin">⚙️</div>
+                <div class="role-icon admin">âš™ï¸</div>
                 <h4>Administrators</h4>
                 <p>Full platform management with comprehensive control and analytics.</p>
                 <ul>
@@ -245,39 +245,39 @@
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      6. HOW IT WORKS SECTION
-     ═══════════════════════════════════════════════════════ -->
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="section" id="how-it-works">
     <div class="section-container">
         <div class="section-header">
             <span class="section-tag">How It Works</span>
             <h2 class="section-title">Your Career Journey in 4 Simple Steps</h2>
-            <p class="section-subtitle">From sign-up to your personalized career plan — it takes just minutes.</p>
+            <p class="section-subtitle">From sign-up to your personalized career plan â€” it takes just minutes.</p>
         </div>
 
         <div class="steps-grid">
             <div class="step-card">
                 <div class="step-number">1</div>
-                <div class="step-icon">📋</div>
+                <div class="step-icon">ðŸ“‹</div>
                 <h4>Create Your Account</h4>
                 <p>Sign up as a student, parent, or counselor. It's free and takes under a minute.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">2</div>
-                <div class="step-icon">📝</div>
+                <div class="step-icon">ðŸ“</div>
                 <h4>Take the Aptitude Test</h4>
                 <p>Complete our scientifically-designed assessment to map your cognitive strengths.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">3</div>
-                <div class="step-icon">🎯</div>
+                <div class="step-icon">ðŸŽ¯</div>
                 <h4>Get Career Matches</h4>
                 <p>Receive personalized career recommendations powered by Nepal market data.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">4</div>
-                <div class="step-icon">🚀</div>
+                <div class="step-icon">ðŸš€</div>
                 <h4>Plan Your Future</h4>
                 <p>Explore colleges, compare budgets, and build your career roadmap with confidence.</p>
             </div>
@@ -285,9 +285,9 @@
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      7. SAMPLE CAREER PATHS SECTION
-     ═══════════════════════════════════════════════════════ -->
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="section section-light" id="career-paths">
     <div class="section-container">
         <div class="section-header">
@@ -358,9 +358,9 @@
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      8. TESTIMONIALS SECTION
-     ═══════════════════════════════════════════════════════ -->
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="section section-light" id="testimonials">
     <div class="section-container">
         <div class="section-header">
@@ -371,7 +371,7 @@
 
         <div class="testimonials-grid">
             <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-stars">â˜…â˜…â˜…â˜…â˜…</div>
                 <p class="testimonial-text">
                     "I was confused between engineering and medicine. Disha's aptitude test and salary insights showed me that my analytical skills perfectly match software engineering. Now I'm preparing for BScCSIT at TU with a clear goal!"
                 </p>
@@ -385,7 +385,7 @@
             </div>
 
             <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-stars">â˜…â˜…â˜…â˜…â˜…</div>
                 <p class="testimonial-text">
                     "As a parent, I was worried about my daughter's career choice. Disha gave me detailed reports showing her strengths, career matches, and even the budget required. It gave our family the confidence to support her path."
                 </p>
@@ -399,7 +399,7 @@
             </div>
 
             <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-stars">â˜…â˜…â˜…â˜…â˜…</div>
                 <p class="testimonial-text">
                     "Managing 200+ students used to be overwhelming. Disha's counselor dashboard gives me analytics, risk alerts, and individual progress tracking. It's completely transformed how I guide students in their career decisions."
                 </p>
@@ -415,9 +415,9 @@
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      10. FAQ SECTION
-     ═══════════════════════════════════════════════════════ -->
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="section" id="faq">
     <div class="section-container">
         <div class="section-header">
@@ -428,16 +428,16 @@
 
         <div class="faq-container">
             <div class="faq-item">
-                <button class="faq-question">Who can use Disha? <span class="icon">▼</span></button>
+                <button class="faq-question">Who can use Disha? <span class="icon">â–¼</span></button>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        Disha is designed for high school (+2) students preparing for further education or entering the job market, parents wanting to guide their children, career switchers looking for data-driven insights, and career counselors/consultants needing scalable tools for their clients.
+                        Disha is designed for high school (+2) students preparing for further education or entering the job market, parents wanting to guide their children, career switchers looking for data-driven insights, and career counselors needing scalable tools for their clients.
                     </div>
                 </div>
             </div>
             
             <div class="faq-item">
-                <button class="faq-question">Is the assessment free? <span class="icon">▼</span></button>
+                <button class="faq-question">Is the assessment free? <span class="icon">â–¼</span></button>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
                         Yes! Your initial aptitude assessment and basic career matching are completely free. We believe every student should have access to basic career guidance. We do offer premium features for advanced counselor consulting.
@@ -446,7 +446,7 @@
             </div>
 
             <div class="faq-item">
-                <button class="faq-question">How are careers recommended? <span class="icon">▼</span></button>
+                <button class="faq-question">How are careers recommended? <span class="icon">â–¼</span></button>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
                         Our recommendation engine uses a proprietary algorithm that cross-references your cognitive aptitude scores, personal interests, educational budget constraints, and current labor market demand data in Nepal to suggest the most optimal career paths.
@@ -455,7 +455,7 @@
             </div>
 
             <div class="faq-item">
-                <button class="faq-question">How long does the assessment take? <span class="icon">▼</span></button>
+                <button class="faq-question">How long does the assessment take? <span class="icon">â–¼</span></button>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
                         The core aptitude test takes approximately 20-30 minutes to complete. It evaluates various cognitive domains including numerical, verbal, abstract reasoning, and spatial awareness.
@@ -464,7 +464,7 @@
             </div>
 
             <div class="faq-item">
-                <button class="faq-question">Can parents monitor progress? <span class="icon">▼</span></button>
+                <button class="faq-question">Can parents monitor progress? <span class="icon">â–¼</span></button>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
                         Absolutely. Parents can create "Parent" accounts and link them to their child's account to receive automated reports, view assessment results, and explore budget/college planning tools together.
@@ -475,16 +475,16 @@
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      11. CALL TO ACTION SECTION
-     ═══════════════════════════════════════════════════════ -->
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="cta-section">
     <div class="cta-content">
         <h2>Ready to Discover Your Perfect Career?</h2>
-        <p>Join thousands of Nepali students who are making smarter career decisions with data-driven guidance. Start your journey today — it's completely free.</p>
+        <p>Join thousands of Nepali students who are making smarter career decisions with data-driven guidance. Start your journey today â€” it's completely free.</p>
         <div class="cta-buttons">
             <a href="<%= request.getContextPath() %>/JSP/auth/register.jsp" class="btn-cta-white">
-                🚀 Create Free Account
+                ðŸš€ Create Free Account
             </a>
             <a href="<%= request.getContextPath() %>/JSP/auth/login.jsp" class="btn-cta-outline">
                 Already have an account? Log In
@@ -493,18 +493,18 @@
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      10. FOOTER
-     ═══════════════════════════════════════════════════════ -->
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <footer class="landing-footer">
     <div class="footer-grid">
         <div class="footer-brand">
-            <h3>🎯 <span class="brand-text">DISHA</span></h3>
+            <h3>ðŸŽ¯ <span class="brand-text">DISHA</span></h3>
             <p>Nepal's first career intelligence platform combining aptitude science with real labor market data to guide students toward their best career path.</p>
             <div class="footer-social">
                 <a href="#" title="Facebook">f</a>
-                <a href="#" title="Twitter">𝕏</a>
-                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="Twitter">ð•</a>
+                <a href="#" title="Instagram">ðŸ“·</a>
                 <a href="#" title="LinkedIn">in</a>
             </div>
         </div>
@@ -546,9 +546,9 @@
     </div>
 </footer>
 
-<!-- ═══════════════════════════════════════════════════════
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      MINIMAL JAVASCRIPT
-     ═══════════════════════════════════════════════════════ -->
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <script>
     // Sticky navbar shadow on scroll
     window.addEventListener('scroll', function() {

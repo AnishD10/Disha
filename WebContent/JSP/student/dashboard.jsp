@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.disha.model.User" %>
 <%
     User currentUser = (User) session.getAttribute("loggedInUser");
@@ -12,8 +12,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard — DISHA</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/disha-main.css">
+    <title>Student Dashboard â€” DISHA</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
 </head>
 <body>
 
@@ -29,7 +29,7 @@
         <div class="dashboard-body">
             
             <div class="page-header" style="margin-bottom: 2rem;">
-                <h1 style="color: var(--color-primary); font-size: 2rem;">Welcome back, <%= currentUser.getFullName() %>! 👋</h1>
+                <h1 style="color: var(--color-primary); font-size: 2rem;">Welcome back, <%= currentUser.getFullName() %>! ðŸ‘‹</h1>
                 <p style="color: var(--color-text-muted);">Let's continue shaping your future today.</p>
             </div>
             
@@ -52,7 +52,7 @@
                 <div class="card stat-card">
                     <span class="stat-card-title">Saved Careers</span>
                     <span class="stat-card-value">4</span>
-                    <a href="career-matches.jsp" style="font-size: 0.85rem; margin-top: 0.5rem; display: inline-block;">View saved list →</a>
+                    <span style="font-size: 0.85rem; margin-top: 0.5rem; display: inline-block; color: var(--color-text-muted);">Career discovery preview</span>
                 </div>
             </div>
             
@@ -69,7 +69,7 @@
                             
                             <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; border: 1px solid var(--color-border-soft); border-radius: var(--radius-md);">
                                 <div style="display: flex; gap: 1rem; align-items: center;">
-                                    <div style="font-size: 2rem;">💻</div>
+                                    <div style="font-size: 2rem;">ðŸ’»</div>
                                     <div>
                                         <h4 style="margin:0;">Software Engineer</h4>
                                         <span style="font-size:0.85rem; color:var(--color-text-muted);">High Demand in Nepal</span>
@@ -83,7 +83,7 @@
                             
                             <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; border: 1px solid var(--color-border-soft); border-radius: var(--radius-md);">
                                 <div style="display: flex; gap: 1rem; align-items: center;">
-                                    <div style="font-size: 2rem;">📊</div>
+                                    <div style="font-size: 2rem;">ðŸ“Š</div>
                                     <div>
                                         <h4 style="margin:0;">Data Analyst</h4>
                                         <span style="font-size:0.85rem; color:var(--color-text-muted);">Growing Field</span>
@@ -96,7 +96,7 @@
                             </div>
                             
                         </div>
-                        <a href="career-matches.jsp" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">View All Matches</a>
+                        <a href="<%= request.getContextPath() %>/JSP/decision/decision-plan.jsp" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">Plan Next Step</a>
                     </div>
                 </div>
                 
@@ -108,14 +108,14 @@
                         <h3 style="margin-bottom: 1rem; color: var(--color-secondary);">Next Steps</h3>
                         <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
                             <li style="display: flex; gap: 1rem; align-items: flex-start;">
-                                <div>⏳</div>
+                                <div>â³</div>
                                 <div>
                                     <div style="font-weight: 600;">Complete Personality Test</div>
                                     <div style="font-size: 0.85rem; opacity: 0.9;">Required for better accuracy</div>
                                 </div>
                             </li>
                             <li style="display: flex; gap: 1rem; align-items: flex-start;">
-                                <div>🧭</div>
+                                <div>ðŸ§­</div>
                                 <div>
                                     <div style="font-weight: 600;">Try Decision Planning</div>
                                     <div style="font-size: 0.85rem; opacity: 0.9;">Explore degrees and budget filters</div>

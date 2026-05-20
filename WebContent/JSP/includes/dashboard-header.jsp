@@ -5,7 +5,7 @@
     if (uRole != null) {
         if ("STUDENT".equalsIgnoreCase(uRole)) roleName = "Student";
         else if ("PARENT".equalsIgnoreCase(uRole)) roleName = "Parent";
-        else if ("COUNSELOR".equalsIgnoreCase(uRole) || "CONSULTANT".equalsIgnoreCase(uRole)) roleName = "Consultant";
+        else if ("COUNSELOR".equalsIgnoreCase(uRole)) roleName = "Counselor";
         else if ("ADMIN".equalsIgnoreCase(uRole)) roleName = "Admin";
     }
     
@@ -14,7 +14,7 @@
         String uri = request.getRequestURI();
         if (uri.contains("/student/")) roleName = "Student";
         else if (uri.contains("/parent/")) roleName = "Parent";
-        else if (uri.contains("/consultant/") || uri.contains("/counselor/")) roleName = "Consultant";
+        else if (uri.contains("/counselor/")) roleName = "Counselor";
         else if (uri.contains("/admin/")) roleName = "Admin";
     }
     

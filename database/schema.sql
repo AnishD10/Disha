@@ -1,6 +1,7 @@
-USE disha_db;
+CREATE DATABASE IF NOT EXISTS disha_career_portal;
+USE disha_career_portal;
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -17,7 +18,7 @@ CREATE TABLE users (
     INDEX idx_username (username)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE student_profiles (
+CREATE TABLE IF NOT EXISTS student_profiles (
     student_profile_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL UNIQUE,
     date_of_birth DATE,
@@ -35,7 +36,7 @@ CREATE TABLE student_profiles (
     INDEX idx_budget_range (budget_range)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE parent_student_links (
+CREATE TABLE IF NOT EXISTS parent_student_links (
     link_id INT PRIMARY KEY AUTO_INCREMENT,
     parent_user_id INT NOT NULL,
     student_user_id INT NOT NULL,
@@ -48,7 +49,7 @@ CREATE TABLE parent_student_links (
     INDEX idx_student_id (student_user_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE assessments (
+CREATE TABLE IF NOT EXISTS assessments (
     assessment_id INT PRIMARY KEY AUTO_INCREMENT,
     assessment_name VARCHAR(150) NOT NULL,
     description TEXT,
@@ -63,7 +64,7 @@ CREATE TABLE assessments (
     INDEX idx_created_by (created_by)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE questions (
+CREATE TABLE IF NOT EXISTS questions (
     question_id INT PRIMARY KEY AUTO_INCREMENT,
     assessment_id INT NOT NULL,
     question_text TEXT NOT NULL,
@@ -75,7 +76,7 @@ CREATE TABLE questions (
     INDEX idx_question_order (question_order)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE question_options (
+CREATE TABLE IF NOT EXISTS question_options (
     option_id INT PRIMARY KEY AUTO_INCREMENT,
     question_id INT NOT NULL,
     option_text VARCHAR(255),
@@ -85,7 +86,7 @@ CREATE TABLE question_options (
     INDEX idx_question_id (question_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE student_assessments (
+CREATE TABLE IF NOT EXISTS student_assessments (
     student_assessment_id INT PRIMARY KEY AUTO_INCREMENT,
     student_user_id INT NOT NULL,
     assessment_id INT NOT NULL,
@@ -101,7 +102,7 @@ CREATE TABLE student_assessments (
     INDEX idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE student_answers (
+CREATE TABLE IF NOT EXISTS student_answers (
     answer_id INT PRIMARY KEY AUTO_INCREMENT,
     student_assessment_id INT NOT NULL,
     question_id INT NOT NULL,
@@ -114,7 +115,7 @@ CREATE TABLE student_answers (
     INDEX idx_question_id (question_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE aptitude_profiles (
+CREATE TABLE IF NOT EXISTS aptitude_profiles (
     aptitude_profile_id INT PRIMARY KEY AUTO_INCREMENT,
     student_user_id INT NOT NULL,
     student_assessment_id INT NOT NULL,
@@ -130,7 +131,7 @@ CREATE TABLE aptitude_profiles (
     INDEX idx_skill_cluster (skill_cluster)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE careers (
+CREATE TABLE IF NOT EXISTS careers (
     career_id INT PRIMARY KEY AUTO_INCREMENT,
     career_name VARCHAR(150) NOT NULL,
     career_description TEXT,
@@ -147,7 +148,7 @@ CREATE TABLE careers (
     INDEX idx_career_name (career_name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE career_aptitude_mapping (
+CREATE TABLE IF NOT EXISTS career_aptitude_mapping (
     mapping_id INT PRIMARY KEY AUTO_INCREMENT,
     career_id INT NOT NULL,
     skill_cluster VARCHAR(100),
@@ -159,7 +160,7 @@ CREATE TABLE career_aptitude_mapping (
     INDEX idx_career_id (career_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE career_matches (
+CREATE TABLE IF NOT EXISTS career_matches (
     career_match_id INT PRIMARY KEY AUTO_INCREMENT,
     student_user_id INT NOT NULL,
     career_id INT NOT NULL,
@@ -176,7 +177,7 @@ CREATE TABLE career_matches (
     INDEX idx_match_status (match_status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE colleges (
+CREATE TABLE IF NOT EXISTS colleges (
     college_id INT PRIMARY KEY AUTO_INCREMENT,
     college_name VARCHAR(150) NOT NULL,
     college_location VARCHAR(100),
@@ -193,7 +194,7 @@ CREATE TABLE colleges (
     INDEX idx_college_location (college_location)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE degrees (
+CREATE TABLE IF NOT EXISTS degrees (
     degree_id INT PRIMARY KEY AUTO_INCREMENT,
     college_id INT NOT NULL,
     degree_name VARCHAR(150) NOT NULL,
@@ -215,7 +216,7 @@ CREATE TABLE degrees (
     INDEX idx_field_of_study (field_of_study)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE student_constraints (
+CREATE TABLE IF NOT EXISTS student_constraints (
     constraint_id INT PRIMARY KEY AUTO_INCREMENT,
     student_user_id INT NOT NULL,
     budget_max DECIMAL(10, 2),
@@ -231,7 +232,7 @@ CREATE TABLE student_constraints (
     INDEX idx_student_user_id (student_user_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE decision_plans (
+CREATE TABLE IF NOT EXISTS decision_plans (
     decision_plan_id INT PRIMARY KEY AUTO_INCREMENT,
     student_user_id INT NOT NULL,
     plan_name VARCHAR(150),
@@ -248,7 +249,7 @@ CREATE TABLE decision_plans (
     INDEX idx_degree_id (degree_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE counselor_assignments (
+CREATE TABLE IF NOT EXISTS counselor_assignments (
     assignment_id INT PRIMARY KEY AUTO_INCREMENT,
     counselor_user_id INT NOT NULL,
     student_user_id INT NOT NULL,
@@ -264,7 +265,7 @@ CREATE TABLE counselor_assignments (
     INDEX idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE counselor_reports (
+CREATE TABLE IF NOT EXISTS counselor_reports (
     report_id INT PRIMARY KEY AUTO_INCREMENT,
     counselor_user_id INT NOT NULL,
     report_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -279,7 +280,7 @@ CREATE TABLE counselor_reports (
     INDEX idx_report_date (report_date)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE labour_market_data (
+CREATE TABLE IF NOT EXISTS labour_market_data (
     market_data_id INT PRIMARY KEY AUTO_INCREMENT,
     career_id INT NOT NULL,
     data_year INT,
@@ -299,7 +300,7 @@ CREATE TABLE labour_market_data (
     INDEX idx_market_demand (market_demand)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE admin_logs (
+CREATE TABLE IF NOT EXISTS admin_logs (
     log_id INT PRIMARY KEY AUTO_INCREMENT,
     admin_user_id INT NOT NULL,
     action_type VARCHAR(100),
@@ -315,7 +316,7 @@ CREATE TABLE admin_logs (
     INDEX idx_created_at (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE system_feedback (
+CREATE TABLE IF NOT EXISTS system_feedback (
     feedback_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     feedback_type VARCHAR(50),
@@ -327,7 +328,7 @@ CREATE TABLE system_feedback (
     INDEX idx_created_at (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE user_sessions (
+CREATE TABLE IF NOT EXISTS user_sessions (
     session_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     session_token VARCHAR(255) NOT NULL UNIQUE,
@@ -342,3 +343,4 @@ CREATE TABLE user_sessions (
     INDEX idx_session_token (session_token),
     INDEX idx_is_active (is_active)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+

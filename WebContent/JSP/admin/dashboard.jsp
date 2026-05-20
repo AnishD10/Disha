@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.disha.model.User, java.util.List" %>
 <%
     User currentUser = (User) session.getAttribute("loggedInUser");
@@ -25,8 +25,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard — DISHA</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/disha-main.css">
+    <title>Admin Dashboard â€” DISHA</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
 </head>
 <body>
 <div class="dashboard-layout">
@@ -40,27 +40,27 @@
             <!-- Statistics Cards -->
             <div class="grid-cards">
                 <div class="card stat-card">
-                    <span class="stat-card-title">👥 Total Users</span>
+                    <span class="stat-card-title">ðŸ‘¥ Total Users</span>
                     <span class="stat-card-value"><%= totalUsers %></span>
                 </div>
                 <div class="card stat-card">
-                    <span class="stat-card-title">🎓 Students</span>
+                    <span class="stat-card-title">ðŸŽ“ Students</span>
                     <span class="stat-card-value"><%= totalStudents %></span>
                 </div>
                 <div class="card stat-card">
-                    <span class="stat-card-title">👨‍👩‍👧 Parents</span>
+                    <span class="stat-card-title">ðŸ‘¨â€ðŸ‘©â€ðŸ‘§ Parents</span>
                     <span class="stat-card-value"><%= totalParents %></span>
                 </div>
                 <div class="card stat-card">
-                    <span class="stat-card-title">🧑‍💼 Counselors</span>
+                    <span class="stat-card-title">ðŸ§‘â€ðŸ’¼ Counselors</span>
                     <span class="stat-card-value"><%= totalCounselors %></span>
                 </div>
                 <div class="card stat-card">
-                    <span class="stat-card-title">💼 Careers</span>
+                    <span class="stat-card-title">ðŸ’¼ Careers</span>
                     <span class="stat-card-value"><%= totalCareers %></span>
                 </div>
                 <div class="card stat-card">
-                    <span class="stat-card-title">🏫 Colleges</span>
+                    <span class="stat-card-title">ðŸ« Colleges</span>
                     <span class="stat-card-value"><%= totalColleges %></span>
                 </div>
             </div>

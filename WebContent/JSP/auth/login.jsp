@@ -1,9 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.disha.model.User" %>
 <%
     /* If already logged in, redirect to appropriate dashboard */
-    Object user = session.getAttribute("loggedInUser");
+    User user = (User) session.getAttribute("loggedInUser");
     if (user != null) {
-        response.sendRedirect(request.getContextPath() + "/JSP/student/dashboard.jsp");
+        switch (user.getRole()) {
+            case ADMIN:
+                response.sendRedirect(request.getContextPath() + "/admin/dashboard");
+                break;
+            case PARENT:
+                response.sendRedirect(request.getContextPath() + "/JSP/parent/dashboard.jsp");
+                break;
+            case COUNSELOR:
+                response.sendRedirect(request.getContextPath() + "/JSP/counselor/dashboard.jsp");
+                break;
+            default:
+                response.sendRedirect(request.getContextPath() + "/JSP/student/dashboard.jsp");
+                break;
+        }
         return;
     }
 
@@ -20,8 +34,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login — DISHA Nepal</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/disha-main.css">
+    <title>Login â€” DISHA Nepal</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
     <style>
         .password-wrapper {
             position: relative;
@@ -49,36 +63,36 @@
 
 <div class="auth-wrapper">
 
-    <!-- ── Left Hero Panel ─────────────────────────────────────────── -->
+    <!-- â”€â”€ Left Hero Panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <div class="auth-hero">
         <div class="logo">DISHA</div>
         <p class="tagline">Nepal Career Intelligence Portal</p>
 
         <ul class="feature-list">
             <li>
-                <span class="icon">🎯</span>
+                <span class="icon">ðŸŽ¯</span>
                 Psychometric assessments mapped to Nepal's job market
             </li>
             <li>
-                <span class="icon">🏫</span>
+                <span class="icon">ðŸ«</span>
                 Browse colleges filtered by budget, location & score
             </li>
             <li>
-                <span class="icon">📊</span>
+                <span class="icon">ðŸ“Š</span>
                 Real salary & demand data for Nepali career paths
             </li>
             <li>
-                <span class="icon">👨‍👩‍👧</span>
+                <span class="icon">ðŸ‘¨â€ðŸ‘©â€ðŸ‘§</span>
                 Family-facing dashboard for informed decisions
             </li>
             <li>
-                <span class="icon">🧭</span>
+                <span class="icon">ðŸ§­</span>
                 Counselor tools to guide students at scale
             </li>
         </ul>
     </div>
 
-    <!-- ── Right Login Panel ───────────────────────────────────────── -->
+    <!-- â”€â”€ Right Login Panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <div class="auth-panel">
         <div class="auth-card">
 
@@ -88,14 +102,14 @@
             <!-- Flash message (from registration redirect) -->
             <% if (flashMsg != null) { %>
             <div class="alert alert-<%= flashType %>">
-                <span>✓</span> <%= flashMsg %>
+                <span>âœ“</span> <%= flashMsg %>
             </div>
             <% } %>
 
             <!-- Error message from servlet -->
             <% if (request.getAttribute("errorMessage") != null) { %>
             <div class="alert alert-error">
-                <span>⚠</span> <%= request.getAttribute("errorMessage") %>
+                <span>âš </span> <%= request.getAttribute("errorMessage") %>
             </div>
             <% } %>
 
@@ -125,13 +139,13 @@
                                 autocomplete="current-password"
                                 required>
                         <button type="button" class="toggle-password" onclick="togglePassword('password', this)" title="Show/hide password">
-                            👁
+                            ðŸ‘
                         </button>
                     </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary">
-                    Sign In →
+                    Sign In â†’
                 </button>
 
             </form>
@@ -153,10 +167,10 @@
         const input = document.getElementById(inputId);
         if (input.type === 'password') {
             input.type = 'text';
-            btn.textContent = '🙈';
+            btn.textContent = 'ðŸ™ˆ';
         } else {
             input.type = 'password';
-            btn.textContent = '👁';
+            btn.textContent = 'ðŸ‘';
         }
     }
 </script>

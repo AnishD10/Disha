@@ -2,6 +2,7 @@ package com.disha.controller;
 
 import dao.CollegeDAO;
 import com.disha.model.College;
+import com.disha.model.User;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -15,6 +16,10 @@ public class CollegeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (!requireAdmin(request, response)) {
+            return;
+        }
+
         String action = request.getParameter("action");
         if (action == null) action = "list";
 
@@ -43,6 +48,10 @@ public class CollegeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (!requireAdmin(request, response)) {
+            return;
+        }
+
         String action = request.getParameter("action");
 
         College college = new College();
@@ -64,5 +73,18 @@ public class CollegeServlet extends HttpServlet {
             collegeDAO.updateCollege(college);
             response.sendRedirect(request.getContextPath() + "/admin/colleges?action=list&msg=updated");
         }
+    }
+
+    private boolean requireAdmin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User currentUser = (User) request.getSession().getAttribute("loggedInUser");
+        if (currentUser == null) {
+            response.sendRedirect(request.getContextPath() + "/JSP/auth/login.jsp");
+            return false;
+        }
+        if (!User.Role.ADMIN.equals(currentUser.getRole())) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+            return false;
+        }
+        return true;
     }
 }

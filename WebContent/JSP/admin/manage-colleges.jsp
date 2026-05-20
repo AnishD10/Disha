@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.disha.model.User, com.disha.model.College, java.util.List" %>
 <%
     User cu = (User) session.getAttribute("loggedInUser");
@@ -10,8 +10,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Colleges — DISHA Admin</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/disha-main.css">
+    <title>Manage Colleges â€” DISHA Admin</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
 </head>
 <body>
 <div class="dashboard-layout">
@@ -40,7 +40,7 @@
                             <td>
                                 <strong><%= c.getCollegeName() %></strong>
                                 <% if (c.getWebsiteUrl() != null && !c.getWebsiteUrl().isEmpty()) { %>
-                                <br><a href="<%= c.getWebsiteUrl() %>" target="_blank" style="font-size:0.8rem;">🌐 Website</a>
+                                <br><a href="<%= c.getWebsiteUrl() %>" target="_blank" style="font-size:0.8rem;">ðŸŒ Website</a>
                                 <% } %>
                             </td>
                             <td><%= c.getCollegeLocation() != null ? c.getCollegeLocation() : "-" %></td>

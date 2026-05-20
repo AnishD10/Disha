@@ -1,5 +1,8 @@
 ### IntelliJ IDEA ###
+.idea/
+*.iml
 out/
+build/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .kotlin
@@ -29,7 +32,7 @@ bin/
 ### Mac OS ###
 .DS_Store
 src/.env
-Disha - Nepal Career Intelligence Portal.iml
+.ai/
 
 ### Documentation ###
 # Ignore all markdown files except README.md

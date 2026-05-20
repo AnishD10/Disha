@@ -1,14 +1,14 @@
 -- Initial data setup for Disha application
 -- This file is executed after schema.sql
 
-USE disha_db;
+USE disha_career_portal;
 
 -- Insert initial admin user (password: admin123 -> SHA-256 hash)
-INSERT INTO users (username, email, password_hash, role, first_name, last_name, phone, is_active) 
-VALUES ('admin', 'admin@disha.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'ADMIN', 'Admin', 'User', '9800000000', TRUE);
+INSERT IGNORE INTO users (username, email, password_hash, role, first_name, last_name, phone, is_active) 
+VALUES ('disha_admin', 'admin@disha.com', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'ADMIN', 'Admin', 'User', '9800000000', TRUE);
 
 -- Insert sample students
-INSERT INTO users (username, email, password_hash, role, first_name, last_name, phone, is_active) VALUES 
+INSERT IGNORE INTO users (username, email, password_hash, role, first_name, last_name, phone, is_active) VALUES 
 ('ram_sharma', 'ram@student.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'STUDENT', 'Ram', 'Sharma', '9801000001', TRUE),
 ('sita_kc', 'sita@student.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'STUDENT', 'Sita', 'KC', '9801000002', TRUE),
 ('hari_thapa', 'hari@student.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'STUDENT', 'Hari', 'Thapa', '9801000003', TRUE),
@@ -16,12 +16,12 @@ INSERT INTO users (username, email, password_hash, role, first_name, last_name, 
 ('bikash_rai', 'bikash@student.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'STUDENT', 'Bikash', 'Rai', '9801000005', TRUE);
 
 -- Insert sample parents
-INSERT INTO users (username, email, password_hash, role, first_name, last_name, phone, is_active) VALUES 
+INSERT IGNORE INTO users (username, email, password_hash, role, first_name, last_name, phone, is_active) VALUES 
 ('parent_sharma', 'parent.sharma@disha.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'PARENT', 'Krishna', 'Sharma', '9802000001', TRUE),
 ('parent_kc', 'parent.kc@disha.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'PARENT', 'Durga', 'KC', '9802000002', TRUE);
 
 -- Insert sample counselors
-INSERT INTO users (username, email, password_hash, role, first_name, last_name, phone, is_active) VALUES 
+INSERT IGNORE INTO users (username, email, password_hash, role, first_name, last_name, phone, is_active) VALUES 
 ('counselor1', 'counselor1@disha.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'COUNSELOR', 'Rajesh', 'Hamal', '9803000001', TRUE),
 ('counselor2', 'counselor2@disha.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'COUNSELOR', 'Anita', 'Gurung', '9803000002', TRUE);
 
@@ -43,6 +43,37 @@ INSERT INTO colleges (college_name, college_location, college_city, college_desc
 ('Pokhara University', 'Dhungepatan', 'Kaski', 'University focused on science, technology and management', 'https://pu.edu.np', 'info@pu.edu.np', '061-504072', TRUE, TRUE),
 ('Purbanchal University', 'Biratnagar', 'Morang', 'University in eastern Nepal', 'https://puranchaluniversity.edu.np', 'info@puranchaluniversity.edu.np', '021-525242', TRUE, TRUE),
 ('Nepal Engineering College', 'Changunarayan', 'Bhaktapur', 'Premier engineering college affiliated to Pokhara University', 'https://nec.edu.np', 'info@nec.edu.np', '01-6614149', FALSE, TRUE);
+
+-- Insert sample labour market records for admin management
+INSERT INTO labour_market_data (career_id, data_year, job_openings, average_salary, market_demand, risk_index, growth_rate, updated_by)
+SELECT c.career_id, 2026, 1800, 120000.00, 'HIGH', 2, 15.50, u.user_id
+FROM careers c JOIN users u ON u.email = 'admin@disha.com'
+WHERE c.career_name = 'Software Engineer'
+  AND NOT EXISTS (SELECT 1 FROM labour_market_data l WHERE l.career_id = c.career_id AND l.data_year = 2026);
+
+INSERT INTO labour_market_data (career_id, data_year, job_openings, average_salary, market_demand, risk_index, growth_rate, updated_by)
+SELECT c.career_id, 2026, 950, 80000.00, 'HIGH', 3, 12.00, u.user_id
+FROM careers c JOIN users u ON u.email = 'admin@disha.com'
+WHERE c.career_name = 'Data Analyst'
+  AND NOT EXISTS (SELECT 1 FROM labour_market_data l WHERE l.career_id = c.career_id AND l.data_year = 2026);
+
+INSERT INTO labour_market_data (career_id, data_year, job_openings, average_salary, market_demand, risk_index, growth_rate, updated_by)
+SELECT c.career_id, 2026, 620, 70000.00, 'MEDIUM', 4, 8.00, u.user_id
+FROM careers c JOIN users u ON u.email = 'admin@disha.com'
+WHERE c.career_name = 'Civil Engineer'
+  AND NOT EXISTS (SELECT 1 FROM labour_market_data l WHERE l.career_id = c.career_id AND l.data_year = 2026);
+
+INSERT INTO labour_market_data (career_id, data_year, job_openings, average_salary, market_demand, risk_index, growth_rate, updated_by)
+SELECT c.career_id, 2026, 700, 150000.00, 'HIGH', 2, 10.00, u.user_id
+FROM careers c JOIN users u ON u.email = 'admin@disha.com'
+WHERE c.career_name = 'Doctor (MBBS)'
+  AND NOT EXISTS (SELECT 1 FROM labour_market_data l WHERE l.career_id = c.career_id AND l.data_year = 2026);
+
+INSERT INTO labour_market_data (career_id, data_year, job_openings, average_salary, market_demand, risk_index, growth_rate, updated_by)
+SELECT c.career_id, 2026, 1100, 45000.00, 'MEDIUM', 5, 5.00, u.user_id
+FROM careers c JOIN users u ON u.email = 'admin@disha.com'
+WHERE c.career_name = 'Teacher'
+  AND NOT EXISTS (SELECT 1 FROM labour_market_data l WHERE l.career_id = c.career_id AND l.data_year = 2026);
 
 -- Insert sample assessments
 INSERT INTO assessments (assessment_name, description, total_questions, duration_minutes, passing_score, created_by, is_active) VALUES 
