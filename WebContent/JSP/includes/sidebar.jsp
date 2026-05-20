@@ -26,6 +26,21 @@
                     <span style="font-size: 1.2rem;">DP</span> <span>Decision Planning</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="<%= request.getContextPath() %>/assessment/start" class="nav-link <%= uri.contains("/assessment/start") ? "active":""%>">
+                    <span style="font-size: 1.2rem;">AT</span> <span>Aptitude Test</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<%= request.getContextPath() %>/assessment/history" class="nav-link <%= uri.contains("/assessment/history") ? "active":""%>">
+                    <span style="font-size: 1.2rem;">AH</span> <span>Assessment History</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<%= request.getContextPath() %>/career" class="nav-link <%= uri.contains("/career") ? "active":""%>">
+                    <span style="font-size: 1.2rem;">CD</span> <span>Career Discovery</span>
+                </a>
+            </li>
 
         <% } else if ("PARENT".equalsIgnoreCase(userRole)) { %>
             <li class="nav-item">

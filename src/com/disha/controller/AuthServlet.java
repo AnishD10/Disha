@@ -56,12 +56,12 @@ public class AuthServlet extends HttpServlet {
             session.setAttribute("userName", user.getFullName());
             session.setMaxInactiveInterval(30 * 60); // 30 minutes
 
-            // Role-based redirect
+            // Role-based redirect with a one-time dashboard toast flag.
             switch (user.getRole()) {
-                case ADMIN:     response.sendRedirect(request.getContextPath() + "/admin/dashboard"); break;
-                case PARENT:    response.sendRedirect(request.getContextPath() + "/JSP/parent/dashboard.jsp"); break;
-                case COUNSELOR: response.sendRedirect(request.getContextPath() + "/JSP/counselor/dashboard.jsp"); break;
-                default:        response.sendRedirect(request.getContextPath() + "/JSP/student/dashboard.jsp"); break;
+                case ADMIN:     response.sendRedirect(request.getContextPath() + "/admin/dashboard?loginSuccess=true"); break;
+                case PARENT:    response.sendRedirect(request.getContextPath() + "/JSP/parent/dashboard.jsp?loginSuccess=true"); break;
+                case COUNSELOR: response.sendRedirect(request.getContextPath() + "/JSP/counselor/dashboard.jsp?loginSuccess=true"); break;
+                default:        response.sendRedirect(request.getContextPath() + "/JSP/student/dashboard.jsp?loginSuccess=true"); break;
             }
         } else {
             request.setAttribute("errorMessage", "Invalid email or password.");

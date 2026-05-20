@@ -33,5 +33,6 @@
         <p>This dashboard will contain: bulk student management, aggregate reports, flagging at-risk students.</p>
     </div>
 </div>
+<jsp:include page="../includes/login-toast.jsp" />
 </body>
 </html>

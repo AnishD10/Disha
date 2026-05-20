@@ -112,6 +112,81 @@ CREATE TABLE student_answers (
     INDEX idx_question_id (question_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE aptitude_questions (
+    question_id INT PRIMARY KEY AUTO_INCREMENT,
+    question_text TEXT NOT NULL,
+    section ENUM('APTITUDE', 'PERSONALITY', 'INTEREST') NOT NULL,
+    question_type ENUM('MCQ', 'LIKERT') NOT NULL,
+    question_order INT NOT NULL,
+    INDEX idx_section (section),
+    INDEX idx_question_order (question_order)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE aptitude_options (
+    option_id INT PRIMARY KEY AUTO_INCREMENT,
+    question_id INT NOT NULL,
+    option_text VARCHAR(255) NOT NULL,
+    score_value INT NOT NULL,
+    is_correct BOOLEAN DEFAULT FALSE,
+    CONSTRAINT fk_aptitude_option_question FOREIGN KEY (question_id) REFERENCES aptitude_questions(question_id) ON DELETE CASCADE,
+    INDEX idx_question_id (question_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE assessment_attempts (
+    attempt_id INT PRIMARY KEY AUTO_INCREMENT,
+    student_id INT NOT NULL,
+    attempt_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_completed BOOLEAN DEFAULT FALSE,
+    aptitude_score INT DEFAULT 0,
+    personality_score INT DEFAULT 0,
+    interest_score INT DEFAULT 0,
+    personality_cluster VARCHAR(50),
+    CONSTRAINT fk_assessment_attempt_student FOREIGN KEY (student_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    INDEX idx_student_id (student_id),
+    INDEX idx_attempt_date (attempt_date)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE attempt_answers (
+    answer_id INT PRIMARY KEY AUTO_INCREMENT,
+    attempt_id INT NOT NULL,
+    question_id INT NOT NULL,
+    selected_option_id INT NOT NULL,
+    CONSTRAINT fk_attempt_answer_attempt FOREIGN KEY (attempt_id) REFERENCES assessment_attempts(attempt_id) ON DELETE CASCADE,
+    CONSTRAINT fk_attempt_answer_question FOREIGN KEY (question_id) REFERENCES aptitude_questions(question_id),
+    CONSTRAINT fk_attempt_answer_option FOREIGN KEY (selected_option_id) REFERENCES aptitude_options(option_id),
+    INDEX idx_attempt_id (attempt_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE nepal_careers (
+    career_id INT PRIMARY KEY AUTO_INCREMENT,
+    career_name VARCHAR(100) NOT NULL,
+    career_description TEXT,
+    suitable_clusters VARCHAR(200),
+    min_aptitude_score INT DEFAULT 0,
+    nepal_relevance_note TEXT,
+    INDEX idx_min_aptitude_score (min_aptitude_score)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE attempt_career_recs (
+    rec_id INT PRIMARY KEY AUTO_INCREMENT,
+    attempt_id INT NOT NULL,
+    career_id INT NOT NULL,
+    career_rank INT NOT NULL,
+    CONSTRAINT fk_attempt_rec_attempt FOREIGN KEY (attempt_id) REFERENCES assessment_attempts(attempt_id) ON DELETE CASCADE,
+    CONSTRAINT fk_attempt_rec_career FOREIGN KEY (career_id) REFERENCES nepal_careers(career_id),
+    INDEX idx_attempt_id (attempt_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE attempt_skills (
+    skill_id INT PRIMARY KEY AUTO_INCREMENT,
+    attempt_id INT NOT NULL,
+    skill_name VARCHAR(100) NOT NULL,
+    skill_score INT NOT NULL,
+    skill_level ENUM('STRONG', 'AVERAGE', 'WEAK') NOT NULL,
+    CONSTRAINT fk_attempt_skill_attempt FOREIGN KEY (attempt_id) REFERENCES assessment_attempts(attempt_id) ON DELETE CASCADE,
+    INDEX idx_attempt_id (attempt_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE aptitude_profiles (
     aptitude_profile_id INT PRIMARY KEY AUTO_INCREMENT,
     student_user_id INT NOT NULL,
@@ -227,6 +302,43 @@ CREATE TABLE student_constraints (
     CONSTRAINT fk_constraint_student FOREIGN KEY (student_user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     UNIQUE KEY unique_student_constraint (student_user_id),
     INDEX idx_student_user_id (student_user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE college_programmes (
+    plan_id INT PRIMARY KEY AUTO_INCREMENT,
+    college_name VARCHAR(150) NOT NULL,
+    degree_name VARCHAR(150) NOT NULL,
+    faculty VARCHAR(100),
+    location VARCHAR(100),
+    annual_fee_npr DECIMAL(10, 2),
+    minimum_percentage DECIMAL(5, 2),
+    career_path VARCHAR(500),
+    affiliation VARCHAR(50),
+    duration_years INT,
+    scholarship_available BOOLEAN DEFAULT FALSE,
+    contact_info VARCHAR(255),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_faculty (faculty),
+    INDEX idx_location (location),
+    INDEX idx_annual_fee (annual_fee_npr),
+    INDEX idx_minimum_percentage (minimum_percentage),
+    INDEX idx_is_active (is_active)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE student_decision_searches (
+    search_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    max_budget DECIMAL(10, 2),
+    location_filter VARCHAR(100),
+    min_percentage DECIMAL(5, 2),
+    career_path_filter VARCHAR(500),
+    result_count INT,
+    searched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_search_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    INDEX idx_user_id (user_id),
+    INDEX idx_searched_at (searched_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE decision_plans (

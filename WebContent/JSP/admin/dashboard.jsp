@@ -100,5 +100,6 @@
         </div>
     </div>
 </div>
+<jsp:include page="../includes/login-toast.jsp" />
 </body>
 </html>

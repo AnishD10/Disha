@@ -33,5 +33,6 @@
         <p>This dashboard will contain: child's aptitude report, salary data, college suggestions.</p>
     </div>
 </div>
+<jsp:include page="../includes/login-toast.jsp" />
 </body>
 </html>

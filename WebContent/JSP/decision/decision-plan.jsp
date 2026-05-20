@@ -98,7 +98,7 @@
         <aside class="filter-panel">
             <h3>ðŸ” Filter Options</h3>
 
-            <form method="POST" action="<%= request.getContextPath() %>/JSP/decision/decision-plan.jsp">
+            <form method="POST" action="<%= request.getContextPath() %>/decision/plan">
 
                 <!-- Budget -->
                 <div class="filter-section">
@@ -171,7 +171,7 @@
                 </button>
 
                 <% if (hasSearched) { %>
-                <a href="<%= request.getContextPath() %>/JSP/decision/decision-plan.jsp"
+                <a href="<%= request.getContextPath() %>/decision/plan"
                    class="btn btn-secondary" style="width:100%; margin-top: 10px; text-align:center;">
                     Clear Filters
                 </a>

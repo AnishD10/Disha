@@ -178,7 +178,7 @@ public class UserServlet extends HttpServlet {
 
             // 7. Redirect to role-specific dashboard
             String dashboardPath = RoleConstants.getDashboardPath(user.getRole().name());
-            resp.sendRedirect(req.getContextPath() + dashboardPath);
+            resp.sendRedirect(req.getContextPath() + dashboardPath + "?loginSuccess=true");
 
         } catch (SQLException e) {
             log("loginUser DB error: " + e.getMessage(), e);

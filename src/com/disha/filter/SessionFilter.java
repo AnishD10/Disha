@@ -53,7 +53,10 @@ public class SessionFilter implements Filter {
             {"/JSP/counselor/",  RoleConstants.COUNSELOR},
             {"/JSP/parent/",     RoleConstants.PARENT},
             {"/JSP/student/",    RoleConstants.STUDENT},
-            {"/decision/",        RoleConstants.STUDENT},
+            {"/JSP/decision/",   RoleConstants.STUDENT},
+            {"/decision/",       RoleConstants.STUDENT},
+            {"/career",          RoleConstants.STUDENT},
+            {"/assessment/",     RoleConstants.STUDENT},
     };
 
     @Override public void init(FilterConfig fc) throws ServletException {}

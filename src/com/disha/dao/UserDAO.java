@@ -20,15 +20,15 @@ import java.util.List;
 public class UserDAO extends DBUtil {
 
     private static final String INSERT_USER =
-            "INSERT INTO users (username, full_name, email, password_hash, role, phone, is_active) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, 1)";
+            "INSERT INTO users (username, email, password_hash, role, first_name, last_name, phone, is_active) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, 1)";
 
     private static final String SELECT_BY_EMAIL =
-            "SELECT user_id, full_name, email, password_hash, role, phone, created_at, is_active " +
+            "SELECT user_id, username, email, password_hash, role, first_name, last_name, phone, created_at, is_active " +
                     "FROM users WHERE email = ? AND is_active = 1";
 
     private static final String SELECT_BY_ID =
-            "SELECT user_id, full_name, email, password_hash, role, phone, created_at, is_active " +
+            "SELECT user_id, username, email, password_hash, role, first_name, last_name, phone, created_at, is_active " +
                     "FROM users WHERE user_id = ?";
 
     private static final String EMAIL_EXISTS =
@@ -41,8 +41,8 @@ public class UserDAO extends DBUtil {
             "UPDATE users SET is_active = 0 WHERE user_id = ?";
 
     private static final String SELECT_ALL_BY_ROLE =
-            "SELECT user_id, full_name, email, password_hash, role, phone, created_at, is_active " +
-                    "FROM users WHERE role = ? AND is_active = 1 ORDER BY full_name";
+            "SELECT user_id, username, email, password_hash, role, first_name, last_name, phone, created_at, is_active " +
+                    "FROM users WHERE role = ? AND is_active = 1 ORDER BY first_name, last_name";
 
     public int registerUser(User user) throws SQLException {
         Connection conn = null;
@@ -52,11 +52,12 @@ public class UserDAO extends DBUtil {
             conn = getConnection();
             ps = conn.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, createUsername(user.getEmail()));
-            ps.setString(2, user.getFullName());
-            ps.setString(3, user.getEmail());
-            ps.setString(4, user.getPasswordHash());
-            ps.setString(5, user.getRole().name());
-            ps.setString(6, user.getPhone() != null ? user.getPhone() : "");
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPasswordHash());
+            ps.setString(4, user.getRole().name());
+            ps.setString(5, user.getFirstName());
+            ps.setString(6, user.getLastName() != null ? user.getLastName() : "");
+            ps.setString(7, user.getPhone() != null ? user.getPhone() : "");
             if (ps.executeUpdate() == 0) return -1;
             rs = ps.getGeneratedKeys();
             return rs.next() ? rs.getInt(1) : -1;
@@ -157,7 +158,9 @@ public class UserDAO extends DBUtil {
     private User mapRow(ResultSet rs) throws SQLException {
         User u = new User();
         u.setUserId(rs.getInt("user_id"));
-        u.setFullName(rs.getString("full_name"));
+        u.setUsername(rs.getString("username"));
+        u.setFirstName(rs.getString("first_name"));
+        u.setLastName(rs.getString("last_name"));
         u.setEmail(rs.getString("email"));
         u.setPasswordHash(rs.getString("password_hash"));
         u.setRole(User.Role.valueOf(rs.getString("role")));

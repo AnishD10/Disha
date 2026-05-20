@@ -41,6 +41,7 @@
                     <div style="margin-top: 1rem; background: var(--color-border); height: 6px; border-radius: 3px; overflow: hidden;">
                         <div style="width: 40%; background: var(--color-primary); height: 100%;"></div>
                     </div>
+                    <a href="<%= request.getContextPath() %>/assessment/start" class="btn btn-secondary" style="margin-top:1rem;">Start Aptitude Test</a>
                 </div>
                 
                 <div class="card stat-card">
@@ -96,7 +97,7 @@
                             </div>
                             
                         </div>
-                        <a href="<%= request.getContextPath() %>/JSP/decision/decision-plan.jsp" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">Plan Next Step</a>
+                        <a href="<%= request.getContextPath() %>/decision/plan" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">Plan Next Step</a>
                     </div>
                 </div>
                 
@@ -112,6 +113,7 @@
                                 <div>
                                     <div style="font-weight: 600;">Complete Personality Test</div>
                                     <div style="font-size: 0.85rem; opacity: 0.9;">Required for better accuracy</div>
+                                    <a href="<%= request.getContextPath() %>/assessment/start" style="color: white; text-decoration: underline; font-size: 0.85rem; display: block; margin-top: 5px;">Start test -></a>
                                 </div>
                             </li>
                             <li style="display: flex; gap: 1rem; align-items: flex-start;">
@@ -119,7 +121,7 @@
                                 <div>
                                     <div style="font-weight: 600;">Try Decision Planning</div>
                                     <div style="font-size: 0.85rem; opacity: 0.9;">Explore degrees and budget filters</div>
-                                    <a href="<%= request.getContextPath() %>/JSP/decision/decision-plan.jsp" style="color: white; text-decoration: underline; font-size: 0.85rem; display: block; margin-top: 5px;">Start -></a>
+                                    <a href="<%= request.getContextPath() %>/decision/plan" style="color: white; text-decoration: underline; font-size: 0.85rem; display: block; margin-top: 5px;">Start -></a>
                                 </div>
                             </li>
                         </ul>
@@ -158,5 +160,6 @@
     </div>
 </div>
 
+<jsp:include page="../includes/login-toast.jsp" />
 </body>
 </html>
