@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.disha.model.DecisionPlan, com.disha.model.User, java.util.List" %>
 <%
-    /* Session guard — SessionFilter handles redirect, but double-check here */
+    /* Frontend guard for this integration UI. Backend ownership can move to the decision-planning branch. */
     User currentUser = (User) session.getAttribute("loggedInUser");
     if (currentUser == null) {
-        response.sendRedirect(request.getContextPath() + "/jsp/auth/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/JSP/auth/login.jsp");
         return;
     }
 
@@ -30,8 +30,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decision Planning — DISHA Nepal</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/disha-main.css">
+    <title>Decision Planning â€” DISHA Nepal</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
     <style>
         .fee-highlight { color: var(--color-primary); }
 
@@ -67,38 +67,38 @@
 </head>
 <body>
 
-<!-- ── Navbar ─────────────────────────────────────────────────────── -->
+<!-- â”€â”€ Navbar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
 <nav class="navbar">
-    <a href="<%= request.getContextPath() %>/jsp/student/dashboard.jsp" class="nav-brand">DISHA</a>
+    <a href="<%= request.getContextPath() %>/JSP/student/dashboard.jsp" class="nav-brand">DISHA</a>
     <div class="nav-user">
         <span>Welcome, <%= currentUser.getFullName() %></span>
         <span class="role-chip"><%= currentUser.getRole().name() %></span>
-        <a href="<%= request.getContextPath() %>/jsp/auth/login.jsp" class="btn btn-sm btn-secondary">Log Out</a>
+        <a href="<%= request.getContextPath() %>/auth/logout" class="btn btn-sm btn-secondary">Log Out</a>
     </div>
 </nav>
 
-<!-- ── Page Content ────────────────────────────────────────────────── -->
+<!-- â”€â”€ Page Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
 <div class="page-wrapper">
 
     <div class="page-header">
-        <h1>🧭 Decision Planning</h1>
+        <h1>ðŸ§­ Decision Planning</h1>
         <p>Filter degrees and colleges by your budget, location, academic score, and career goals.</p>
     </div>
 
     <!-- Error message -->
     <% if (errorMessage != null) { %>
     <div class="alert alert-error" style="margin-bottom: 20px;">
-        <span>⚠</span> <%= errorMessage %>
+        <span>âš </span> <%= errorMessage %>
     </div>
     <% } %>
 
     <div class="decision-grid">
 
-        <!-- ── Filter Panel ──────────────────────────────────────────── -->
+        <!-- â”€â”€ Filter Panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
         <aside class="filter-panel">
-            <h3>🔍 Filter Options</h3>
+            <h3>ðŸ” Filter Options</h3>
 
-            <form method="POST" action="<%= request.getContextPath() %>/jsp/decision/decision-plan.jsp">
+            <form method="POST" action="<%= request.getContextPath() %>/JSP/decision/decision-plan.jsp">
 
                 <!-- Budget -->
                 <div class="filter-section">
@@ -112,7 +112,7 @@
                 <div class="filter-section">
                     <label for="location">Location / District</label>
                     <select id="location" name="location">
-                        <option value="">— Any Location —</option>
+                        <option value="">â€” Any Location â€”</option>
                         <% if (locations != null) {
                             for (String loc : locations) {
                                 boolean selected = loc.equals(fLocation);
@@ -135,7 +135,7 @@
                 <div class="filter-section">
                     <label for="faculty">Faculty / Stream</label>
                     <select id="faculty" name="faculty">
-                        <option value="">— Any Faculty —</option>
+                        <option value="">â€” Any Faculty â€”</option>
                         <% if (faculties != null) {
                             for (String fac : faculties) {
                                 boolean selected = fac.equals(fFaculty);
@@ -149,7 +149,7 @@
                 <div class="filter-section">
                     <label for="careerPath">Career Interest</label>
                     <select id="careerPath" name="careerPath">
-                        <option value="">— Any Career —</option>
+                        <option value="">â€” Any Career â€”</option>
                         <% if (careerPaths != null) {
                             for (String cp : careerPaths) {
                                 boolean selected = cp.equals(fCareer);
@@ -167,11 +167,11 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="width:100%; margin-top: 8px;">
-                    Find Programmes →
+                    Find Programmes â†’
                 </button>
 
                 <% if (hasSearched) { %>
-                <a href="<%= request.getContextPath() %>/jsp/decision/decision-plan.jsp"
+                <a href="<%= request.getContextPath() %>/JSP/decision/decision-plan.jsp"
                    class="btn btn-secondary" style="width:100%; margin-top: 10px; text-align:center;">
                     Clear Filters
                 </a>
@@ -180,13 +180,13 @@
             </form>
         </aside>
 
-        <!-- ── Results Panel ──────────────────────────────────────────── -->
+        <!-- â”€â”€ Results Panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
         <main class="results-panel">
 
             <% if (!hasSearched) { %>
-            <!-- Prompt state — no search yet -->
+            <!-- Prompt state â€” no search yet -->
             <div class="empty-state">
-                <div class="empty-icon">🗺️</div>
+                <div class="empty-icon">ðŸ—ºï¸</div>
                 <h3>Set your filters and find the right programme</h3>
                 <p class="no-results-tip">
                     Leave any filter blank to search across all values.<br>
@@ -199,22 +199,22 @@
             <!-- Applied filter chips -->
             <div class="applied-filters">
                 <% if (fBudget != null && !fBudget.equals(0.0)) { %>
-                <span class="filter-chip">Budget ≤ NPR <%= fBudget %></span>
+                <span class="filter-chip">Budget â‰¤ NPR <%= fBudget %></span>
                 <% } %>
                 <% if (fLocation != null && !fLocation.toString().isEmpty()) { %>
-                <span class="filter-chip">📍 <%= fLocation %></span>
+                <span class="filter-chip">ðŸ“ <%= fLocation %></span>
                 <% } %>
                 <% if (fPercent != null && !fPercent.equals(0.0)) { %>
-                <span class="filter-chip">Score ≥ <%= fPercent %>%</span>
+                <span class="filter-chip">Score â‰¥ <%= fPercent %>%</span>
                 <% } %>
                 <% if (fFaculty != null && !fFaculty.toString().isEmpty()) { %>
                 <span class="filter-chip"><%= fFaculty %></span>
                 <% } %>
                 <% if (fCareer != null && !fCareer.toString().isEmpty()) { %>
-                <span class="filter-chip">🎯 <%= fCareer %></span>
+                <span class="filter-chip">ðŸŽ¯ <%= fCareer %></span>
                 <% } %>
                 <% if (Boolean.TRUE.equals(fScholar)) { %>
-                <span class="filter-chip">🏅 Scholarship</span>
+                <span class="filter-chip">ðŸ… Scholarship</span>
                 <% } %>
             </div>
 
@@ -225,7 +225,7 @@
 
             <% if (results.isEmpty()) { %>
             <div class="empty-state">
-                <div class="empty-icon">🔍</div>
+                <div class="empty-icon">ðŸ”</div>
                 <h3>No programmes match your current filters</h3>
                 <p class="no-results-tip">
                     Try increasing your budget, relaxing the location filter,
@@ -241,12 +241,12 @@
                     <div>
                         <div class="college-name"><%= dp.getCollegeName() %></div>
                         <div class="degree-name">
-                            <%= dp.getDegreeName() %> — <%= dp.getFaculty() %>
+                            <%= dp.getDegreeName() %> â€” <%= dp.getFaculty() %>
                             (<%= dp.getDurationYears() %> yrs, <%= dp.getAffiliation() %>)
                         </div>
                     </div>
                     <% if (dp.isScholarshipAvailable()) { %>
-                    <span class="scholarship-badge">🏅 Scholarship</span>
+                    <span class="scholarship-badge">ðŸ… Scholarship</span>
                     <% } %>
                 </div>
 
@@ -264,7 +264,7 @@
                     <div class="meta-item">
                         <div class="meta-label">Location</div>
                         <div class="meta-value" style="font-family: var(--font-body); font-size: 0.85rem;">
-                            📍 <%= dp.getLocation() %>
+                            ðŸ“ <%= dp.getLocation() %>
                         </div>
                     </div>
                 </div>
@@ -272,13 +272,13 @@
                 <div class="result-card-tags">
                     <% if (dp.getCareerPath() != null && !dp.getCareerPath().isEmpty()) {
                         for (String tag : dp.getCareerPath().split(",")) { %>
-                    <span class="tag">🎯 <%= tag.trim() %></span>
+                    <span class="tag">ðŸŽ¯ <%= tag.trim() %></span>
                     <%     }
                     } %>
                 </div>
 
                 <% if (dp.getContactInfo() != null && !dp.getContactInfo().isEmpty()) { %>
-                <div class="contact-info">📞 <%= dp.getContactInfo() %></div>
+                <div class="contact-info">ðŸ“ž <%= dp.getContactInfo() %></div>
                 <% } %>
             </div>
 

@@ -2,6 +2,7 @@ package com.disha.model;
 
 public class DecisionPlan {
 
+    private int planId;
     private String collegeName;
     private String degreeName;
     private String faculty;
@@ -13,6 +14,14 @@ public class DecisionPlan {
     private String location;
     private String careerPath;
     private String contactInfo;
+
+    public int getPlanId() {
+        return planId;
+    }
+
+    public void setPlanId(int planId) {
+        this.planId = planId;
+    }
 
     public String getCollegeName() {
         return collegeName;

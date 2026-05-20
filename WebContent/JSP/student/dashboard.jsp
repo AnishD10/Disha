@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.disha.model.User" %>
 <%
     User currentUser = (User) session.getAttribute("loggedInUser");
     if (currentUser == null) {
-        response.sendRedirect(request.getContextPath() + "/jsp/auth/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/JSP/auth/login.jsp");
         return;
     }
 %>
@@ -11,31 +11,152 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Student Dashboard — DISHA</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/disha-main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard â€” DISHA</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/disha-main.css">
 </head>
 <body>
-<nav class="navbar">
-    <a href="#" class="nav-brand">DISHA</a>
-    <div class="nav-user">
-        <span>Welcome, <%= currentUser.getFullName() %></span>
-        <span class="role-chip">STUDENT</span>
-        <a href="<%= request.getContextPath() %>/jsp/auth/login.jsp" class="btn btn-sm btn-secondary">Log Out</a>
-    </div>
-</nav>
-<div class="page-wrapper">
-    <div class="page-header">
-        <h1>🎓 Student Dashboard</h1>
-        <p>yo kam baki xa.</p>
-    </div>
-    <div style="background:#161B22; border:1px dashed #30363D; border-radius:10px; padding:32px; text-align:center; color:#8B949E;">
-        <p style="font-size:1.1rem; margin-bottom:12px;">yo kam baki xa</p>
-        <p>This dashboard will contain: Assessment, Personal Dashboard, Career Discovery links.</p>
-        <br>
-        <a href="<%= request.getContextPath() %>/jsp/decision/decision-plan.jsp" class="btn btn-primary" style="display:inline-flex; width:auto;">
-            🧭 Try Decision Planning (Joyal's Feature)
-        </a>
+
+<div class="dashboard-layout">
+    
+    <!-- Sidebar Include -->
+    <jsp:include page="../includes/sidebar.jsp" />
+    
+    <div class="main-content">
+        <!-- Header Include -->
+        <jsp:include page="../includes/dashboard-header.jsp" />
+        
+        <div class="dashboard-body">
+            
+            <div class="page-header" style="margin-bottom: 2rem;">
+                <h1 style="color: var(--color-primary); font-size: 2rem;">Welcome back, <%= currentUser.getFullName() %>! ðŸ‘‹</h1>
+                <p style="color: var(--color-text-muted);">Let's continue shaping your future today.</p>
+            </div>
+            
+            <!-- Quick Statistics Cards -->
+            <div class="grid-cards">
+                <div class="card stat-card">
+                    <span class="stat-card-title">Completed Assessments</span>
+                    <span class="stat-card-value">2 / 5</span>
+                    <div style="margin-top: 1rem; background: var(--color-border); height: 6px; border-radius: 3px; overflow: hidden;">
+                        <div style="width: 40%; background: var(--color-primary); height: 100%;"></div>
+                    </div>
+                </div>
+                
+                <div class="card stat-card">
+                    <span class="stat-card-title">Top Aptitude</span>
+                    <span class="stat-card-value" style="font-size: 1.5rem; color: var(--color-text); margin-top: 0.5rem;">Analytical Thinking</span>
+                    <span class="badge badge-success" style="width: fit-content; margin-top: 0.5rem;">92% Match</span>
+                </div>
+                
+                <div class="card stat-card">
+                    <span class="stat-card-title">Saved Careers</span>
+                    <span class="stat-card-value">4</span>
+                    <span style="font-size: 0.85rem; margin-top: 0.5rem; display: inline-block; color: var(--color-text-muted);">Career discovery preview</span>
+                </div>
+            </div>
+            
+            <!-- Dashboard Main Split -->
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+                
+                <!-- Center Column -->
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    
+                    <!-- Career Recommendations -->
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem; border-bottom: 1px solid var(--color-border-soft); padding-bottom: 0.5rem;">Top Career Matches</h3>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            
+                            <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; border: 1px solid var(--color-border-soft); border-radius: var(--radius-md);">
+                                <div style="display: flex; gap: 1rem; align-items: center;">
+                                    <div style="font-size: 2rem;">ðŸ’»</div>
+                                    <div>
+                                        <h4 style="margin:0;">Software Engineer</h4>
+                                        <span style="font-size:0.85rem; color:var(--color-text-muted);">High Demand in Nepal</span>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <span class="badge badge-success">95% Match</span>
+                                    <div style="font-size:0.85rem; margin-top:5px; font-weight:600;">RS 80K - 150K / mo</div>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; border: 1px solid var(--color-border-soft); border-radius: var(--radius-md);">
+                                <div style="display: flex; gap: 1rem; align-items: center;">
+                                    <div style="font-size: 2rem;">ðŸ“Š</div>
+                                    <div>
+                                        <h4 style="margin:0;">Data Analyst</h4>
+                                        <span style="font-size:0.85rem; color:var(--color-text-muted);">Growing Field</span>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <span class="badge badge-success">88% Match</span>
+                                    <div style="font-size:0.85rem; margin-top:5px; font-weight:600;">RS 60K - 120K / mo</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <a href="<%= request.getContextPath() %>/JSP/decision/decision-plan.jsp" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">Plan Next Step</a>
+                    </div>
+                </div>
+                
+                <!-- Right Column Panel -->
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    
+                    <!-- Upcoming Actions -->
+                    <div class="card" style="background-color: var(--color-primary); color: var(--color-secondary);">
+                        <h3 style="margin-bottom: 1rem; color: var(--color-secondary);">Next Steps</h3>
+                        <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
+                            <li style="display: flex; gap: 1rem; align-items: flex-start;">
+                                <div>â³</div>
+                                <div>
+                                    <div style="font-weight: 600;">Complete Personality Test</div>
+                                    <div style="font-size: 0.85rem; opacity: 0.9;">Required for better accuracy</div>
+                                </div>
+                            </li>
+                            <li style="display: flex; gap: 1rem; align-items: flex-start;">
+                                <div>ðŸ§­</div>
+                                <div>
+                                    <div style="font-weight: 600;">Try Decision Planning</div>
+                                    <div style="font-size: 0.85rem; opacity: 0.9;">Explore degrees and budget filters</div>
+                                    <a href="<%= request.getContextPath() %>/JSP/decision/decision-plan.jsp" style="color: white; text-decoration: underline; font-size: 0.85rem; display: block; margin-top: 5px;">Start -></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Skill Progress -->
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem; border-bottom: 1px solid var(--color-border-soft); padding-bottom: 0.5rem;">Skill Profile</h3>
+                        
+                        <div class="mb-2">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.3rem;">
+                                <span>Logical Reasoning</span>
+                                <span>85%</span>
+                            </div>
+                            <div style="background: var(--color-border); height: 6px; border-radius: 3px;">
+                                <div style="width: 85%; background: var(--color-primary); height: 100%; border-radius: 3px;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.3rem;">
+                                <span>Communication</span>
+                                <span>60%</span>
+                            </div>
+                            <div style="background: var(--color-border); height: 6px; border-radius: 3px;">
+                                <div style="width: 60%; background: var(--color-warning); height: 100%; border-radius: 3px;"></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
+
 </body>
 </html>
