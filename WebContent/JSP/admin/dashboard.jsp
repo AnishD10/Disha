@@ -3,7 +3,7 @@
 <%
     User currentUser = (User) session.getAttribute("loggedInUser");
     if (currentUser == null) {
-        response.sendRedirect(request.getContextPath() + "/JSP/auth/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/jsp/auth/login.jsp");
         return;
     }
 %>
@@ -20,7 +20,7 @@
     <div class="nav-user">
         <span>Welcome, <%= currentUser.getFullName() %></span>
         <span class="role-chip">ADMIN</span>
-        <a href="<%= request.getContextPath() %>/JSP/auth/login.jsp" class="btn btn-sm btn-secondary">Log Out</a>
+        <a href="<%= request.getContextPath() %>/jsp/auth/login.jsp" class="btn btn-sm btn-secondary">Log Out</a>
     </div>
 </nav>
 <div class="page-wrapper">

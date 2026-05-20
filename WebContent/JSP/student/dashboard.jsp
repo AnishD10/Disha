@@ -3,7 +3,7 @@
 <%
     User currentUser = (User) session.getAttribute("loggedInUser");
     if (currentUser == null) {
-        response.sendRedirect(request.getContextPath() + "/JSP/auth/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/jsp/auth/login.jsp");
         return;
     }
 %>
@@ -20,7 +20,7 @@
     <div class="nav-user">
         <span>Welcome, <%= currentUser.getFullName() %></span>
         <span class="role-chip">STUDENT</span>
-        <a href="<%= request.getContextPath() %>/JSP/auth/login.jsp" class="btn btn-sm btn-secondary">Log Out</a>
+        <a href="<%= request.getContextPath() %>/jsp/auth/login.jsp" class="btn btn-sm btn-secondary">Log Out</a>
     </div>
 </nav>
 <div class="page-wrapper">
@@ -32,7 +32,7 @@
         <p style="font-size:1.1rem; margin-bottom:12px;">yo kam baki xa</p>
         <p>This dashboard will contain: Assessment, Personal Dashboard, Career Discovery links.</p>
         <br>
-        <a href="<%= request.getContextPath() %>/JSP/decision/decision-plan.jsp" class="btn btn-primary" style="display:inline-flex; width:auto;">
+        <a href="<%= request.getContextPath() %>/jsp/decision/decision-plan.jsp" class="btn btn-primary" style="display:inline-flex; width:auto;">
             🧭 Try Decision Planning (Joyal's Feature)
         </a>
     </div>
