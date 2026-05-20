@@ -30,6 +30,7 @@ bin/
 .DS_Store
 src/.env
 Disha - Nepal Career Intelligence Portal.iml
+docker-images/
 
 ### Documentation ###
 # Ignore all markdown files except README.md

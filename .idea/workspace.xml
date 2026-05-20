@@ -10,49 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f564eb23-0714-414a-80a9-1f90f451fc83" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/WebContent/WEB-INF/lib/mysql-connector-j-9.7.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Disha___Nepal_Career_Intelligence_Portal_war_exploded.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CLAUDE_DATABASE_ASSIGNMENT_BRIEF.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CLAUDE_DATABASE_PROMPT.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATABASE_AND_DAO_CONVENTIONS.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DIAGRAMS.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DIAGRAMS/01-Model-Layer-ClassDiagram.mmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DIAGRAMS/02-DAO-Layer-ClassDiagram.mmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DIAGRAMS/03-Service-Layer-ClassDiagram.mmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DIAGRAMS/04-Controller-Layer-ClassDiagram.mmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DIAGRAMS/05-Complete-Architecture-Layered.mmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DIAGRAMS/06-Entity-Relationship-Diagram.mmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DIAGRAMS/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FOLDER_STRUCTURE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/CSS/disha-main.css" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/css/disha-main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/pages/decision/decision-plan.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/pages/decision/decision-plan.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/pages/sources.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/02_migration_joyal_integration.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/init.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/setup.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/disha/dao/BaseDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/disha/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/disha/dao/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/disha/filter/SessionFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/disha/filter/SessionFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/disha/util/DBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/disha/util/DBUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/disha/util/PasswordUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/disha/util/PasswordUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/joyal_schema.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -326,7 +285,7 @@
       <workItem from="1779270700656" duration="38000" />
       <workItem from="1779270754378" duration="21000" />
       <workItem from="1779270817788" duration="69000" />
-      <workItem from="1779270926153" duration="9031000" />
+      <workItem from="1779270926153" duration="12713000" />
     </task>
     <servers />
   </component>
