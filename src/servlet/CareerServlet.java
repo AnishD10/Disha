@@ -27,7 +27,7 @@ public class CareerServlet extends HttpServlet {
     private static final String JSP_COMPARE = "/jsp/career/compare.jsp";
     private static final String JSP_SAVED = "/jsp/career/saved.jsp";
     private static final String JSP_ASSESSMENT = "/jsp/career/assessment.jsp";
-    private static final String LOGIN_PATH = "login";
+    private static final String LOGIN_PATH = "jsp/auth/login.jsp";
 
     private CareerRecommendationService recommendationService;
 
