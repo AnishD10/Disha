@@ -1,0 +1,49 @@
+services:
+  db:
+    build:
+      context: .
+      dockerfile: database/Dockerfile
+    image: disha-mysql:local
+    environment:
+      MYSQL_DATABASE: disha_career_portal
+      MYSQL_USER: disha
+      MYSQL_PASSWORD: disha123
+      MYSQL_ROOT_PASSWORD: root123
+      TZ: UTC
+    ports:
+      - "3307:3306"
+    volumes:
+      - disha-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$${MYSQL_ROOT_PASSWORD} --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: Disha
+    image: disha-app:local
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: disha_career_portal
+      DB_USER: disha
+      DB_PASSWORD: disha123
+      DISHA_DB_HOST: db
+      DISHA_DB_PORT: "3306"
+      DISHA_DB_NAME: disha_career_portal
+      DISHA_DB_USER: disha
+      DISHA_DB_PASSWORD: disha123
+    ports:
+      - "${APP_PORT:-8081}:8080"
+
+volumes:
+  disha-db-data:

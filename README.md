@@ -67,6 +67,24 @@ Run the local auth/dashboard/assessment smoke test after deployment:
 .\smoke-test-local.ps1
 ```
 
+## Docker Build And Run
+
+Docker builds separate local images for the Tomcat app and MySQL database:
+
+```powershell
+docker compose build
+docker compose up -d
+.\smoke-test-local.ps1 -BaseUrl "http://localhost:8081/Disha"
+```
+
+Open:
+
+```text
+http://localhost:8081/Disha/
+```
+
+See `DOCKER.md` for manual `docker run` commands, logs, reset, and test steps.
+
 ## Integration Rules
 
 - Keep one web root: `WebContent`.

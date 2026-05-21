@@ -1,0 +1,16 @@
+.git
+.idea
+.ai
+.junie
+out
+target
+build
+WEB-INF
+web
+WebContent/WEB-INF/classes
+WebContent/WEB-INF/lib
+*.class
+*.war
+.local-sources.txt
+.env
+.env.local
